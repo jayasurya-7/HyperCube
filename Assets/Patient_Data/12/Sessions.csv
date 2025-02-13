@@ -1,0 +1,6 @@
+﻿SessionNumber,DateTime,Device,Assessment,StartTime,StopTime,GameName,TrialDataFileLocation,DeviceSetupLocation,AssistMode,AssistModeParameters,GameParameter
+1,13-02-2025 12:08:02,HYPERCUBE,0,13-02-2025 12:08:02,13-02-2025 12:08:08,Space Shooter-Hand Grip,D:\cube\12-Space Shooter-Hand Grip\12Space ShooterHand GripRawdata25-02-13-12-08-02-.csv,Null,Null,Null,Null
+1,13-02-2025 12:08:12,HYPERCUBE,0,13-02-2025 12:08:12,13-02-2025 12:08:56,Auto Ride-Tripod Grasp,D:\cube\12-Auto Ride-Tripod Grasp\12Auto RideTripod GraspRawdata25-02-13-12-08-12-.csv,Null,Null,Null,Null
+1,13-02-2025 12:09:03,HYPERCUBE,0,13-02-2025 12:09:03,13-02-2025 12:09:40,Highway Racer-Tripod Grasp,D:\cube\12-Highway Racer-Tripod Grasp\12Highway RacerTripod GraspRawdata25-02-13-12-09-03-.csv,Null,Null,Null,Null
+2,13-02-2025 12:54:58,R2,1,13-02-2025 12:54:58,13-02-2025 12:55:05,ASSESSMENT,Null,Null,Null,Null,Null
+2,13-02-2025 12:55:31,R2,1,13-02-2025 12:55:31,13-02-2025 12:55:39,ASSESSMENT,Null,Null,Null,Null,Null

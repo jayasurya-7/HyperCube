@@ -1,0 +1,2 @@
+﻿SessionNumber,DateTime,Device,Assessment,StartTime,StopTime,GameName,TrialDataFileLocation,DeviceSetupLocation,AssistMode,AssistModeParameters,GameParameter
+1,20-08-2024 15:39:46,HYPERCUBE,0,20-08-2024 15:39:46,20-08-2024 15:39:56,Space Shooter-Hand Grip,D:\cube\666-Space Shooter-Hand Grip\666Space ShooterHand GripRawdata24-08-20-15-39-46-.csv,Null,Null,Null,Null

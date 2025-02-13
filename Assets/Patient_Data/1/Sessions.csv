@@ -1,0 +1,7 @@
+﻿SessionNumber,DateTime,Device,Assessment,StartTime,StopTime,GameName,TrialDataFileLocation,DeviceSetupLocation,AssistMode,AssistModeParameters,GameParameter
+1,20-08-2024 12:58:07,R2,1,20-08-2024 12:58:07,20-08-2024 12:58:30,ASSESSMENT,Null,Null,Null,Null,Null
+2,20-08-2024 12:59:38,HYPERCUBE,0,20-08-2024 12:59:38,20-08-2024 12:59:50,Space Shooter-Hand Grip,D:\cube\1-Space Shooter-Hand Grip\1Space ShooterHand GripRawdata24-08-20-12-59-38-.csv,Null,Null,Null,Null
+3,20-08-2024 13:02:12,HYPERCUBE,0,20-08-2024 13:02:12,20-08-2024 13:02:22,Space Shooter-Hand Grip,D:\cube\1-Space Shooter-Hand Grip\1Space ShooterHand GripRawdata24-08-20-13-02-12-.csv,Null,Null,Null,Null
+4,20-08-2024 15:32:06,HYPERCUBE,0,20-08-2024 15:32:06,20-08-2024 15:32:17,Space Shooter-Hand Grip,D:\cube\1-Space Shooter-Hand Grip\1Space ShooterHand GripRawdata24-08-20-15-32-06-.csv,Null,Null,Null,Null
+5,13-02-2025 15:26:10,HYPERCUBE,0,13-02-2025 15:26:10,13-02-2025 15:26:13,Auto Ride-Pinch Grasp,1-Auto Ride-Pinch Grasp\1Auto RidePinch GraspRawdata25-02-13-15-26-10-.csv,Null,Null,Null,Null
+5,13-02-2025 15:26:17,HYPERCUBE,0,13-02-2025 15:26:17,13-02-2025 15:26:29,Space Shooter-Hand Grip,1-Space Shooter-Hand Grip\1Space ShooterHand GripRawdata25-02-13-15-26-17-.csv,Null,Null,Null,Null

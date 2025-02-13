@@ -1,0 +1,5 @@
+﻿SessionNumber,DateTime,Device,Assessment,StartTime,StopTime,GameName,TrialDataFileLocation,DeviceSetupLocation,AssistMode,AssistModeParameters,GameParameter
+1,13-02-2025 12:06:20,R2,1,13-02-2025 12:06:20,13-02-2025 12:06:29,ASSESSMENT,Null,Null,Null,Null,Null
+1,13-02-2025 12:06:35,R2,1,13-02-2025 12:06:35,13-02-2025 12:06:47,ASSESSMENT,Null,Null,Null,Null,Null
+1,13-02-2025 12:06:48,R2,1,13-02-2025 12:06:48,13-02-2025 12:06:58,ASSESSMENT,Null,Null,Null,Null,Null
+1,13-02-2025 12:07:06,HYPERCUBE,0,13-02-2025 12:07:06,13-02-2025 12:07:15,Space Shooter-Hand Grip,D:\cube\JK12-Space Shooter-Hand Grip\JK12Space ShooterHand GripRawdata25-02-13-12-07-06-.csv,Null,Null,Null,Null
