@@ -5,7 +5,9 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using System.IO;
 using Random = UnityEngine.Random;
-
+using NeuroRehabLibrary;
+using static hyper1;
+using NeuroRehabLibrary;
 
 
 public class GameManager_Car2D : MonoBehaviour {
@@ -78,7 +80,7 @@ public class GameManager_Car2D : MonoBehaviour {
 
     public GameObject Column;
 
-
+    private GameSession currentGameSession;
 
     public GameObject[] SpawnPowerGameObjects;
     private GameObject SpawnPowerObject;
@@ -110,7 +112,6 @@ public class GameManager_Car2D : MonoBehaviour {
 
 
     public Camera cam;
-
     void Awake() {
 		if (instance == null)
 			instance = this;
@@ -139,6 +140,9 @@ public class GameManager_Car2D : MonoBehaviour {
         CAR_spawnTargets1.instance.playSize = targetWidth.x * 0.8f;
         //AppData.timeOnTrail = timeleft;
         //AppData.reps = 0;
+
+        StartNewGameSession();
+
     }
 
     void Update() {
@@ -252,12 +256,12 @@ public class GameManager_Car2D : MonoBehaviour {
         }
     }
 
-
+ 
     #region-------Player settings------
 
     //private void UpdateDifficulty()
     //{
-        //scrollspeed = -2 - AppData.startGameLevelSpeed * .1f;
+    //scrollspeed = -2 - AppData.startGameLevelSpeed * .1f;
     //}
 
     public void PlayerDied()
@@ -527,6 +531,56 @@ public class GameManager_Car2D : MonoBehaviour {
         LevelUpCanvas.SetActive(false);
     }
 
+    void StartNewGameSession()
+    {
+        currentGameSession = new GameSession
+        {
+            GameName = "Highway Racer",
+            Assessment = 0 // Example assessment value, adjust as needed
+        };
+
+        SessionManager.Instance.StartGameSession(currentGameSession);
+        Debug.Log($"Started new game session with session number: {currentGameSession.SessionNumber}");
+
+        SetSessionDetails();
+    }
+
+
+    private void SetSessionDetails()
+    {
+        string device = "HYPERCUBE"; // Set the device name
+        string assistMode = "Null"; // Set the assist mode
+        string assistModeParameters = "Null"; // Set the assist mode parameters
+        string deviceSetupLocation = "Null"; // Set the device setup location
+
+
+        string gameParameter = "Null";
+
+
+
+        SessionManager.Instance.SetGameParameter(gameParameter, currentGameSession);
+
+
+        SessionManager.Instance.SetDevice(device, currentGameSession);
+        SessionManager.Instance.SetAssistMode(assistMode, assistModeParameters, currentGameSession);
+        SessionManager.Instance.SetDeviceSetupLocation(deviceSetupLocation, currentGameSession);
+
+
+
+    }
+
+    void EndCurrentGameSession()
+    {
+        if (currentGameSession != null)
+        {
+            string trialDataFileLocation = savepath;
+            SessionManager.Instance.SetTrialDataFileLocation(trialDataFileLocation, currentGameSession);
+
+            SessionManager.Instance.EndGameSession(currentGameSession);
+        }
+    }
+
+
     public void ShowGamePlayMenu()
     {
         //Debug.Log("comes inside");
@@ -662,6 +716,7 @@ public class GameManager_Car2D : MonoBehaviour {
         //SendToRobot.ControlParam(AppData.plutoData.mechs[AppData.plutoData.mechIndex], ControlType.TORQUE, true, false);
         //SoundManager_Car2D.instance.SetSoundOnOff(true);
         CleanUpScene();
+        EndCurrentGameSession();
         endValSet = true;
         isGameOver = true;
         isPlaying = false;
@@ -673,6 +728,7 @@ public class GameManager_Car2D : MonoBehaviour {
 
     public void GameQuit()
     {
+        EndCurrentGameSession();
          ButtonSound();
         h.Stop_data_log();
 

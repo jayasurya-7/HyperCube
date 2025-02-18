@@ -7,6 +7,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Michsky.UI.ModernUIPack;
+using NeuroRehabLibrary;
+using static hyper1;
 public class FlappyGameControl : MonoBehaviour
 {
     public hyper1 h;
@@ -36,6 +38,7 @@ public class FlappyGameControl : MonoBehaviour
     public GameObject Canvas;
 
     public BirdControl bc;
+    private GameSession currentGameSession;
     void Awake()
     {
         if (instance == null)
@@ -67,6 +70,7 @@ public class FlappyGameControl : MonoBehaviour
         //vdc.StartCapture();
         // Time.timeScale = 0;
         ShowGameMenu();
+        StartNewGameSession();
     }
 
     // Update is called once per frame
@@ -163,6 +167,7 @@ public class FlappyGameControl : MonoBehaviour
         GameOverText.SetActive(true);
         gameOver = true;
         h.Stop_data_log();
+        EndCurrentGameSession();
 
     }
     public void BirdScored()
@@ -317,5 +322,54 @@ public class FlappyGameControl : MonoBehaviour
         menuCanvas.SetActive(false);
         Time.timeScale = 1;
     }
-    
+
+    void StartNewGameSession()
+    {
+        currentGameSession = new GameSession
+        {
+            GameName = sessionlocation.filename,
+            Assessment = 0 // Example assessment value, adjust as needed
+        };
+
+        SessionManager.Instance.StartGameSession(currentGameSession);
+        Debug.Log($"Started new game session with session number: {currentGameSession.SessionNumber}");
+
+        SetSessionDetails();
+    }
+
+
+    private void SetSessionDetails()
+    {
+        string device = "HYPERCUBE"; // Set the device name
+        string assistMode = "Null"; // Set the assist mode
+        string assistModeParameters = "Null"; // Set the assist mode parameters
+        string deviceSetupLocation = "Null"; // Set the device setup location
+
+
+        string gameParameter = "Null";
+
+
+
+        SessionManager.Instance.SetGameParameter(gameParameter, currentGameSession);
+
+
+        SessionManager.Instance.SetDevice(device, currentGameSession);
+        SessionManager.Instance.SetAssistMode(assistMode, assistModeParameters, currentGameSession);
+        SessionManager.Instance.SetDeviceSetupLocation(deviceSetupLocation, currentGameSession);
+
+
+
+    }
+
+    void EndCurrentGameSession()
+    {
+        if (currentGameSession != null)
+        {
+            string trialDataFileLocation = savepath;
+            SessionManager.Instance.SetTrialDataFileLocation(trialDataFileLocation, currentGameSession);
+
+            SessionManager.Instance.EndGameSession(currentGameSession);
+        }
+    }
+
 }

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Runtime;
-using System.IO;
+//using System.IO;
 using System;
 using System.Diagnostics;
 using Debug = UnityEngine.Debug;
@@ -18,6 +18,7 @@ using System.Drawing;
 using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
 using NeuroRehabLibrary;
+using System.IO;
 
 public class hyper1 : MonoBehaviour
 
@@ -47,7 +48,7 @@ public class hyper1 : MonoBehaviour
     public static string Date;
     public static string name_sub_;
     public static string date_;
-    public static string Path;
+   // public static string Path;
     public static string filePath;
     public static string folderpath;
     public static float timer;
@@ -174,6 +175,7 @@ public class hyper1 : MonoBehaviour
     {
         public static string datafile;
         public static string filename;
+        public static string gameName;
     }
     public void start_data_log()
     {
@@ -182,52 +184,63 @@ public class hyper1 : MonoBehaviour
         //string condition = condition_subject.text;
         //string trial_number = trial_no.text;
         //string Hosp_number = Hos_.text;
-        string Hosp_number = PlayerPrefs.GetString("Hospital Number");
+        string Hosp_number = AppData.hospno;
         string Game_name = PlayerPrefs.GetString("Game name");
         string Mech_name = PlayerPrefs.GetString("Mechanism");
         //string pth = "C:\\Users\\SRIRAMACHANDRAN\\Desktop\\HypercubeData\\";
-        string pth = PlayerPrefs.GetString("Address");
+        string pth = Path.Combine(AppData.rawDataPath, "RawData");
+
+        if (!Directory.Exists(pth))
+        {
+            Directory.CreateDirectory(pth);
+            Debug.Log(pth);
+        }
+        else
+        {
+            Debug.Log("not created");
+        }
+        string dateTimeNow = DateTime.Now.ToString("dd-MM-yyyy");
+
+        string total_path = Game_name+ '-'+ Mech_name;
         //string pth = "D:\\HypercubeData\\";
         //string pth = "C:\\Users\\DELL\\Desktop\\Hypercube Data\\";
         //string pth = "C:\\Users\\Siva\\Desktop\\HypercubeGames23\\Data\\";
         //string pth = "C:\\Users\\aravi\\Desktop\\Hypercube data\\";
-        string total_path = pth + Hosp_number + "-" + Game_name + "-" + Mech_name;
+        //string total_path = pth + Hosp_number + "-" + Game_name + "-" + Mech_name;
+
         folderpath = total_path;
-        Directory.CreateDirectory(total_path);
+      //  Directory.CreateDirectory(total_path);
 
         sessionlocation.datafile = pth + Hosp_number;
         sessionlocation.filename = Game_name + "-" + Mech_name;
-
+        sessionlocation.gameName = Game_name;
         //string baseDirectory = sessionlocation.datafile;
         //SessionManager.Initialize(baseDirectory);
 
 
         //change_color();
 
-        string filename = total_path + "\\" + Hosp_number + Game_name + Mech_name + AppData.dataFolder + DateTime.UtcNow.ToLocalTime().ToString("yy-MM-dd-HH-mm-ss") +
+        string filename =  Mech_name +"-" + Game_name+"-"+ DateTime.UtcNow.ToLocalTime().ToString("yy-MM-dd-HH-mm-ss") +
              "-" + ".csv";
+        string rawDataFile = Path.Combine(pth, filename);
         savepath = filename;
-        PlayerPrefs.SetString("data", filename);
+        PlayerPrefs.SetString("data", rawDataFile);
         //saver(total_path);
-        AppData.dlogger = new DataLogger(filename, ""); 
+        AppData.dlogger = new DataLogger(rawDataFile, "");
+      //  File.Create(rawDataFile).Dispose();
 
-        if (!File.Exists(filename))
+        if (!File.Exists(rawDataFile))
         {
-            //Debug.Log(filename);
+            Debug.Log(rawDataFile);
             /*****header setting***/
             string clientHeader = $"\"TIME\",\"F1\",\"F2\",\"ang1\",\"ang2\",\"ang3\",\"ang4\",\"dist1\",\"dist2\",\"B1\",\"B2\",\"B3\",\"B4\",\"B5\",\"B6\",\"B7\",{Environment.NewLine}";
 
 
 
-            File.WriteAllText(filename, clientHeader);
+            File.WriteAllText(rawDataFile, clientHeader);
 
             
         }
-
-       
-
-
-
         StartNewGameSession();
 
 
@@ -242,7 +255,7 @@ public class hyper1 : MonoBehaviour
     {
         currentGameSession = new GameSession
         {
-            GameName = sessionlocation.filename,
+            GameName = PlayerPrefs.GetString("Game name"),
             Assessment = 0 // Example assessment value, adjust as needed
         };
 

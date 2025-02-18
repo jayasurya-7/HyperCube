@@ -1,0 +1,5 @@
+﻿SessionNumber,DateTime,Device,Assessment,StartTime,StopTime,GameName,TrialDataFileLocation,DeviceSetupLocation,AssistMode,AssistModeParameters,GameParameter
+1,18-02-2025 15:24:55,HYPERCUBE,0,18-02-2025 15:25:43,18-02-2025 15:26:00,Auto Ride-Buttons,Buttons-Auto Ride-25-02-18-15-25-43-.csv,Null,Null,Null,Null
+2,18-02-2025 15:34:06,HYPERCUBE,0,18-02-2025 15:34:50,18-02-2025 15:34:55,Auto Ride,Buttons-Auto Ride-25-02-18-15-34-50-.csv,Null,Null,Null,Null
+3,18-02-2025 15:52:52,HYPERCUBE,0,18-02-2025 15:52:53,18-02-2025 15:53:08,Snake game,,Null,Null,Null,Null
+3,18-02-2025 15:53:15,HYPERCUBE,0,18-02-2025 15:53:28,18-02-2025 15:53:43,Auto Ride,Buttons-Auto Ride-25-02-18-15-53-28-.csv,Null,Null,Null,Null

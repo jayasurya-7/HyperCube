@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using System;
 
 using System.Collections;
+using NeuroRehabLibrary;
 
 public class welcome : MonoBehaviour
 {
@@ -57,23 +58,6 @@ public class welcome : MonoBehaviour
 
     public void login()
     {
-        p_patientname = Patientname.text;
-        bool Patientname_check = string.IsNullOrEmpty(p_patientname);
-        if (Patientname_check == true)
-        {
-            Debug.Log("Empty name");
-
-        }
-        else
-        {
-            string path_to_data = Application.dataPath;
-
-            if (!Directory.Exists(path_to_data + "\\" + p_hospno))
-            {
-                string patientDir = path_to_data + "\\" + "Patient_Data" + "\\" + p_hospno;
-                circleclass.circlePath = patientDir;
-            }
-        }
 
         p_hospno = hospno.text;
         bool hospno_check = string.IsNullOrEmpty(p_hospno);
@@ -85,7 +69,7 @@ public class welcome : MonoBehaviour
         else
         {
             string path_to_data = Application.dataPath;
-
+            Debug.Log("path "+ path_to_data);
             if (!Directory.Exists(path_to_data + "\\" + p_hospno))
             {
                 string patientDir = path_to_data + "\\" + "Patient_Data" + "\\" + p_hospno;
@@ -93,48 +77,34 @@ public class welcome : MonoBehaviour
                 if (Directory.Exists(patientDir))
                 {
 
-
-
-
-
-
-
-
-
-
                     string dateTimeNow = DateTime.Now.ToString("dd-MM-yyyy");
                     string newDirPath = Path.Combine(patientDir, dateTimeNow);
-
+                    Debug.Log(newDirPath + "xxx");
                     if (Directory.Exists(newDirPath))
                     {
                         staticclass.FolderPath = newDirPath;
+                        AppData.rawDataPath = newDirPath;
                     }
                     else
                     {
                         Directory.CreateDirectory(newDirPath);
                         staticclass.FolderPath = newDirPath;
+                        AppData.rawDataPath = newDirPath;
+                        Debug.Log(newDirPath);
                     }
+                    string baseDirectory = patientDir;
 
 
+                    SessionManager.Initialize(baseDirectory);
 
-
-
-
-                    SceneManager.LoadScene("newscene");
-
-
-
-
-
-
-
-
-
-
+                    SessionManager.Instance.Login();
+                    AppData.hospno = p_hospno;
+                    SceneManager.LoadScene("Home");
                 }
                 else
                 {
                     Debug.Log("Hospital Number Does not exist");
+                    SceneManager.LoadScene("Register");
 
                     //StartCoroutine(ShowMessageFor3Seconds("PLEASE ENTER SIGN UP AND REGISTER"));
                 }

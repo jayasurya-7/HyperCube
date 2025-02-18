@@ -82,6 +82,7 @@ public class ButtonClick : MonoBehaviour
         //PlayerPrefs.SetString("Hospital Number", HN.text);
         SceneManager.LoadScene("FlappyGame");
         PlayerPrefs.SetString("Game name", "Auto Ride");
+        AppData.selectedGame = "autoRider";
         //DontDestroyOnLoad(hypercube);
 
     }
@@ -91,6 +92,7 @@ public class ButtonClick : MonoBehaviour
         //PlayerPrefs.SetString("Hospital Number", HN.text);
         SceneManager.LoadScene("HIGHWAYRACER");
         PlayerPrefs.SetString("Game name", "Highway Racer");
+        AppData.selectedGame = "highwayRacer";
     }
 
     public void SpaceShooterLoad()
@@ -98,7 +100,8 @@ public class ButtonClick : MonoBehaviour
         //PlayerPrefs.SetString("Hospital Number", HN.text);
         SceneManager.LoadScene("Space");
         PlayerPrefs.SetString("Game name", "Space Shooter");
-   
+        AppData.selectedGame = "spaceShooter";
+
     }
 
     public void PingPongLoad()
@@ -106,6 +109,7 @@ public class ButtonClick : MonoBehaviour
         //PlayerPrefs.SetString("Hospital Number", HN.text);
         SceneManager.LoadScene("pong_menu");
         PlayerPrefs.SetString("Game name", "Ping Pong");
+        AppData.selectedGame = "pingPong";
     }
 
     public void HomeScreenLoad()
@@ -118,18 +122,21 @@ public class ButtonClick : MonoBehaviour
         //PlayerPrefs.SetString("Hospital Number", HN.text);
         SceneManager.LoadScene("menu");
         PlayerPrefs.SetString("Game name", "pacman");
+        AppData.selectedGame = "pacMan";
     }
 
     public void SnakeLoad()
     {
         SceneManager.LoadScene("Snake Game");
         PlayerPrefs.SetString("Game name", "Snake2d");
+        AppData.selectedGame = "snakeGame";
     }
 
     public void AssessmentSceneLoad()
     {
         //PlayerPrefs.SetString("Hospital Number", HN.text);
         SceneManager.LoadScene("Assessment");
+        PlayerPrefs.SetString("Game name", "Assessment");
     }
 
     public void MechanismSceneLoad()
@@ -147,12 +154,12 @@ public class ButtonClick : MonoBehaviour
        
         string patientDir = path_to_data + "\\" + "Patient_Data" + "\\" + Hosp_number;
         //string baseDirectory = pth + Hosp_number;
-        string baseDirectory = patientDir;
+  //      string baseDirectory = patientDir;
 
 
-  SessionManager.Initialize(baseDirectory);
+  //SessionManager.Initialize(baseDirectory);
 
-        SessionManager.Instance.Login();
+  //      SessionManager.Instance.Login();
         PlayerPrefs.SetFloat("Time", float.Parse(Time.text));
 
        

@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using NeuroRehabLibrary;
 using static hyper1;
+using System;
 
 public class UIManagerPP : MonoBehaviour
 {
@@ -47,7 +48,7 @@ public class UIManagerPP : MonoBehaviour
     {
         currentGameSession = new GameSession
         {
-            GameName = sessionlocation.filename,
+           // GameName = sessionlocation.filename,
             Assessment = 0 // Example assessment value, adjust as needed
         };
 
@@ -98,8 +99,8 @@ public class UIManagerPP : MonoBehaviour
     void Update()
 	{
 
-
-		if (rightBound.enemyScore >= winScore && !isFinished)
+        gameData.events = Array.IndexOf(gameData.pongEvents, "playerFail");
+        if (rightBound.enemyScore >= winScore && !isFinished)
 		{
 			isFinished = true;
 			enemyWon = true;

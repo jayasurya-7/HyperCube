@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using NeuroRehabLibrary;
 
 public class PlayerController : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class PlayerController : MonoBehaviour
     private ScoreManager SM;
 
     private bool _deadPlaying = false;
-
+    private GameSession currentGameSession;
     // Use this for initialization
     void Start()
     {   speed = PlayerPrefs.GetFloat("PlayerSpeed");
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
         SM = GameObject.Find("Game Manager").GetComponent<ScoreManager>();
         GUINav = GameObject.Find("UI Manager").GetComponent<GameGUINavigation>();
         _dest = transform.position;
+        StartNewGameSession();
     }
 
     // Update is called once per frame
@@ -54,6 +56,55 @@ public class PlayerController : MonoBehaviour
         }
 
 
+    }
+
+    void StartNewGameSession()
+    {
+        currentGameSession = new GameSession
+        {
+             GameName = "PacMan",
+            Assessment = 0 // Example assessment value, adjust as needed
+        };
+
+        SessionManager.Instance.StartGameSession(currentGameSession);
+        Debug.Log($"Started new game session with session number: {currentGameSession.SessionNumber}");
+
+        SetSessionDetails();
+    }
+
+
+    private void SetSessionDetails()
+    {
+        string device = "HYPERCUBE"; // Set the device name
+        string assistMode = "Null"; // Set the assist mode
+        string assistModeParameters = "Null"; // Set the assist mode parameters
+        string deviceSetupLocation = "Null"; // Set the device setup location
+
+
+        string gameParameter = "Null";
+
+
+
+        SessionManager.Instance.SetGameParameter(gameParameter, currentGameSession);
+
+
+        SessionManager.Instance.SetDevice(device, currentGameSession);
+        SessionManager.Instance.SetAssistMode(assistMode, assistModeParameters, currentGameSession);
+        SessionManager.Instance.SetDeviceSetupLocation(deviceSetupLocation, currentGameSession);
+
+
+
+    }
+
+    void EndCurrentGameSession()
+    {
+        if (currentGameSession != null)
+        {
+            string trialDataFileLocation = "null";
+            SessionManager.Instance.SetTrialDataFileLocation(trialDataFileLocation, currentGameSession);
+
+            SessionManager.Instance.EndGameSession(currentGameSession);
+        }
     }
 
     IEnumerator PlayDeadAnimation()

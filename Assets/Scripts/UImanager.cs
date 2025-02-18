@@ -135,7 +135,7 @@ public class UImanager : MonoBehaviour
 
     private void SetSessionDetails()
     {
-        string device = "R2"; // Set the device name
+        string device = "HyperCube"; // Set the device name
         string assistMode = "Null"; // Set the assist mode
         string assistModeParameters = "Null"; // Set the assist mode parameters
         string deviceSetupLocation = "Null"; // Set the device setup location

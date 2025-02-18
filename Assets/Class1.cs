@@ -40,6 +40,7 @@ namespace NeuroRehabLibrary
             else
             {
                 _currentSessionNumber = GetLastSessionNumber();
+                AppData.currentSessionNumber = _currentSessionNumber;
                 Debug.Log($"Initialized SessionManager with session number: {_currentSessionNumber}");
             }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.SceneManagement;
-
+using NeuroRehabLibrary;
 public class Snake : MonoBehaviour
 {
     Vector2 dir = Vector2.right;
@@ -18,12 +18,15 @@ public class Snake : MonoBehaviour
     public AudioSource GameOverSound;
     public AudioSource PauseSound;
     public AudioSource UnpauseSound;
+    private GameSession currentGameSession;
     // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating("Move", 0.3f, 0.3f);
         Time.timeScale = 1;
-     
+        StartNewGameSession();
+
+
     }
 
     // Update is called once per frame
@@ -51,6 +54,58 @@ public class Snake : MonoBehaviour
         }
         
     }
+
+
+    void StartNewGameSession()
+    {
+        currentGameSession = new GameSession
+        {
+            GameName = "Snake game",
+            Assessment = 0 // Example assessment value, adjust as needed
+        };
+
+        SessionManager.Instance.StartGameSession(currentGameSession);
+        Debug.Log($"Started new game session with session number: {currentGameSession.SessionNumber}");
+
+        SetSessionDetails();
+    }
+
+
+    private void SetSessionDetails()
+    {
+        string device = "HYPERCUBE"; // Set the device name
+        string assistMode = "Null"; // Set the assist mode
+        string assistModeParameters = "Null"; // Set the assist mode parameters
+        string deviceSetupLocation = "Null"; // Set the device setup location
+
+
+        string gameParameter = "Null";
+
+
+
+        SessionManager.Instance.SetGameParameter(gameParameter, currentGameSession);
+
+
+        SessionManager.Instance.SetDevice(device, currentGameSession);
+        SessionManager.Instance.SetAssistMode(assistMode, assistModeParameters, currentGameSession);
+        SessionManager.Instance.SetDeviceSetupLocation(deviceSetupLocation, currentGameSession);
+
+
+
+    }
+
+    void EndCurrentGameSession()
+    {
+        if (currentGameSession != null)
+        {
+            
+            //string trialDataFileLocation = savepath;
+            //SessionManager.Instance.SetTrialDataFileLocation(trialDataFileLocation, currentGameSession);
+
+            SessionManager.Instance.EndGameSession(currentGameSession);
+        }
+    }
+
 
     void Move ()
     {
@@ -128,6 +183,7 @@ public class Snake : MonoBehaviour
         GameOverCanvas.SetActive(true);
         Time.timeScale = 0;
         GameOverSound.Play();
+        EndCurrentGameSession();
     }
 
     public void Restart()

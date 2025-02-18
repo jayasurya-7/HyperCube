@@ -186,6 +186,147 @@ static class JediSerialPayload
     }
 }
 
+
+public static class gameData
+{
+    //Assessment check
+    public static bool isPROMcompleted = false;
+    public static bool isAROMcompleted = false;
+    //AAN controller check
+    public static bool isBallReached = false;
+    public static bool targetSpwan = false;
+    public static bool isAROMEnabled = false;
+    //game
+    public static bool isGameLogging;
+    public static string game;
+    public static int gameScore;
+    public static int reps;
+    public static int playerScore;
+    public static int enemyScore;
+    public static string playerPos = "0";
+    public static string playerPosition = "0";
+    public static string enemyPos = "0";
+    public static string playerHit = "0";
+    public static string enemyHit = "0";
+    public static string wallBounce = "0";
+    public static string enemyFail = "0";
+    public static string playerFail = "0";
+    public static int winningScore = 3;
+    public static float moveTime;
+    public static readonly string[] pongEvents = new string[] { "moving", "wallBounce", "playerHit", "enemyHit", "playerFail", "enemyFail" };
+    public static readonly string[] hatEvents = new string[] { "moving", "BallCaught", "BombCaught", "BallMissed", "BombMissed" };
+    public static readonly string[] tukEvents = new string[] { "moving", "collided", "passed" };
+    public static int events;
+    public static string TargetPos;
+    public static float successRate;
+    public static float gameSpeedTT;
+    public static float gameSpeedPP;
+    public static float gameSpeedHT;
+    public static float predictedHitY;
+    public static bool setNeutral = false;
+    private static DataLogger dataLog;
+    private static readonly string[] gameHeader = new string[] {
+        "playerPosY","enemyPosY","events","playerScore","enemyScore"
+    };
+    private static readonly string[] tukTukHeader = new string[] {
+        "playerPosx","events","playerScore"
+    };
+    public static bool isLogging { get; private set; }
+    public static bool moving = true; // used to manipulate events in HAT TRICK
+    static public void StartDataLog(string fname)
+    {
+        if (dataLog != null)
+        {
+            StopLogging();
+        }
+        // Start new logger
+        if (AppData.selectedGame == "pingPong")
+        {
+            if (fname != "")
+            {
+                string instructionLine = "0 - moving, 1 - wallBounce, 2 - playerHit, 3 - enemyHit, 4 - playerFail, 5 - enemyFail\n";
+                string headerWithInstructions = instructionLine + String.Join(", ", gameHeader) + "\n";
+                dataLog = new DataLogger(fname, headerWithInstructions);
+                isLogging = true;
+            }
+            else
+            {
+                dataLog = null;
+                isLogging = false;
+            }
+        }
+        else if (AppData.selectedGame == "autoRider")
+        {
+            if (fname != "")
+            {
+                string instructionLine = "0 - moving, 1 - BallCaught, 2 - BombCaught, 3 - BallMissed, 4 - BombMissed\n";
+                string headerWithInstructions = instructionLine + String.Join(", ", tukTukHeader) + "\n";
+                dataLog = new DataLogger(fname, headerWithInstructions);
+                isLogging = true;
+            }
+            else
+            {
+                dataLog = null;
+                isLogging = false;
+            }
+        }
+        else if (AppData.selectedGame == "spaceShooter")
+        {
+            if (fname != "")
+            {
+                string instructionLine = "0 - moving, 1 - collided, 2 - enemyDestroyed, 3 -asteroidDestroyed\n";
+                string headerWithInstructions = instructionLine + String.Join(", ", tukTukHeader) + "\n";
+                dataLog = new DataLogger(fname, headerWithInstructions);
+                isLogging = true;
+            }
+            else
+            {
+                dataLog = null;
+                isLogging = false;
+            }
+        }
+    }
+    static public void StopLogging()
+    {
+        if (dataLog != null)
+        {
+            UnityEngine.Debug.Log("Null log not");
+            dataLog.stopDataLog(true);
+            dataLog = null;
+            isLogging = false;
+        }
+        else
+            UnityEngine.Debug.Log("Null log");
+    }
+
+    static public void LogData()
+    {
+        
+            string[] _data = new string[] {
+               playerPos,
+               enemyPos,
+               gameData.events.ToString("F2"),
+               gameData.playerScore.ToString("F2"),
+               gameData.enemyScore.ToString("F2")
+            };
+            string _dstring = String.Join(", ", _data);
+            _dstring += "\n";
+            dataLog.logData(_dstring);
+        
+    }
+    static public void LogDataHT()
+    {
+            string[] _data = new string[] {
+               playerPos,
+               gameData.events.ToString("F2"),
+               gameData.gameScore.ToString("F2")
+            };
+            string _dstring = String.Join(", ", _data);
+            _dstring += "\n";
+            dataLog.logData(_dstring);
+        }
+    
+}
 public class DataLogger
 {
  
@@ -274,7 +415,11 @@ static class AppData
    
     static public string jdfFilename = "Assets\\jeditextformat.txt";
     static public string[] comPorts;
-
+    public static string selectedGame = null;
+    public static string hospno = null;
+    public static int currentSessionNumber;
+    public static string rawDataPath = null;
+    public static string trialDataFileLocationTemp = null;
     static public double nanosecPerTick = 1.0 / Stopwatch.Frequency;
     static public Stopwatch stp_watch = new Stopwatch();
 
