@@ -11321,6 +11321,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1543776014}
     m_Modifications:
+    - target: {fileID: 154750, guid: db15fdab6be0e104fbcf2c44afaad894, type: 3}
+      propertyPath: m_TagString
+      value: Target
+      objectReference: {fileID: 0}
     - target: {fileID: 454750, guid: db15fdab6be0e104fbcf2c44afaad894, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -12695,7 +12699,7 @@ GameObject:
   - component: {fileID: 508745664}
   m_Layer: 0
   m_Name: pacman
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22544,6 +22548,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1543776014}
     m_Modifications:
+    - target: {fileID: 194802, guid: bc6b2f74c0c842443b5d21543c3e5e16, type: 3}
+      propertyPath: m_TagString
+      value: Target
+      objectReference: {fileID: 0}
     - target: {fileID: 494802, guid: bc6b2f74c0c842443b5d21543c3e5e16, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -34007,9 +34015,11 @@ MonoBehaviour:
   distance2: 0
   Btw_dist: 0
   Avg_Btw_dist: 0
+  x: 0
   portnames: []
   Hos_: {fileID: 0}
   MovingAverageLength: 100
+  Ports: []
 --- !u!4 &1498465691
 Transform:
   m_ObjectHideFlags: 0
@@ -41052,6 +41062,49 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1788294571
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1788294573}
+  - component: {fileID: 1788294572}
+  m_Layer: 0
+  m_Name: gemelogPM
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1788294572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788294571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5de66d5f9bb0ebc47a7f581f6079ea27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1788294573
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788294571}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.626026, y: 8.628243, z: -22.192268}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1793699139
 GameObject:
   m_ObjectHideFlags: 0
@@ -44650,7 +44703,7 @@ GameObject:
   - component: {fileID: 1945090363}
   m_Layer: 0
   m_Name: blinkyTarget
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: -1003283189, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48434,6 +48487,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1543776014}
     m_Modifications:
+    - target: {fileID: 151032, guid: e51e4ed36b94fe24f8dc937c5aac9052, type: 3}
+      propertyPath: m_TagString
+      value: Target
+      objectReference: {fileID: 0}
     - target: {fileID: 451032, guid: e51e4ed36b94fe24f8dc937c5aac9052, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -48617,6 +48674,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1543776014}
     m_Modifications:
+    - target: {fileID: 154592, guid: 9f090580268dde54d8def18b84c4dbab, type: 3}
+      propertyPath: m_TagString
+      value: Target
+      objectReference: {fileID: 0}
     - target: {fileID: 454592, guid: 9f090580268dde54d8def18b84c4dbab, type: 3}
       propertyPath: m_RootOrder
       value: 3

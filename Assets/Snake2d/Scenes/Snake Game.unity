@@ -249,6 +249,7 @@ MonoBehaviour:
   portnames: []
   Hos_: {fileID: 0}
   MovingAverageLength: 5
+  Ports: []
 --- !u!4 &321679213
 Transform:
   m_ObjectHideFlags: 0
@@ -2683,6 +2684,49 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1414911113
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1414911115}
+  - component: {fileID: 1414911114}
+  m_Layer: 0
+  m_Name: gamelogSG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1414911114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414911113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 295d156ee0f41e844810104951569eff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1414911115
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414911113}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 46.08919, y: 5.0367956, z: -68.34151}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1496785341
 GameObject:
   m_ObjectHideFlags: 0
@@ -3899,6 +3943,7 @@ MonoBehaviour:
   DistMax: {fileID: 0}
   Path: {fileID: 0}
   Space: {fileID: 0}
+  Time: {fileID: 0}
   Auto: {fileID: 0}
   car1: {fileID: 0}
   car2: {fileID: 0}
@@ -3913,9 +3958,9 @@ MonoBehaviour:
   GrossKnobCanvas: {fileID: 0}
   FineKnobCanvas: {fileID: 0}
   KeyKnobCanvas: {fileID: 0}
-  ComPort: {fileID: 0}
   settingCanvas: {fileID: 0}
   SpeedCanvas: {fileID: 0}
+  Timer: {fileID: 0}
   Grip_Force: 0
   Thumb_dist_Min: 0
   Thumb_dist_Max: 0

@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
         switch (GameManager.gameState)
         {
             case GameManager.GameState.Game:
+                gameData.isGameLogging= true;
                 ReadInputAndMove();
                 Animate();
                 break;
@@ -118,6 +119,8 @@ public class PlayerController : MonoBehaviour
         if (GameManager.lives <= 0)
         {
             Debug.Log("Treshold for High Score: " + SM.LowestHigh());
+            EndCurrentGameSession();
+            gameData.isGameLogging = false;
             if (GameManager.score >= SM.LowestHigh())
                 GUINav.getScoresMenu();
             else

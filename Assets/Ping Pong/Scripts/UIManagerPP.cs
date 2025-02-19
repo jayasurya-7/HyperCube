@@ -150,6 +150,7 @@ public class UIManagerPP : MonoBehaviour
 		if (isFinished )
 		{
 			EndCurrentGameSession();
+			gameData.isGameLogging = false;
 
             LoadScene("pong_menu");
 			h.Stop_data_log();
@@ -163,15 +164,18 @@ public class UIManagerPP : MonoBehaviour
 			{
 				Time.timeScale = 0;
 				showPaused();
+				gameData.isGameLogging = false;
 				//ShowDropdown();
 			}
 			else if (Time.timeScale == 0)
 			{
 				Time.timeScale = 1;
 				hidePaused();
-				//hideDropdown();
-			}
-		}
+                gameData.isGameLogging = true;
+
+                //hideDropdown();
+            }
+        }
 
 
 		if (Time.timeScale == 0 && !isFinished)

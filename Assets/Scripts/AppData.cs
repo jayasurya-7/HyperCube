@@ -285,6 +285,21 @@ public static class gameData
                 isLogging = false;
             }
         }
+        else
+        {
+            if (fname != "")
+            {
+                string instructionLine = "0 - moving, 1 - collided, 2 - enemyDestroyed, 3 -asteroidDestroyed\n";
+                string headerWithInstructions = instructionLine + String.Join(", ", tukTukHeader) + "\n";
+                dataLog = new DataLogger(fname, headerWithInstructions);
+                isLogging = true;
+            }
+            else
+            {
+                dataLog = null;
+                isLogging = false;
+            }
+        }
     }
     static public void StopLogging()
     {

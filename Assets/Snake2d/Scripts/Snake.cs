@@ -26,6 +26,7 @@ public class Snake : MonoBehaviour
         Time.timeScale = 1;
         StartNewGameSession();
 
+        gameData.isGameLogging = true;
 
     }
 
@@ -44,11 +45,13 @@ public class Snake : MonoBehaviour
                 Time.timeScale = 0;
                 PauseCanvas.SetActive(true);
                 PauseSound.Play();
+                gameData.isGameLogging=false;
             }
             else if (Time.timeScale == 0)
             {
                 Time.timeScale = 1;
                 PauseCanvas.SetActive(false);
+                gameData.isGameLogging=true;
                 UnpauseSound.Play();
             }
         }
@@ -180,6 +183,7 @@ public class Snake : MonoBehaviour
 
     private void GameOver()
     {
+        gameData.isGameLogging=false;
         GameOverCanvas.SetActive(true);
         Time.timeScale = 0;
         GameOverSound.Play();

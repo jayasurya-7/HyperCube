@@ -125,8 +125,7 @@ public class FlappyGameControl : MonoBehaviour
     //shows objects with ShowOnPause tag
     public void showPaused()
     {
-       // AppData.plutoData.desTorq = 0;
-        //SendToRobot.ControlParam(AppData.plutoData.mechs[AppData.plutoData.mechIndex], ControlType.TORQUE, true, false);
+        gameData.isGameLogging = false;
         foreach (GameObject g in pauseObjects)
         {
             g.SetActive(true);
@@ -136,7 +135,7 @@ public class FlappyGameControl : MonoBehaviour
     //hides objects with ShowOnPause tag
     public void hidePaused()
     {
-
+        gameData.isGameLogging = true;
         foreach (GameObject g in pauseObjects)
         {
             g.SetActive(false);
@@ -146,7 +145,7 @@ public class FlappyGameControl : MonoBehaviour
     {
         //AppData.plutoData.desTorq = 0;
         //SendToRobot.ControlParam(AppData.plutoData.mechs[AppData.plutoData.mechIndex], ControlType.TORQUE, true, false);
-        
+        gameData.isGameLogging = false;
         endValSet = true;
         if (win == 1)
         {

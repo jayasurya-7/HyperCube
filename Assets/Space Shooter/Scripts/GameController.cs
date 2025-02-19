@@ -76,7 +76,8 @@ public class GameController : MonoBehaviour
 
 		if (gameOver)
 		{
-			restart = true;
+			gameData.isGameLogging = false;
+            restart = true;
 			restartText.text = "Press 'R' to Restart";
 			//h.Stop_data_log();
 			GameOverCanvas.SetActive(true);
@@ -177,16 +178,21 @@ public class GameController : MonoBehaviour
 		Paused = true;
 		PauseCanvas.SetActive(true);
 		Time.timeScale = 0;
-	}
+		gameData.isGameLogging = false;
+    }
 	public void ContinueGame()
     {
 		PauseCanvas.SetActive(false);
 		Time.timeScale = 1;
 		Paused = false;
-	}
+		gameData.isGameLogging = true;
+
+    }
 	public void ExitSpaceShooter()
     {
 		//SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 		Time.timeScale = 1;
-	}
+		gameData.isGameLogging = false;
+
+    }
 }

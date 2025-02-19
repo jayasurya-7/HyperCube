@@ -71,7 +71,7 @@ public class PlayerControllerDefault : MonoBehaviour {
         rb.position = new Vector3 (MovingAverage(Angle2Screen(hyper1.instance.ang1)), this.transform.position.y, Mathf.Clamp(rb.position.z, boundary.zMin, boundary.zMax));
         //rb.velocity = speed; //movement * speed;
         rb.rotation = Quaternion.Euler(0.0f, 0.0f, rb.velocity.x * -tilt);
-        Debug.Log(Angle2Screen(hyper1.instance.ang1));
+       // Debug.Log(Angle2Screen(hyper1.instance.ang1));
     }
 
     public static float Angle2Screen(float angle)

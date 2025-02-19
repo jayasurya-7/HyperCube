@@ -219,6 +219,7 @@ public class PlayerController_Car2D : MonoBehaviour
                     GameManager_Car2D.instance.timeleft = -1;
                     //GameManager_Car2D.instance.PlayerDied();
                     GameManager_Car2D.instance.isGameOver = true;
+                    gameData.isGameLogging = false;
                     //FlappyGameControl.instance.BirdDied();
                     
                 }

@@ -692,7 +692,7 @@ public class GameManager_Car2D : MonoBehaviour {
         ButtonSound();
         isGamePaused = true;
         Time.timeScale = 0;
-
+        gameData.isGameLogging = false;
         ShowPauseMenu();
     }
 
@@ -702,12 +702,14 @@ public class GameManager_Car2D : MonoBehaviour {
         isGamePaused = false;
         Time.timeScale = startGameSpeed;
         ShowGamePlayMenu();
+        gameData.isGameLogging = true;
     }
 
     public void GameStop()
     {
         ButtonSound();
         GameOver();
+        gameData.isGameLogging = false;
     }
 
     public void GameOver()

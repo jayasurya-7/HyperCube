@@ -50,6 +50,7 @@ public class ButtonClick : MonoBehaviour
     public GameObject SpeedCanvas;
     public GameObject Timer;
 
+    public Text msg;
 
     public float Grip_Force;
     public float Thumb_dist_Min;
@@ -291,7 +292,8 @@ public class ButtonClick : MonoBehaviour
 
     public void ApplySettings()
     {
-        PlayerPrefs.SetString("Address", Path.text.ToString());
+        //PlayerPrefs.SetString("Address", Path.text.ToString());
+       msg.text = " [ ! ] Settings Applied ";
         //PlayerPrefs.SetFloat("Time", float.Parse(Time.text));
         //Debug.Log(ComPortValue);
         //if (ComPortValue == 0)

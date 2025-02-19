@@ -4693,6 +4693,7 @@ MonoBehaviour:
   portnames: []
   Hos_: {fileID: 0}
   MovingAverageLength: 200
+  Ports: []
 --- !u!4 &314958240
 Transform:
   m_ObjectHideFlags: 0
@@ -7447,6 +7448,7 @@ MonoBehaviour:
   DistMax: {fileID: 0}
   Path: {fileID: 0}
   Space: {fileID: 0}
+  Time: {fileID: 0}
   Auto: {fileID: 0}
   car1: {fileID: 0}
   car2: {fileID: 0}
@@ -7461,9 +7463,9 @@ MonoBehaviour:
   GrossKnobCanvas: {fileID: 0}
   FineKnobCanvas: {fileID: 0}
   KeyKnobCanvas: {fileID: 0}
-  ComPort: {fileID: 0}
   settingCanvas: {fileID: 0}
   SpeedCanvas: {fileID: 0}
+  Timer: {fileID: 0}
   Grip_Force: 0
   Thumb_dist_Min: 0
   Thumb_dist_Max: 0
@@ -23856,7 +23858,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1704550274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23866,7 +23868,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1704550273}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6930231097a1f844ebdfd40bffdc6614, type: 3}
+  m_Script: {fileID: 11500000, guid: 91a354c4310640b4f93f96b6281d2a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1704550275
