@@ -36,6 +36,7 @@ public class ScoreManagerSnake : MonoBehaviour
     {
         score += 10;
         ScoreText.text = "Score:" + score.ToString();
+        gameData.gameScore = score;
         ScoreSound.Play();
         if (highscore < score)
         {

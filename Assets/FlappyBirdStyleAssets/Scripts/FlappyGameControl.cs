@@ -175,57 +175,52 @@ public class FlappyGameControl : MonoBehaviour
 
         if (gameduration < 0 && !endValSet)
         {
-            
-            //AppData.plutoData.desTorq = 0;
-            //SendToRobot.ControlParam(AppData.plutoData.mechs[AppData.plutoData.mechIndex], ControlType.TORQUE, true, false);
-            //FB_spawnTargets.instance.setZero();
-            gameduration = 0;
-
-
-            if (!gameOver)
+            if (gameduration < 0 && !endValSet)
             {
-                win = 1;
+
+                gameduration = 0;
+
+
+                if (!gameOver)
+                {
+                    win = 1;
+                }
+                else
+                {
+                    win = -1;
+                }
+                gameOver = true;
+                Debug.Log(win);
+
+
+                score = 0;
+                BirdDied();
             }
             else
             {
-                win = -1;
+                if (!bc.startBlinking)
+                {
+                    int index = UnityEngine.Random.Range(0, winClip.Length);
+                    GetComponent<AudioSource>().clip = winClip[index];
+                    if (score != 0)
+                    {
+                        GetComponent<AudioSource>().Play();
+                    }
+                    score += 1;
+                    gameData.gameScore++;
+
+
+                }
+                else
+                {
+                    int index = UnityEngine.Random.Range(0, hitClip.Length);
+                    GetComponent<AudioSource>().clip = hitClip[index];
+                    GetComponent<AudioSource>().Play();
+                }
+
+                ScoreText.text = "Score: " + gameData.gameScore.ToString();/* score.ToString();*/
+                FlappyColumnPool.instance.spawnColumn();
             }
-            gameOver = true;
-            Debug.Log(win);
-            //AppData.plutoData.desTorq = 0;
-            //SendToRobot.ControlParam(AppData.plutoData.mechs[AppData.plutoData.mechIndex], ControlType.TORQUE, true, false);
-            //AppData.DifficultyManager(win);
-            //AppData.writeGamePerformace();
-
-         
-            //AppData.WriteTrainingSummaryFile(AppData.reps, AppData.timeOnTrail);
-            //// vdc.StopCapture();
-            //AppData.StopGameLogging();
-
-            //// write for aan profle
-            //string _fname = Path.Combine(SubjectData.Get_Subj_Assessment_Dir(AppData.subjHospNum), "aan_" + AppData.plutoData.mechs[AppData.plutoData.mechIndex] + ".csv");
-
-            //if ((AppData.regime == "MINIMAL ASSIST"))
-            //{
-            //    using (StreamWriter file = new StreamWriter(_fname, true))
-            //    {
-            //        //AppData.dateTime = DateTime.Now.ToString("Dyyyy-MM-ddTHH-mm-ss");
-            //        string res = String.Join(",", FB_spawnTargets.assistanceTorque);
-            //        Debug.Log(res);
-            //        file.WriteLine(AppData.dateTime + ", " + AppData.pROM()[0].ToString() + ", " + AppData.pROM()[1].ToString() + ", " + "10" + "," + res.ToString() + "," + "");
-            //    }
-            //}
-
-
-            // SendToRobot.ControlParam("wfe", ControlType.TORQUE, true, false);
-            // SceneManager.LoadScene("GameMenu");
-            score = 0;
-            BirdDied();
-            //AppData.timeOnTrail = 0;
-            //AppData.reps = 0;
-            //  HT_spawnTargets1.instance.count = 0;
-            // GameOverObject.SetActive(true);
-
         }
         else
         {

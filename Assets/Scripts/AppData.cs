@@ -226,10 +226,10 @@ public static class gameData
     public static bool setNeutral = false;
     private static DataLogger dataLog;
     private static readonly string[] gameHeader = new string[] {
-        "playerPosY","enemyPosY","events","playerScore","enemyScore"
+       "ang1","ang2","ang3","ang4","dist_btw","forceTotal","playerPosY","enemyPosY","events","playerScore","enemyScore"
     };
     private static readonly string[] tukTukHeader = new string[] {
-        "playerPosx","events","playerScore"
+        "ang1","ang2","ang3","ang4","dist_btw","forceTotal","playerPosx","events","playerScore"
     };
     public static bool isLogging { get; private set; }
     public static bool moving = true; // used to manipulate events in HAT TRICK
@@ -259,7 +259,7 @@ public static class gameData
         {
             if (fname != "")
             {
-                string instructionLine = "0 - moving, 1 - BallCaught, 2 - BombCaught, 3 - BallMissed, 4 - BombMissed\n";
+                string instructionLine = "0 - moving, 1 - collided, 2 - passed\n";
                 string headerWithInstructions = instructionLine + String.Join(", ", tukTukHeader) + "\n";
                 dataLog = new DataLogger(fname, headerWithInstructions);
                 isLogging = true;
@@ -318,11 +318,17 @@ public static class gameData
     {
         
             string[] _data = new string[] {
-               playerPos,
-               enemyPos,
-               gameData.events.ToString("F2"),
-               gameData.playerScore.ToString("F2"),
-               gameData.enemyScore.ToString("F2")
+                hyper1.instance.ang1.ToString("F2"),
+                hyper1.instance.ang2.ToString("F2"),
+                hyper1.instance.ang3.ToString("F2"),
+                hyper1.instance.ang4.ToString("F2"),
+                hyper1.instance.Btw_dist.ToString("F2"),
+                hyper1.instance.force_total.ToString("F2"),
+                playerPos,
+                enemyPos,
+                gameData.events.ToString("F2"),
+                gameData.playerScore.ToString("F2"),
+                gameData.enemyScore.ToString("F2")
             };
             string _dstring = String.Join(", ", _data);
             _dstring += "\n";
@@ -332,6 +338,12 @@ public static class gameData
     static public void LogDataHT()
     {
             string[] _data = new string[] {
+                hyper1.instance.ang1.ToString("F2"),
+                hyper1.instance.ang2.ToString("F2"),
+                hyper1.instance.ang3.ToString("F2"),
+                hyper1.instance.ang4.ToString("F2"),
+                hyper1.instance.Btw_dist.ToString("F2"),
+                hyper1.instance.force_total.ToString("F2"),
                playerPos,
                gameData.events.ToString("F2"),
                gameData.gameScore.ToString("F2")
@@ -431,6 +443,7 @@ static class AppData
     static public string jdfFilename = "Assets\\jeditextformat.txt";
     static public string[] comPorts;
     public static string selectedGame = null;
+    public static string selectedMechanism = null;
     public static string hospno = null;
     public static int currentSessionNumber;
     public static string rawDataPath = null;
@@ -442,7 +455,7 @@ static class AppData
     public static int current_trial = 0;
     public static int current_block = 0;
    
-
+    public static bool HyperCubeConnected = false;
 
     // Arduino related variables
     static public JediSerialCom jediClient;
@@ -565,7 +578,7 @@ class JediSerialCom
                     _count++;
                     JediSerialPayload.updateData();
                     newData = true;
-                    
+                    AppData.HyperCubeConnected = true;
                     // Update data buffers.
                     if (AppData.dataBuffers != null)
                     {
@@ -581,7 +594,7 @@ class JediSerialCom
                         string traildata =  hyper1.timer_+JediSerialPayload.GetFormatedData(JediSerialPayload.data)+ "\n";
                         
                         AppData.dlogger.logData(traildata);
-                        //Debug.Log(traildata);
+                       // Debug.Log(traildata);
                     }
                     //if (AppData.afterLogger != null)
                     //{

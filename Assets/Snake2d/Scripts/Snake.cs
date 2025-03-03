@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.SceneManagement;
 using NeuroRehabLibrary;
+using System;
 public class Snake : MonoBehaviour
 {
     Vector2 dir = Vector2.right;
@@ -52,6 +53,7 @@ public class Snake : MonoBehaviour
                 Time.timeScale = 1;
                 PauseCanvas.SetActive(false);
                 gameData.isGameLogging=true;
+                gameData.events = Array.IndexOf(gameData.tukEvents, "moving");
                 UnpauseSound.Play();
             }
         }
@@ -141,6 +143,8 @@ public class Snake : MonoBehaviour
             ate = true;
             Destroy(coll.gameObject);
             //ScoreSound.Play();
+            gameData.events = Array.IndexOf(gameData.tukEvents, "passed");
+
             ScoreManagerSnake.instance.AddScore();
         }
 
@@ -149,9 +153,11 @@ public class Snake : MonoBehaviour
             Debug.Log("Game Over");
             gameOver = true;
             GameOver();
-            
+            gameData.events = Array.IndexOf(gameData.tukEvents, "collided");
+
+
         }
-                
+
     }
 
     private void MovementControl()

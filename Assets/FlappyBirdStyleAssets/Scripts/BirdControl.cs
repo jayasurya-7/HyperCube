@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 //using PlutoDataStructures;
 
 public class BirdControl : MonoBehaviour
@@ -78,6 +79,10 @@ public class BirdControl : MonoBehaviour
 
     private void Update()
     {
+
+
+        gameData.events = Array.IndexOf(gameData.tukEvents, "moving");
+
         //loadcell = -hyper1.instance.force_total + 2f;
         //KeyboardControl();
         //Debug.Log(hyper1.instance.ang1);
@@ -200,7 +205,9 @@ public class BirdControl : MonoBehaviour
         startBlinking = true;
         collision_count++;
         if (collision.gameObject.tag == "TopCollider" || collision.gameObject.tag == "BottomCollider") {
-            
+
+            gameData.events = Array.IndexOf(gameData.tukEvents, "collided");
+
             startBlinking = true;
             currentLife++;
             life.fillAmount = ((float)currentLife / totalLife);

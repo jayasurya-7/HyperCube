@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System;
 public class BallController : MonoBehaviour {
 
 	//speed of the ball
@@ -27,7 +27,7 @@ public class BallController : MonoBehaviour {
 		rig2D = this.gameObject.GetComponent<Rigidbody2D>();
 
 		//generating random number based on possible initial directions
-		int rand = Random.Range(1,2);
+		int rand = UnityEngine.Random.Range(1,2);
 
 		//setting initial direction
 		if(rand == 1){
@@ -48,9 +48,12 @@ public class BallController : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
-		// rig2D.velocity = speed * (rig2D.velocity.normalized);
-
-		preVel = rig2D.velocity;
+        // rig2D.velocity = speed * (rig2D.velocity.normalized);
+        if (rig2D.velocity.magnitude > 0.01f)
+        {
+            gameData.events = Array.IndexOf(gameData.pongEvents, "moving");
+        }
+        preVel = rig2D.velocity;
 		//Debug.Log(rig2D.velocity);
 
 
@@ -88,10 +91,9 @@ public class BallController : MonoBehaviour {
 
             Vector2 d = new Vector2(1, y).normalized;
 			initVelocity(d * speed );
-
-
-			//_projection.SimulateTrajectory( transform.position, d * speed * 1.5F);
-		}
+            gameData.events = Array.IndexOf(gameData.pongEvents, "enemyHit");
+            //_projection.SimulateTrajectory( transform.position, d * speed * 1.5F);
+        }
 
 		if (col.gameObject.tag == "Player") {
             //calculate angle
@@ -103,24 +105,27 @@ public class BallController : MonoBehaviour {
 			//set angle and speed
 			Vector2 d = new Vector2(-1, y).normalized;
 			initVelocity(d * speed );
-			//_projection.SimulateTrajectory( transform.position, d * speed * 1.5F);
-		}
+            gameData.events = Array.IndexOf(gameData.pongEvents, "playerHit");
+            //_projection.SimulateTrajectory( transform.position, d * speed * 1.5F);
+        }
 		if (col.gameObject.name == "BottomBound")
         {
 			if(rig2D.velocity.y == 0)
             {
 				rig2D.velocity = new Vector2(rig2D.velocity.x, Mathf.Abs(preVel.y));
             }
-			//Debug.Log(preVel);
-		}
+            gameData.events = Array.IndexOf(gameData.pongEvents, "wallBounce");
+            //Debug.Log(preVel);
+        }
 		if (col.gameObject.name == "TopBound")
 		{
 			if (rig2D.velocity.y == 0)
 			{
 				rig2D.velocity = new Vector2(rig2D.velocity.x, -Mathf.Abs(preVel.y));
 			}
-			//Debug.Log(preVel);
-		}
+            //Debug.Log(preVel);
+            gameData.events = Array.IndexOf(gameData.pongEvents, "wallBounce");
+        }
 	}
 
 	//calculates the angle the ball hits the paddle at

@@ -66,7 +66,7 @@ public class gamelogSG : MonoBehaviour
                 if (Player != null)
                     gameData.playerPos = Player.transform.position.y.ToString();
                 else
-                    gameData.playerPos = "\"" + "XXX" + "," + "XXX" + "\"";
+                    gameData.playerPos = "\"" + "XXX" ;
 
                 //if (Target != null)
                 //    gameData.TargetPos = "\"" + Target.transform.position.x.ToString() + "," + Target.transform.position.y.ToString() + "\"";
@@ -78,7 +78,7 @@ public class gamelogSG : MonoBehaviour
                 //    gameData.enemyPos = "\"" + "XXX" + "," + "XXX" + "\"";
             }
 
-            gameData.LogData();
+            gameData.LogDataHT();
         }
         time += Time.deltaTime;
     }

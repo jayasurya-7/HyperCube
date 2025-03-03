@@ -78,7 +78,7 @@ public class gamelogHR : MonoBehaviour
                     gameData.enemyPos = "\"" + "XXX" + "," + "XXX" + "\"";
             }
 
-            gameData.LogData();
+            gameData.LogDataHT();
         }
         time += Time.deltaTime;
     }

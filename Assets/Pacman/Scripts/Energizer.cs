@@ -18,6 +18,8 @@ public class Energizer : MonoBehaviour {
         {
             gm.ScareGhosts();
             Destroy(gameObject);
+              // gameData.events = Array.IndexOf(gameData.tukEvents, "moving");
+            
         }
     }
 }

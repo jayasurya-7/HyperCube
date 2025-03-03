@@ -48,7 +48,7 @@ public class UIManagerPP : MonoBehaviour
     {
         currentGameSession = new GameSession
         {
-           // GameName = sessionlocation.filename,
+           GameName = "Ping Pong",
             Assessment = 0 // Example assessment value, adjust as needed
         };
 
@@ -58,19 +58,14 @@ public class UIManagerPP : MonoBehaviour
         SetSessionDetails();
     }
 
-
+	         
     private void SetSessionDetails()
     {
         string device = "HYPERCUBE"; // Set the device name
         string assistMode = "Null"; // Set the assist mode
         string assistModeParameters = "Null"; // Set the assist mode parameters
         string deviceSetupLocation = "Null"; // Set the device setup location
-
-
         string gameParameter = "Null";
-
-
-
         SessionManager.Instance.SetGameParameter(gameParameter, currentGameSession);
 
 
@@ -99,7 +94,7 @@ public class UIManagerPP : MonoBehaviour
     void Update()
 	{
 
-        gameData.events = Array.IndexOf(gameData.pongEvents, "playerFail");
+        //gameData.events = Array.IndexOf(gameData.pongEvents, "playerFail");
         if (rightBound.enemyScore >= winScore && !isFinished)
 		{
 			isFinished = true;

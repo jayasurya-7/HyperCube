@@ -301,6 +301,7 @@ public class GameManager_Car2D : MonoBehaviour {
             return;
         }
         Debug.Log("player Reached");
+       // gameData.gameScore++;
        //AppData.reps += 1;
         //CAR_spawnTargets1.instance.reached = true;
         SpawnNewObject();
@@ -709,7 +710,7 @@ public class GameManager_Car2D : MonoBehaviour {
     {
         ButtonSound();
         GameOver();
-        gameData.isGameLogging = false;
+       
     }
 
     public void GameOver()
@@ -725,6 +726,7 @@ public class GameManager_Car2D : MonoBehaviour {
         ShowGameOverMenu();
         Time.timeScale = 0;
         h.Stop_data_log();
+        gameData.isGameLogging = false;
 
     }
 

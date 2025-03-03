@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+using System;
 
 
 public class PlayerController_Car2D : MonoBehaviour
@@ -108,6 +108,7 @@ public class PlayerController_Car2D : MonoBehaviour
         //Debug.Log(ControlMethod.value);
         //InputControl();
         //ConrolData();
+        gameData.events = Array.IndexOf(gameData.tukEvents, "moving");
         PlayerControllerInput();
         //KeyboardControl();
         //Vector2 target_pos = new Vector3(Angle2Screen(Average(angles)), rigBody2D.position.y, 0f); //Replace angles value with the encoder value
@@ -210,9 +211,10 @@ public class PlayerController_Car2D : MonoBehaviour
             {
                 currentLife++;
                 Debug.Log("Car hit");
+                gameData.events = Array.IndexOf(gameData.tukEvents, "collided");
                 CAR_spawnTargets1.instance.reached = false;
                 isAlive = false;
-                SoundManager_Car2D.instance.PlaySound(carCrash[Random.Range(0,carCrash.Length)]);
+                SoundManager_Car2D.instance.PlaySound(carCrash[UnityEngine.Random.Range(0,carCrash.Length)]);
                 if (currentLife >= totalLife)
                 {
 
@@ -230,6 +232,8 @@ public class PlayerController_Car2D : MonoBehaviour
         if (other.tag == "Target")
         {
             Debug.Log("Reached");
+            gameData.gameScore++;
+            gameData.events = Array.IndexOf(gameData.tukEvents, "passed");
             CAR_spawnTargets1.instance.reached = true;
         }
     }

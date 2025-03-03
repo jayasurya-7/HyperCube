@@ -141,8 +141,8 @@ public class hyper1 : MonoBehaviour
             //encoder1.text = theta1.ToString();
             //Xposition.text = xposition.ToString();
             //Yposition.text = yposition.ToString();
-            //Joystickbutton.text = joystickButtonstate.ToString();
-            //greenbutton.text = greenbuttonState.ToString();
+            //Joystickbutton.text = joystickButtonstate.ToString();a
+             //greenbutton.text = greenbuttonState.ToString();
             //yellowbutton1.text = yellowOnebuttonState.ToString();
             //yellowbutton2.text = yellowTwobuttonState.ToString();
             //redbutton.text = redbuttonState.ToString();
@@ -355,8 +355,9 @@ public class hyper1 : MonoBehaviour
         //serReader.DisconnectArduino();
         //Debug.Log("Dis");
         JediDataFormat.ReadSetJediDataFormat(AppData.jdfFilename);
-        serReader = new JediSerialCom(PlayerPrefs.GetString("COMPort"));
-        serReader.ConnectToArduino();
+        //serReader = new JediSerialCom(PlayerPrefs.GetString("COMPort"));
+        serReader = new JediSerialCom("COM9");
+       serReader.ConnectToArduino();
         //Debug.Log("connected");
     }
     public void DconnectToArduino()

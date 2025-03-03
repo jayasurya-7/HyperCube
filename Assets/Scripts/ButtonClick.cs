@@ -8,6 +8,8 @@ using System.IO;
 using System.IO.Ports;
 using NeuroRehabLibrary;
 using static hyper1;
+using System.Linq;
+using UnityEditor.Rendering;
 
 public class ButtonClick : MonoBehaviour
 {
@@ -44,7 +46,7 @@ public class ButtonClick : MonoBehaviour
     public GameObject GrossKnobCanvas;
     public GameObject FineKnobCanvas;
     public GameObject KeyKnobCanvas;
-    //public Dropdown ComPort;
+   
     //public TMPro.TMP_Dropdown ComPort;
     public GameObject settingCanvas;
     public GameObject SpeedCanvas;
@@ -59,6 +61,9 @@ public class ButtonClick : MonoBehaviour
     public float Index_dist_Max;
 
     public int ComPortValue;
+    public Dropdown ComPortDropdown;
+    private SerialPort serialPort;
+    JediSerialCom serReader;
     //public GameObject hypercube;
     //public float GF;
 
@@ -66,7 +71,9 @@ public class ButtonClick : MonoBehaviour
     void start()
     {
         Timer.SetActive(false);
-                
+        PopulateComPorts();
+        ComPortDropdown.onValueChanged.AddListener(delegate { ConnectToHypercube(); });
+
         //string[] ComPorts = GetComponent<hyper1>().Ports;
         //var dropdown = transform.GetComponent<Dropdown>();
         //dropdown.options.Clear();
@@ -78,7 +85,41 @@ public class ButtonClick : MonoBehaviour
 
 
     }
-    public void AutogameLoad()
+    void ConnectToHypercube()
+    {
+        if (serialPort != null && serialPort.IsOpen)
+        {
+            serialPort.Close();
+        }
+
+        string selectedPort = ComPortDropdown.options[ComPortDropdown.value].text;
+
+        
+        if (selectedPort != "No Ports Found")
+        {
+            serReader = new JediSerialCom(selectedPort);
+            serReader.ConnectToArduino();
+        }
+    }
+    void PopulateComPorts()
+    {
+        string[] ports = SerialPort.GetPortNames();
+        ComPortDropdown.ClearOptions();
+
+        if (ports.Length > 0)
+        {
+            ComPortDropdown.AddOptions(ports.ToList());
+            ComPortDropdown.value = 0;
+            ComPortDropdown.RefreshShownValue();
+            ConnectToHypercube(); // Automatically connect to the first port
+        }
+        else
+        {
+            ComPortDropdown.AddOptions(new System.Collections.Generic.List<string> { "No Ports Found" });
+            Debug.Log("No ports found");
+        }
+    }
+        public void AutogameLoad()
     {
         //PlayerPrefs.SetString("Hospital Number", HN.text);
         SceneManager.LoadScene("FlappyGame");

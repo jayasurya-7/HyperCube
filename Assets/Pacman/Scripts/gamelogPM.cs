@@ -68,17 +68,17 @@ public class gamelogPM : MonoBehaviour
                 else
                     gameData.playerPos = "\"" + "XXX" + "," + "XXX" + "\"";
 
-                if (Target != null)
-                    gameData.TargetPos = "\"" + Target.transform.position.x.ToString() + "," + Target.transform.position.y.ToString() + "\"";
-                else
-                    gameData.TargetPos = "\"" + "XXX" + "," + "XXX" + "\"";
-                if (Enemy != null)
-                    gameData.enemyPos = Enemy.transform.position.y.ToString();
-                else
-                    gameData.enemyPos = "\"" + "XXX" + "," + "XXX" + "\"";
+                //if (Target != null)
+                //    gameData.TargetPos = "\"" + Target.transform.position.x.ToString() + "," + Target.transform.position.y.ToString() + "\"";
+                //else
+                //    gameData.TargetPos = "\"" + "XXX" + "," + "XXX" + "\"";
+                //if (Enemy != null)
+                //    gameData.enemyPos = Enemy.transform.position.y.ToString();
+                //else
+                //    gameData.enemyPos = "\"" + "XXX" + "," + "XXX" + "\"";
             }
 
-            gameData.LogData();
+            gameData.LogDataHT();
         }
         time += Time.deltaTime;
     }

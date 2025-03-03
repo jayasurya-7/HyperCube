@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using System;
 public class Friendly : MonoBehaviour
 {
     public GameObject Background;
@@ -39,7 +39,8 @@ public class Friendly : MonoBehaviour
             SceneManager.LoadScene("GameOver");
             Destroy(col.gameObject);
             Destroy(gameObject);
-            
+                gameData.events = Array.IndexOf(gameData.tukEvents, "moving");
+
             //gameManager.IncrementScore();
         }
         //if (col.gameObject.tag.Equals("Player"))

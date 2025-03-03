@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -50,6 +51,7 @@ public class GameController : MonoBehaviour
 		highScoreText.text = "High Score:" + PlayerPrefs.GetInt("highScore").ToString();
 		StartCoroutine(SpawnWaves());
 
+		gameData.isGameLogging= true;
 		
 	}
 
@@ -101,6 +103,7 @@ public class GameController : MonoBehaviour
             else
             {
 				ContinueGame();
+                gameData.events = Array.IndexOf(gameData.tukEvents, "moving");
             }
         }
 	}
@@ -111,9 +114,9 @@ public class GameController : MonoBehaviour
 
 		while(!gameOver) {
 			for (int i = 0; i < asteroidCount; i++) {
-				GameObject asteroid = asteroids[Random.Range(0, asteroids.Length)];
+				GameObject asteroid = asteroids[UnityEngine.Random.Range(0, asteroids.Length)];
 
-				Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
+				Vector3 spawnPosition = new Vector3(UnityEngine.Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
 				Quaternion spawnRotation = Quaternion.identity;
 
 				Instantiate(asteroid, spawnPosition, spawnRotation);
@@ -134,6 +137,7 @@ public class GameController : MonoBehaviour
 	void UpdateScore()
 	{
 		scoreText.text = "Score: " + score.ToString();
+		gameData.gameScore= score;	
 	}
 
 	public void AddScore(int newScoreValue)

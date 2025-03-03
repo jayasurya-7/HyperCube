@@ -11323,7 +11323,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 154750, guid: db15fdab6be0e104fbcf2c44afaad894, type: 3}
       propertyPath: m_TagString
-      value: Target
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 454750, guid: db15fdab6be0e104fbcf2c44afaad894, type: 3}
       propertyPath: m_RootOrder
@@ -12699,7 +12699,7 @@ GameObject:
   - component: {fileID: 508745664}
   m_Layer: 0
   m_Name: pacman
-  m_TagString: Player
+  m_TagString: pacdot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22550,7 +22550,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 194802, guid: bc6b2f74c0c842443b5d21543c3e5e16, type: 3}
       propertyPath: m_TagString
-      value: Target
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 494802, guid: bc6b2f74c0c842443b5d21543c3e5e16, type: 3}
       propertyPath: m_RootOrder
@@ -44703,7 +44703,7 @@ GameObject:
   - component: {fileID: 1945090363}
   m_Layer: 0
   m_Name: blinkyTarget
-  m_TagString: Target
+  m_TagString: Untagged
   m_Icon: {fileID: -1003283189, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48489,7 +48489,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 151032, guid: e51e4ed36b94fe24f8dc937c5aac9052, type: 3}
       propertyPath: m_TagString
-      value: Target
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 451032, guid: e51e4ed36b94fe24f8dc937c5aac9052, type: 3}
       propertyPath: m_RootOrder
@@ -48676,7 +48676,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 154592, guid: 9f090580268dde54d8def18b84c4dbab, type: 3}
       propertyPath: m_TagString
-      value: Target
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 454592, guid: 9f090580268dde54d8def18b84c4dbab, type: 3}
       propertyPath: m_RootOrder

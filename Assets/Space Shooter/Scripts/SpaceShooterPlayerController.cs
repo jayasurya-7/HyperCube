@@ -165,7 +165,7 @@ public class SpaceShooterPlayerController : MonoBehaviour
             //direction = Vector2.down;
             this.transform.Translate(-0.05f, 0, 0);
         }
-        else
+        else 
         {
             direction = Vector2.zero;
         }

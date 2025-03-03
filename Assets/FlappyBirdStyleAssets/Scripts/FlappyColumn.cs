@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,7 +29,9 @@ public class FlappyColumn : MonoBehaviour
        // Debug.Log("Trigger" + collision.gameObject.tag);
         if (collision.gameObject.tag == "Player" &&collision.GetComponent<BirdControl>() != null && prevSpawnTime > 1)
         {
-          //  Debug.Log(this.gameObject.name);
+            //  Debug.Log(this.gameObject.name);
+            gameData.events = Array.IndexOf(gameData.tukEvents, "passed");
+
             prevSpawnTime = 0;
          // Debug.Log("UpdateScore");
             FlappyGameControl.instance.BirdScored();

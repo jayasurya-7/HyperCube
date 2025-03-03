@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
         {
             case GameManager.GameState.Game:
                 gameData.isGameLogging= true;
+                gameData.events = Array.IndexOf(gameData.tukEvents, "moving");
                 ReadInputAndMove();
                 Animate();
                 break;
@@ -198,7 +199,7 @@ public class PlayerController : MonoBehaviour
     public void UpdateScore()
     {
         killstreak++;
-
+        gameData.gameScore++;
         // limit killstreak at 4
         if (killstreak > 4) killstreak = 4;
 

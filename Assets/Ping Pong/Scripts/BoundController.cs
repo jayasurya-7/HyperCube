@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class BoundController : MonoBehaviour {
 
@@ -22,10 +23,14 @@ public class BoundController : MonoBehaviour {
 			if (other.gameObject.GetComponent<Rigidbody2D>().velocity.x > 0){
              playAudio(1);
 				enemyScore++;
-			} else {
+				gameData.enemyScore++;
+                gameData.events = Array.IndexOf(gameData.pongEvents, "playerFail");
+            } else {
 				playerScore++;
-				//AppData.gameScore++;
-               playAudio(0);
+				gameData.playerScore++;
+                gameData.events = Array.IndexOf(gameData.pongEvents, "enemyFail");
+                //AppData.gameScore++;
+                playAudio(0);
             }
 
 

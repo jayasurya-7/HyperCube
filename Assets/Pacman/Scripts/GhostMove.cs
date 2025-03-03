@@ -302,14 +302,18 @@ public class GhostMove : MonoBehaviour {
 		        Calm();
 		        InitializeGhost(_startPos);
                 pacman.UpdateScore();
-		    }
-		       
-		    else
+                gameData.events = Array.IndexOf(gameData.tukEvents, "passed");
+
+            }
+
+            else
 		    {
 		        _gm.LoseLife();
-		    }
+                gameData.events = Array.IndexOf(gameData.tukEvents, "collided");
 
-		}
+            }
+
+        }
 	}
 
 	//-----------------------------------------------------------------------------------
