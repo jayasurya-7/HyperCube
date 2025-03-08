@@ -32,7 +32,7 @@ public class welcome : MonoBehaviour
     {
 
 
-
+        messageText.text = " ";
 
 
 
@@ -64,7 +64,7 @@ public class welcome : MonoBehaviour
         if (hospno_check == true)
         {
             Debug.Log("Empty hospno");
-
+            messageText.text = "Empty Patient ID";
         }
         else
         {
@@ -104,6 +104,7 @@ public class welcome : MonoBehaviour
                 else
                 {
                     Debug.Log("Hospital Number Does not exist");
+                    messageText.text = " Hosptial Number doesn't exist";
                     SceneManager.LoadScene("Register");
 
                     //StartCoroutine(ShowMessageFor3Seconds("PLEASE ENTER SIGN UP AND REGISTER"));

@@ -12,7 +12,7 @@ public class gamelogSS : MonoBehaviour
 
     string fileName;
     float time;
-
+    int x = 0;
     void Start()
     {
         ResetGameData();
@@ -35,7 +35,7 @@ public class gamelogSS : MonoBehaviour
     {
         dateTime = DateTime.Now.ToString("Dyyyy-MM-ddTHH-mm-ss");
         date = DateTime.Now.ToString("yyyy-MM-dd");
-        sessionNum = "Session" + AppData.currentSessionNumber;
+        sessionNum = "Session_" + AppData.currentSessionNumber;
     }
 
     private void CreateLogFile()
@@ -67,18 +67,9 @@ public class gamelogSS : MonoBehaviour
                     gameData.playerPos = Player.transform.position.x.ToString();
 
                 else
-                    gameData.playerPos = "\"" + "XXX" + "," + "XXX" + "\"";
-
-                //if (Target != null)
-                //    gameData.TargetPos = "\"" + Target.transform.position.x.ToString() + "," + Target.transform.position.y.ToString() + "\"";
-                //else
-                //    gameData.TargetPos = "\"" + "XXX" + "," + "XXX" + "\"";
-                //if (Enemy != null)
-                //    gameData.enemyPos = Enemy.transform.position.y.ToString();
-                //else
-                //    gameData.enemyPos = "\"" + "XXX" + "," + "XXX" + "\"";
+                    gameData.playerPos = x.ToString("F2");
+                
             }
-            Debug.Log(gameData.playerPos + "cc");
             gameData.LogDataHT();
         }
         time += Time.deltaTime;

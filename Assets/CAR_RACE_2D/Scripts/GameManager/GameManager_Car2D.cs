@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 using System.IO;
 using Random = UnityEngine.Random;
 using NeuroRehabLibrary;
-using static hyper1;
-using NeuroRehabLibrary;
+using static hyper1; 
 
 
 public class GameManager_Car2D : MonoBehaviour {

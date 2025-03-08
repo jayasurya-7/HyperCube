@@ -25,7 +25,7 @@ public class PatientRegister : MonoBehaviour
     public InputField hospnoInput;
     public ToggleGroup genderToggleGroup; // Toggle Group for gender selection
     public ToggleGroup handToggleGroup;   // Toggle Group for hand selection
-
+    public Text msg;
     void Start() { }
 
     public void onclick_register()
@@ -48,9 +48,9 @@ public class PatientRegister : MonoBehaviour
         Debug.Log($"Hospno: {p_hospno}");
         Debug.Log($"Hand: {p_hand}");
 
-        // Validate inputs
         if (string.IsNullOrEmpty(p_name) || string.IsNullOrEmpty(p_age) || string.IsNullOrEmpty(p_hospno) || string.IsNullOrEmpty(p_gender))
         {
+            msg.text = "Error: Name, Age, Gender, and Hospno are required!";
             Debug.Log("Error: Name, Age, Gender, and Hospno are required!");
             return;
         }
@@ -59,7 +59,8 @@ public class PatientRegister : MonoBehaviour
         string patientDir = Path.Combine(Application.dataPath, "Patient_Data", p_hospno);
         if (Directory.Exists(patientDir))
         {
-            Debug.Log("Error: Hospno already exists! Choose a different one.");
+            msg.text = "Error: Hospno already exists! log in";
+            Debug.Log("Error: Hospno already exists! log in");
             SceneManager.LoadScene("Start");
             //return;
         }

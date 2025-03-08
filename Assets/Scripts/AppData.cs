@@ -442,19 +442,23 @@ static class AppData
    
     static public string jdfFilename = "Assets\\jeditextformat.txt";
     static public string[] comPorts;
+
+
+    //def
     public static string selectedGame = null;
     public static string selectedMechanism = null;
     public static string hospno = null;
     public static int currentSessionNumber;
     public static string rawDataPath = null;
     public static string trialDataFileLocationTemp = null;
+
+
     static public double nanosecPerTick = 1.0 / Stopwatch.Frequency;
     static public Stopwatch stp_watch = new Stopwatch();
 
     public static float timelog;
     public static int current_trial = 0;
     public static int current_block = 0;
-   
     public static bool HyperCubeConnected = false;
 
     // Arduino related variables
@@ -533,7 +537,7 @@ class JediSerialCom
                 
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Debug.Log("NOT CONNECTED");
             }
