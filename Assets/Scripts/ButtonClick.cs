@@ -64,10 +64,20 @@ public class ButtonClick : MonoBehaviour
     public Dropdown ComPortDropdown;
     private SerialPort serialPort;
     JediSerialCom serReader;
-    //public GameObject hypercube;
-    //public float GF;
 
-    // Start is called before the first frame update
+    //Scenes
+
+    private string flappyGame = "FlappyGame";
+    private string spaceShooter = "Space";
+    private string highwayRacer = "HIGHWAYRACER";
+    private string pacMan = "menu";
+    private string pongGame = "pong_menu";
+    private string assessmentScene = "ROM Assessment";
+    private string homeScene = "Home";
+    private string snakeGame = "Snake Game";
+    private string settings = "Settings";
+    private string startScene = "Start";
+
     void start()
     {
         Timer.SetActive(false);
@@ -119,28 +129,24 @@ public class ButtonClick : MonoBehaviour
             Debug.Log("No ports found");
         }
     }
-        public void AutogameLoad()
+    public void AutogameLoad()
     {
-        //PlayerPrefs.SetString("Hospital Number", HN.text);
-        SceneManager.LoadScene("FlappyGame");
+        SceneManager.LoadScene(flappyGame);
         PlayerPrefs.SetString("Game name", "Auto Ride");
         AppData.selectedGame = "autoRider";
-        //DontDestroyOnLoad(hypercube);
 
     }
 
     public void HighwayRacerLoad()
     {
-        //PlayerPrefs.SetString("Hospital Number", HN.text);
-        SceneManager.LoadScene("HIGHWAYRACER");
+        SceneManager.LoadScene(highwayRacer);
         PlayerPrefs.SetString("Game name", "Highway Racer");
         AppData.selectedGame = "highwayRacer";
     }
 
     public void SpaceShooterLoad()
     {
-        //PlayerPrefs.SetString("Hospital Number", HN.text);
-        SceneManager.LoadScene("Space");
+        SceneManager.LoadScene(spaceShooter);
         PlayerPrefs.SetString("Game name", "Space Shooter");
         AppData.selectedGame = "spaceShooter";
 
@@ -148,8 +154,7 @@ public class ButtonClick : MonoBehaviour
 
     public void PingPongLoad()
     {
-        //PlayerPrefs.SetString("Hospital Number", HN.text);
-        SceneManager.LoadScene("pong_menu");
+        SceneManager.LoadScene(pongGame);
         PlayerPrefs.SetString("Game name", "Ping Pong");
         AppData.selectedGame = "pingPong";
     }
@@ -161,22 +166,20 @@ public class ButtonClick : MonoBehaviour
 
     public void PacmanLoad()
     {
-        //PlayerPrefs.SetString("Hospital Number", HN.text);
-        SceneManager.LoadScene("menu");
+        SceneManager.LoadScene(pacMan);
         PlayerPrefs.SetString("Game name", "pacman");
         AppData.selectedGame = "pacMan";
     }
 
     public void SnakeLoad()
     {
-        SceneManager.LoadScene("Snake Game");
+        SceneManager.LoadScene(snakeGame);
         PlayerPrefs.SetString("Game name", "Snake2d");
         AppData.selectedGame = "snakeGame";
     }
 
     public void AssessmentSceneLoad()
     {
-        //PlayerPrefs.SetString("Hospital Number", HN.text);
         SceneManager.LoadScene("Assessment");
         PlayerPrefs.SetString("Game name", "Assessment");
     }
@@ -184,7 +187,7 @@ public class ButtonClick : MonoBehaviour
     public void MechanismSceneLoad()
     {
         PlayerPrefs.SetString("Hospital Number", HN.text);
-        SceneManager.LoadScene("Home");
+        SceneManager.LoadScene(homeScene);
 
 
         string pth = PlayerPrefs.GetString("Address");
@@ -195,20 +198,7 @@ public class ButtonClick : MonoBehaviour
 
        
         string patientDir = path_to_data + "\\" + "Patient_Data" + "\\" + Hosp_number;
-        //string baseDirectory = pth + Hosp_number;
-  //      string baseDirectory = patientDir;
-
-
-  //SessionManager.Initialize(baseDirectory);
-
-  //      SessionManager.Instance.Login();
         PlayerPrefs.SetFloat("Time", float.Parse(Time.text));
-
-       
-
-        //SessionManager.Instance.Login();
-        
-        //Timer.SetActive(true);
         
     }
 
@@ -302,12 +292,12 @@ public class ButtonClick : MonoBehaviour
 
     public void LoadUIscene()
     {
-        SceneManager.LoadScene("ROM Assessment");
+        SceneManager.LoadScene(assessmentScene);
     }
 
     public void Return()
     {
-        SceneManager.LoadScene("Home");
+        SceneManager.LoadScene(homeScene);
     }
 
     public void Quit()
@@ -322,14 +312,8 @@ public class ButtonClick : MonoBehaviour
     
     public void Settings()
     {
-        SceneManager.LoadScene("Settings");
+        SceneManager.LoadScene(settings);
     }
-
-    //public void ComPortDropdown()
-    //{
-    //    ComPortValue = ComPort.value;
-        
-    //}
 
     public void ApplySettings()
     {
@@ -438,8 +422,8 @@ public class ButtonClick : MonoBehaviour
     }
     public void LoadStartScene()
     {
-        SceneManager.LoadScene("Start");
-        //PlayerPrefs.SetFloat("Time", float.Parse(Time.text));
+        SceneManager.LoadScene(startScene);
+       // PlayerPrefs.SetFloat("Time", float.Parse(Time.text));
         
         Destroy(Timer.gameObject);
     }
