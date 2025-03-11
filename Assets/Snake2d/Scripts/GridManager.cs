@@ -7,7 +7,7 @@ public class GridManager : MonoBehaviour
     public GameObject VerticalGridPrefab;
     public GameObject HorizontalGridPrefab;
     public GameObject GridPrefab;
-    public Transform camera;
+   // public Transform camera;
 
     // Start is called before the first frame update
     void Start()

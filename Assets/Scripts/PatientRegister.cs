@@ -26,6 +26,7 @@ public class PatientRegister : MonoBehaviour
     public ToggleGroup genderToggleGroup; // Toggle Group for gender selection
     public ToggleGroup handToggleGroup;   // Toggle Group for hand selection
     public Text msg;
+    private string startScene = "Start";
     void Start() { }
 
     public void onclick_register()
@@ -42,11 +43,6 @@ public class PatientRegister : MonoBehaviour
         Toggle selectedHandToggle = handToggleGroup.ActiveToggles().FirstOrDefault();
         string p_hand = selectedHandToggle != null ? selectedHandToggle.name : "";
 
-        Debug.Log($"Name: {p_name}");
-        Debug.Log($"Age: {p_age}");
-        Debug.Log($"Gender: {p_gender}");
-        Debug.Log($"Hospno: {p_hospno}");
-        Debug.Log($"Hand: {p_hand}");
 
         if (string.IsNullOrEmpty(p_name) || string.IsNullOrEmpty(p_age) || string.IsNullOrEmpty(p_hospno) || string.IsNullOrEmpty(p_gender))
         {
@@ -61,7 +57,7 @@ public class PatientRegister : MonoBehaviour
         {
             msg.text = "Error: Hospno already exists! log in";
             Debug.Log("Error: Hospno already exists! log in");
-            SceneManager.LoadScene("Start");
+            SceneManager.LoadScene(startScene);
             //return;
         }
 
@@ -76,11 +72,11 @@ public class PatientRegister : MonoBehaviour
         Debug.Log("Patient registered successfully!");
         Debug.Log(patientDir);
         // Load next scene
-        SceneManager.LoadScene("Start");
+        SceneManager.LoadScene(startScene);
     }
 
     public void onclick_existing()
     {
-        SceneManager.LoadScene("Start");
+        SceneManager.LoadScene(startScene);
     }
 }

@@ -500,7 +500,6 @@ MonoBehaviour:
   VerticalGridPrefab: {fileID: 7402716940765550593, guid: 10202eb13012dfe43b492e0136672e33, type: 3}
   HorizontalGridPrefab: {fileID: 6002130643914305136, guid: d4a12e321877ef84f8dae146dbe5dc5b, type: 3}
   GridPrefab: {fileID: 582426055669858194, guid: 24831ed58ddb93440a055f1787133fdc, type: 3}
-  camera: {fileID: 519420032}
 --- !u!4 &449514054
 Transform:
   m_ObjectHideFlags: 0
@@ -4773,6 +4772,22 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.49713063
       objectReference: {fileID: 0}
+    - target: {fileID: 4671395604514900144, guid: 982782fe47f50ab4d821895836032bbc, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671395604514900144, guid: 982782fe47f50ab4d821895836032bbc, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -14536453
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671395604514900144, guid: 982782fe47f50ab4d821895836032bbc, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671395604514900144, guid: 982782fe47f50ab4d821895836032bbc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 4671395604514900145, guid: 982782fe47f50ab4d821895836032bbc, type: 3}
       propertyPath: m_Name
       value: snakeHead

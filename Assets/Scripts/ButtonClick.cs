@@ -78,7 +78,7 @@ public class ButtonClick : MonoBehaviour
     private string settings = "Settings";
     private string startScene = "Start";
 
-    void start()
+    void Start()
     {
         Timer.SetActive(false);
         PopulateComPorts();

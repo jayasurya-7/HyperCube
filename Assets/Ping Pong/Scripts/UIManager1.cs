@@ -46,7 +46,8 @@ public class UIManager1 : MonoBehaviour {
 
 	//Reloads the Level
 	public void Reload(){
-		Application.LoadLevel(Application.loadedLevel);
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		//Application.LoadLevel(Application.loadedLevel);
 	}
     void playAudio(int clipNumber)
     {

@@ -58,8 +58,9 @@ public class gamelogSS : MonoBehaviour
             if (gameData.game == "COMPENSATION")
             {
                 gameData.playerPos = Player.transform.eulerAngles.z.ToString();
-                gameData.TargetPos = Target.transform.eulerAngles.z.ToString();
-                gameData.enemyPos = Enemy.transform.eulerAngles.z.ToString();
+                //gameData.TargetPos = Target.transform.eulerAngles.z.ToString();
+                //gameData.enemyPos = Enemy.transform.eulerAngles.z.ToString();
+
             }
             else
             {

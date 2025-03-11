@@ -39,7 +39,6 @@ public class Friendly : MonoBehaviour
             SceneManager.LoadScene("GameOver");
             Destroy(col.gameObject);
             Destroy(gameObject);
-                gameData.events = Array.IndexOf(gameData.tukEvents, "moving");
 
             //gameManager.IncrementScore();
         }

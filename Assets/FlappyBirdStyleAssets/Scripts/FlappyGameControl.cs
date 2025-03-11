@@ -58,6 +58,7 @@ public class FlappyGameControl : MonoBehaviour
     void Start()
     {
         scrollSpeed = -(PlayerPrefs.GetFloat("ScrollSpeed"));
+        scrollSpeed = -3f;
         Time.timeScale = 1;
         timerObject.isOn = true;
         timerObject.enableSpecified = true;
@@ -208,7 +209,7 @@ public class FlappyGameControl : MonoBehaviour
                     }
                     score += 1;
                     gameData.gameScore++;
-
+                     
 
                 }
                 else

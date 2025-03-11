@@ -148,10 +148,10 @@ public class PongPlayerController : MonoBehaviour {
             
         }
     }
-    private void OntriggerEnter2D(Collision2D collision)
-    {
-        Debug.Log("hello");
-    }
+    //private void OnTriggerEnter2D(Collision2D collision)
+    //{
+    //    Debug.Log("hello");
+    //}
 
     public void dropDown()
     {

@@ -49,7 +49,8 @@ public class SpaceShooterPlayerController : MonoBehaviour
 		
 		
 
-	    if ((Input.GetKeyDown(KeyCode.P))||((hyper1.instance.buttonPin2State == 0) || hyper1.instance.force_total > 1 || hyper1.instance.buttonPin1State == 0 || hyper1.instance.buttonPin4State == 0) && myTime > nextFire) 
+	    if ((Input.GetKeyDown(KeyCode.P))||((hyper1.instance.buttonPin2State == 0) || hyper1.instance.force_total > 1 ||
+            hyper1.instance.buttonPin1State == 0 || hyper1.instance.buttonPin4State == 0) && myTime > nextFire) 
 		{
 				nextFire = myTime + fireRate;
 				Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
