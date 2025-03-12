@@ -85,106 +85,107 @@ static class JediDataFormat
     }
 }
 
-static class JediSerialPayload
-{
-    static public uint count;
-    static public int plSz = 0;
-    static public byte status = 0;
-    //static public byte[] errorval = new byte[] { 0, 0x00 };
-    static public int[] payload = new int[256];
-    static public byte[] payloadBytes = new byte[256];
-    static public List<object> data = new List<object>();
+//static class JediSerialPayload
+//{
+//    static public uint count;
+//    static public int plSz = 0;
+//    static public byte status = 0;
+//    //static public byte[] errorval = new byte[] { 0, 0x00 };
+//    static public int[] payload = new int[256];
+//    static public byte[] payloadBytes = new byte[256];
+//    static public List<object> data = new List<object>();
 
-    static private bool IsFormatStringCorrect(string dataformat)
-    {
-        foreach (char c in dataformat)
-        {
-            if (Array.Exists(JediDataFormat.FormatChars, chr => chr == c) == false)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
+//    static private bool IsFormatStringCorrect(string dataformat)
+//    {
+//        foreach (char c in dataformat)
+//        {
+//            if (Array.Exists(JediDataFormat.FormatChars, chr => chr == c) == false)
+//            {
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
 
-    static public bool updateData()
-    {
-        // Ensure that the payload size is equal to the expect sizes for the
-        //given data format.
-        //Debug.Log(JediDataFormat.dformat.Length );
-        if ((plSz - 1 == JediDataFormat.dataSize) )
-        {
-           // Debug.Log(JediDataFormat.dformat.Length && JediDataFormat.dformat.Length < 16);
-            int byteArrayInx = 0;
-            data.Clear();
-            for (int i = 0; i <15; i++)
-            {
-                switch (JediDataFormat.dataTypes[i])
-                {
-                    case 'b':
-                        data.Add(JediSerialPayload.payloadBytes[byteArrayInx]);
-                        break;
-                    case 'i':
-                        data.Add(System.BitConverter.ToUInt16(JediSerialPayload.payloadBytes, byteArrayInx));
-                        break;
-                    case 'f':
-                        data.Add(System.BitConverter.ToSingle(JediSerialPayload.payloadBytes, byteArrayInx));
-                        break;
-                }
-                byteArrayInx += JediDataFormat.FormatCharSize[Array.IndexOf(JediDataFormat.FormatChars, JediDataFormat.dataTypes[i])];
-            }
+//    static public bool updateData()
+//    {
+//        // Ensure that the payload size is equal to the expect sizes for the
+//        //given data format.
+//        //Debug.Log(JediDataFormat.dformat.Length );
+//        if ((plSz - 1 == JediDataFormat.dataSize) )
+//        {
+//           // Debug.Log(JediDataFormat.dformat.Length && JediDataFormat.dformat.Length < 16);
+//            int byteArrayInx = 0;
+//            data.Clear();
+//            for (int i = 0; i <15; i++)
+//            {
+//                switch (JediDataFormat.dataTypes[i])
+//                {
+//                    case 'b':
+//                        data.Add(JediSerialPayload.payloadBytes[byteArrayInx]);
+//                        break;
+//                    case 'i':
+//                        data.Add(System.BitConverter.ToUInt16(JediSerialPayload.payloadBytes, byteArrayInx));
+//                        break;
+//                    case 'f':
+//                        data.Add(System.BitConverter.ToSingle(JediSerialPayload.payloadBytes, byteArrayInx));
+//                        break;
+//                }
+//                byteArrayInx += JediDataFormat.FormatCharSize[Array.IndexOf(JediDataFormat.FormatChars, JediDataFormat.dataTypes[i])];
+//            }
 
-            foreach (object o in data)
-            {
-                //  Debug.Log(o);
-                //Debug.Log(" ");
-            }
-            // Debug.Log("\r");
-            return true;
-        }
-        else
-        {
-            Debug.Log("\r no data coming in.");
-            return false;
-        }
-    }
+//            foreach (object o in data)
+//            {
+//                //  Debug.Log(o);
+//                //Debug.Log(" ");
+//            }
+//            // Debug.Log("\r");
+//            return true;
+//        }
+//        else
+//        {
+//            Debug.Log("\r no data coming in.");
+//            AppData.HyperCubeConnected= false;
+//            return false;
+//        }
+//    }
 
 
-    static public string GetFormatedData(List<object> data)
-    {
-        string _dstring = AppData.CurrentTime().ToString("G17");
-        for (int i = 0; i < data.Count; i++)
-        {
-            switch (JediDataFormat.dataTypes[i])
-            {
-                case 'b':
-                    _dstring += "," + ((byte)data[i]).ToString();
-                    break;
-                case 'i':
-                    _dstring += "," + ((UInt16)data[i]).ToString();
-                    break;
-                case 'f':
-                    _dstring += "," + ((float)data[i]).ToString("G17");
-                    break;
-            }
+//    static public string GetFormatedData(List<object> data)
+//    {
+//        string _dstring = AppData.CurrentTime().ToString("G17");
+//        for (int i = 0; i < data.Count; i++)
+//        {
+//            switch (JediDataFormat.dataTypes[i])
+//            {
+//                case 'b':
+//                    _dstring += "," + ((byte)data[i]).ToString();
+//                    break;
+//                case 'i':
+//                    _dstring += "," + ((UInt16)data[i]).ToString();
+//                    break;
+//                case 'f':
+//                    _dstring += "," + ((float)data[i]).ToString("G17");
+//                    break;
+//            }
 
-        }
-        //_dstring += "\n";
-        return _dstring;
-    }
+//        }
+//        //_dstring += "\n";
+//        return _dstring;
+//    }
 
-    static public string GetFormatedDataWithLabels(List<object> data)
-    {
-        StringBuilder _strbldr = new StringBuilder();
-        _strbldr.AppendLine($"    Time\t: {AppData.CurrentTime()}");
-        for (int i = 0; i < data.Count; i++)
-        {
-            _strbldr.AppendLine($"[{JediDataFormat.dataTypes[i]}] {JediDataFormat.dataLabels[i]}\t: {data[i]}");
+//    static public string GetFormatedDataWithLabels(List<object> data)
+//    {
+//        StringBuilder _strbldr = new StringBuilder();
+//        _strbldr.AppendLine($"    Time\t: {AppData.CurrentTime()}");
+//        for (int i = 0; i < data.Count; i++)
+//        {
+//            _strbldr.AppendLine($"[{JediDataFormat.dataTypes[i]}] {JediDataFormat.dataLabels[i]}\t: {data[i]}");
 
-        }
-        return _strbldr.ToString();
-    }
-}
+//        }
+//        return _strbldr.ToString();
+//    }
+//}
 
 
 public static class gameData
@@ -487,7 +488,7 @@ static class AppData
     public static bool HyperCubeConnected = false;
 
     // Arduino related variables
-    static public JediSerialCom jediClient;
+    //static public JediSerialCom jediClient;
 
     // Incoming data format
     static public string dataFormat;
@@ -512,24 +513,43 @@ static class AppData
     }
 }
 
-class JediSerialCom
+public static class JediSerialCom
 {
-    public bool stop;
-    public bool pause;
-    private SerialPort serPort;
-    private Thread reader;
-    private uint _count;
-    public uint count
+    static public bool stop;
+    static public bool pause;
+    static public SerialPort serPort;
+    static private Thread reader;
+    static private uint _count;
+    static public uint count
 
     {
         get { return _count; }
     }
-    public bool newData;
-    public int annotation;
+    static public bool newData;
+    static public int annotation;
 
 
 
-    public JediSerialCom(string port)
+    //public JediSerialCom(string port)
+    //{
+    //    serPort = new SerialPort();
+    //    // Allow the user to set the appropriate properties.
+    //    serPort.PortName = port;
+    //    serPort.BaudRate = 115200;
+    //    serPort.Parity = Parity.None;
+    //    serPort.DataBits = 8;
+    //    serPort.StopBits = StopBits.One;
+    //    serPort.Handshake = Handshake.None;
+    //    serPort.DtrEnable = true;
+
+    //    // Set the read/write timeouts
+    //    serPort.ReadTimeout = 500;
+    //    serPort.WriteTimeout = 500;
+    //    reader = new Thread(serialreaderthread);
+     
+    //}
+
+    static public void InitSerialComm(string port)
     {
         serPort = new SerialPort();
         // Allow the user to set the appropriate properties.
@@ -542,49 +562,47 @@ class JediSerialCom
         serPort.DtrEnable = true;
 
         // Set the read/write timeouts
-        serPort.ReadTimeout = 500;
-        serPort.WriteTimeout = 500;
-        reader = new Thread(serialreaderthread);
-     
+        serPort.ReadTimeout = 250;
+        serPort.WriteTimeout = 250;
     }
 
-    public void ConnectToArduino()
+    static public void Connect()
     {
-       
+        stop = false;
         if (serPort.IsOpen == false)
         {
             try
             {
-                serPort.Open();      // Start reader and writer threads.
-                Debug.Log("Not open");
-                reader = new Thread(serialreaderthread);
-                reader.Start();
-                
-
+                serPort.Open();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Debug.Log("NOT CONNECTED");
+                Debug.Log("exception: " + ex);
             }
-            
-           
-           // Debug.Log("open");
+            // Create a new thread to read the serial port data.
+            reader = new Thread(serialreaderthread);
+            reader.Priority = System.Threading.ThreadPriority.AboveNormal;
+            reader.Start();
         }
-       
-            
     }
-    
-    public void DisconnectArduino()
+
+    static public void Disconnect()
     {
         stop = true;
+        if (serPort.IsOpen)
+        {
+            reader.Abort();
+            serPort.Close();
+        }
     }
 
-    public void resetCount()
+  
+   static  public void resetCount()
     {
         _count = 0;
     }
 
-    private void serialreaderthread()
+   static private void serialreaderthread()
     {
         byte[] _floatbytes = new byte[4];
 
@@ -616,15 +634,15 @@ class JediSerialCom
                         AppData.dataBuffers.Add(JediSerialPayload.data);
                     }
                    // Debug.Log(AppData.dlogger);
-                    // Check if data is to be logged.
-                    if (AppData.dlogger != null)
-                    {
+                    //// Check if data is to be logged.
+                    //if (AppData.dlogger != null)
+                    //{
                       
-                        string traildata =  hyper1.timer_+JediSerialPayload.GetFormatedData(JediSerialPayload.data)+ "\n";
+                    //    string traildata =  hyper1.timer_+JediSerialPayload.GetFormatedData(JediSerialPayload.data)+ "\n";
                         
-                        AppData.dlogger.logData(traildata);
-                       // Debug.Log(traildata);
-                    }
+                    //    AppData.dlogger.logData(traildata);
+                    //   // Debug.Log(traildata);
+                    //}
                     //if (AppData.afterLogger != null)
                     //{
 
@@ -640,6 +658,10 @@ class JediSerialCom
                         annotation = 0;
                     }
                 }
+                else
+                {
+                    AppData.HyperCubeConnected = false;
+                }
             }
             catch (TimeoutException)
             {
@@ -651,7 +673,7 @@ class JediSerialCom
     }
 
     // Read a full serial packet.
-    private bool readFullSerialPacket()
+    static private bool readFullSerialPacket()
     {
         int chksum = 0;
         int _chksum;
@@ -692,7 +714,7 @@ class JediSerialCom
     }
 
     // Write output serial packet
-    public void WriteSerialPacket(byte[] msgParam)
+ static   public void WriteSerialPacket(byte[] msgParam)
     {
         //SerializeField] Text textbox_values;
         int chksum;

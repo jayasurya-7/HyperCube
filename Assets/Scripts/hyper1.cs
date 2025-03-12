@@ -24,7 +24,7 @@ public class hyper1 : MonoBehaviour
 
 {   
     public static hyper1 instance;
-    JediSerialCom serReader;
+    //JediSerialCom serReader;
     public float force_1;
     public float force_2;
     public float force_total;
@@ -107,11 +107,12 @@ public class hyper1 : MonoBehaviour
             try
             {   
                 force_1 = (float.Parse(JediSerialPayload.data[0].ToString()));
+                Debug.Log($"force-1 :{force_1},data -{JediSerialPayload.force_1}");
                 force_2 = (float.Parse(JediSerialPayload.data[1].ToString()));
                 force_total = (force_1 + force_2);
                 ang1 = float.Parse(JediSerialPayload.data[2].ToString());
                 ang2 = float.Parse(JediSerialPayload.data[3].ToString());
-                ang3 = float.Parse(JediSerialPayload.data[4].ToString());
+                 ang3 = float.Parse(JediSerialPayload.data[4].ToString());
                 ang4 = float.Parse(JediSerialPayload.data[5].ToString());
                 distance1 = float.Parse(JediSerialPayload.data[6].ToString());
                 distance2 = float.Parse(JediSerialPayload.data[7].ToString());
@@ -350,28 +351,16 @@ public class hyper1 : MonoBehaviour
         return movingAverage;
     }
 
-    public void ReconnectToArduino()
-    {
-        //serReader.DisconnectArduino();
-        //Debug.Log("Dis");
-        JediDataFormat.ReadSetJediDataFormat(AppData.jdfFilename);
-        //serReader = new JediSerialCom(PlayerPrefs.GetString("COMPort"));
-        serReader = new JediSerialCom("COM11");
-       serReader.ConnectToArduino();
-        //Debug.Log("connected");
-    }
-    public void DconnectToArduino()
-    {
-        serReader.DisconnectArduino();
-        Debug.Log("Disconnected");
-    }
-    public void ReconnectingToArduino()
-    {
-        DconnectToArduino();
-        Debug.Log("Disconnected");
-        ReconnectToArduino();
-        Debug.Log("Reconnected");
-    }
+    //public void ReconnectToArduino()
+    //{
+    //    //serReader.DisconnectArduino();
+    //    //Debug.Log("Dis");
+    //    JediDataFormat.ReadSetJediDataFormat(AppData.jdfFilename);
+    //    //serReader = new JediSerialCom(PlayerPrefs.GetString("COMPort"));
+    //    serReader = new JediSerialCom("COM11");
+    //   serReader.ConnectToArduino();
+    //    //Debug.Log("connected");
+    //}
 }
 
 

@@ -9,16 +9,15 @@ public class connectHypercube : MonoBehaviour
 {
     public Dropdown ComPortDropdown;
     private SerialPort serialPort;
-    JediSerialCom serReader;
     // Start is called before the first frame update
     void Start()
     {
         PopulateComPorts();
-        ComPortDropdown.onValueChanged.AddListener(delegate { ConnectToHypercube(); });
+        ComPortDropdown.onValueChanged.AddListener(delegate { ConnectToHypercubex(); });
 
 
     }
-    void ConnectToHypercube()
+    void ConnectToHypercubex()
     {
         if (serialPort != null && serialPort.IsOpen)
         {
@@ -30,8 +29,7 @@ public class connectHypercube : MonoBehaviour
 
         if (selectedPort != "No Ports Found")
         {
-            serReader = new JediSerialCom(selectedPort);
-            serReader.ConnectToArduino();
+            ConnectToHypercube.Connect(selectedPort);
         }
     }
     void PopulateComPorts()
@@ -44,7 +42,7 @@ public class connectHypercube : MonoBehaviour
             ComPortDropdown.AddOptions(ports.ToList());
             ComPortDropdown.value = 0;
             ComPortDropdown.RefreshShownValue();
-            ConnectToHypercube(); // Automatically connect to the first port
+            
         }
         else
         {
