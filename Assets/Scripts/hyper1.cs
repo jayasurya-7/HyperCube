@@ -356,7 +356,7 @@ public class hyper1 : MonoBehaviour
         //Debug.Log("Dis");
         JediDataFormat.ReadSetJediDataFormat(AppData.jdfFilename);
         //serReader = new JediSerialCom(PlayerPrefs.GetString("COMPort"));
-        serReader = new JediSerialCom("COM9");
+        serReader = new JediSerialCom("COM11");
        serReader.ConnectToArduino();
         //Debug.Log("connected");
     }

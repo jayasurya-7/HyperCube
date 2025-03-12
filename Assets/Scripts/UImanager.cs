@@ -110,9 +110,9 @@ public class UImanager : MonoBehaviour
     void Start()
     {
 
-
-
         StartNewGameSession();
+        Debug.Log($"handle :{AppData.handleAngleMax}, handle  :{AppData.handleAngleMin}, grip :{AppData.handleGripForce},gross :{AppData.grossKnobMax},gross min:{AppData.grossKnobMin}, fine max:{AppData.fineKnobMax}, fine min :{AppData.fineKnobMin}," +
+            $",key max : {AppData.keyKnobMax},key Min :{AppData.keyKnobMin}, grasp max :{AppData.graspMax},grasp Min :{AppData.graspMin}");
 
     }
 
@@ -204,6 +204,7 @@ public class UImanager : MonoBehaviour
         if (HandleMax == false && Input.GetKeyDown(KeyCode.Return))
         {
             PlayerPrefs.SetFloat("Handle Ang Max", hyper1.instance.ang1);
+            AppData.handleAngleMax=hyper1.instance.ang1;
             HandleMax = true;
             Instruction3.SetActive(false);
             Instruction4.SetActive(true);
@@ -213,6 +214,8 @@ public class UImanager : MonoBehaviour
         if (HandleMin == false && Input.GetKeyDown(KeyCode.Space))
         {
             PlayerPrefs.SetFloat("Handle Ang Min", hyper1.instance.ang1);
+            AppData.handleAngleMin = hyper1.instance.ang1;
+
             HandleMin = true;
             HandleAngSet = true;
             Instruction4.SetActive(false);
@@ -227,6 +230,7 @@ public class UImanager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             PlayerPrefs.SetFloat("Grip force", hyper1.instance.force_total);
+            AppData.handleGripForce = hyper1.instance.force_total;
             ForceAcknowledgement.text = "Threshold force set as  " + PlayerPrefs.GetFloat("Grip force") + "  Kgs".ToString();
                        
         }
@@ -248,6 +252,8 @@ public class UImanager : MonoBehaviour
             if (GrossMaxAngSet == false)
             {
                 PlayerPrefs.SetFloat("Knob Ang Max", hyper1.instance.ang2);
+                AppData.grossKnobMax = hyper1.instance.ang2;
+
                 GrossMaxAngle.text = "Max angle: " + PlayerPrefs.GetFloat("Knob Ang Max").ToString();
                 GrossInstruction_1.SetActive(false);
                 GrossInstruction_3.SetActive(false);
@@ -269,6 +275,8 @@ public class UImanager : MonoBehaviour
             if (GrossMinAngSet == false)
             {
                 PlayerPrefs.SetFloat("Knob Ang Min", hyper1.instance.ang2);
+                AppData.grossKnobMin = hyper1.instance.ang2;
+
                 GrossMinAngle.text = "Min angle: " + PlayerPrefs.GetFloat("Knob Ang Min").ToString();
                 GrossClockwise = false;
                 GrossMinAngSet = true;
@@ -293,6 +301,8 @@ public class UImanager : MonoBehaviour
             if (FineMaxAngSet == false)
             {
                 PlayerPrefs.SetFloat("Knob Fine Ang Max", hyper1.instance.ang4);
+                AppData.fineKnobMax = hyper1.instance.ang4;
+
                 FineMaxAngle.text = "Max angle: " + PlayerPrefs.GetFloat("Knob Fine Ang Max").ToString();
                 FineInstruction_1.SetActive(false);
                 FineInstruction_3.SetActive(false);
@@ -314,6 +324,7 @@ public class UImanager : MonoBehaviour
             if (FineMinAngSet == false)
             {
                 PlayerPrefs.SetFloat("Knob Fine Ang Min", hyper1.instance.ang4);
+                AppData.fineKnobMin = hyper1.instance.ang4;
                 FineMinAngle.text = "Min angle: " + PlayerPrefs.GetFloat("Knob Fine Ang Min").ToString();
                 FineClockwise = false;
                 FineMinAngSet = true;
@@ -338,6 +349,8 @@ public class UImanager : MonoBehaviour
             if (KeyMaxAngSet == false)
             {
                 PlayerPrefs.SetFloat("Knob Key Ang Max", hyper1.instance.ang3);
+                AppData.keyKnobMax = hyper1.instance.ang3;
+
                 KeyMaxAngle.text = "Max angle: " + PlayerPrefs.GetFloat("Knob Key Ang Max").ToString();
                 KeyInstruction_1.SetActive(false);
                 KeyInstruction_3.SetActive(false);
@@ -359,6 +372,8 @@ public class UImanager : MonoBehaviour
             if (KeyMinAngSet == false)
             {
                 PlayerPrefs.SetFloat("Knob Key Ang Min", hyper1.instance.ang3);
+                AppData.keyKnobMin = hyper1.instance.ang3;
+
                 KeyMinAngle.text = "Min angle: " + PlayerPrefs.GetFloat("Knob Key Ang Min").ToString();
                 KeyClockwise = false;
                 KeyMinAngSet = true;
@@ -384,6 +399,8 @@ public class UImanager : MonoBehaviour
             if (GraspMaxSet == false)
             {
                 PlayerPrefs.SetFloat("Dist Min", (Mathf.Round((hyper1.instance.Btw_dist) * 10.0f) * 0.1f));
+                AppData.graspMax = (Mathf.Round((hyper1.instance.Btw_dist) * 10.0f) * 0.1f);
+
                 MaxDistance.text = "Min distance: " + PlayerPrefs.GetFloat("Dist Min").ToString();
                 GraspInstruction_1.SetActive(false);
                 GraspInstruction_3.SetActive(false);
@@ -406,6 +423,8 @@ public class UImanager : MonoBehaviour
             if (GraspMinSet == false)
             {
                 PlayerPrefs.SetFloat("Dist Max", (Mathf.Round((hyper1.instance.Btw_dist) * 10.0f) * 0.1f));
+                AppData.graspMin = (Mathf.Round((hyper1.instance.Btw_dist) * 10.0f) * 0.1f);
+
                 MinDistance.text = "Max distance: " + PlayerPrefs.GetFloat("Dist Max").ToString();
                 GraspInstruction_2.SetActive(false);
                 GraspInstruction_4.SetActive(false);

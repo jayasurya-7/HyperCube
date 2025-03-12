@@ -453,6 +453,31 @@ static class AppData
     public static string trialDataFileLocationTemp = null;
 
 
+    //ROM values
+
+        //handle Mech
+        public static float handleAngleMax = 0f;
+        public static float handleAngleMin = 0f;
+        //grip force
+        public static float handleGripForce= 0f;
+
+
+        //gross knob
+        public static float grossKnobMax = 0f;
+        public static float grossKnobMin = 0f;
+
+        //fine knob
+        public static float fineKnobMin = 0f;
+        public static float fineKnobMax = 0f;
+
+        //key knob
+        public static float keyKnobMin = 0f;
+        public static float keyKnobMax = 0f;
+        //TripodGrasp
+        public static float graspMin = 0f;
+        public static float graspMax = 0f;
+
+
     static public double nanosecPerTick = 1.0 / Stopwatch.Frequency;
     static public Stopwatch stp_watch = new Stopwatch();
 

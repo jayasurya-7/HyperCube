@@ -9,12 +9,17 @@ using System;
 
 using System.Collections;
 using NeuroRehabLibrary;
+using System.IO.Ports;
+using System.Linq;
+using UnityEditor.Rendering;
 
 public class welcome : MonoBehaviour
 {
     public InputField hospno;
-
+    public Dropdown ComPortDropdown;
     public InputField Patientname;
+    private SerialPort serialPort;
+    JediSerialCom serReader;
     public static string p_hospno;
 
     public static string p_patientname;
@@ -30,13 +35,41 @@ public class welcome : MonoBehaviour
 
     void Start()
     {
-
-
         messageText.text = " ";
+        PopulateComPorts();
+    }
+    public void ConnectToHypercube()
+    {
+        if (serialPort != null && serialPort.IsOpen)
+        {
+            serialPort.Close();
+        }
 
+        string selectedPort = ComPortDropdown.options[ComPortDropdown.value].text;
 
+        if (selectedPort != "No Ports Found")
+        {
+            serReader = new JediSerialCom(selectedPort);
+            serReader.ConnectToArduino();
+        }
+    }
+    void PopulateComPorts()
+    {
+        string[] ports = SerialPort.GetPortNames();
+        ComPortDropdown.ClearOptions();
 
-
+        if (ports.Length > 0)
+        {
+            ComPortDropdown.AddOptions(ports.ToList());
+            ComPortDropdown.value = 0;
+            ComPortDropdown.RefreshShownValue();
+        }
+        else
+        {
+            ComPortDropdown.AddOptions(new System.Collections.Generic.List<string> { "No Ports Found" });
+            Debug.Log("No ports found");
+        }
+        Debug.Log("No ports found 2");
     }
 
     void Update()
