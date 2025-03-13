@@ -313,9 +313,21 @@ public class BirdControl : MonoBehaviour
             }
         }
 
+        //else if (controlValue == 4)
+        //{
+        //    transform.position = new Vector2(this.transform.position.x, Angle2ScreenGrossKnob(hyper1.instance.ang2));
+        //    if (this.transform.position.y > topbound)
+        //    {
+        //        transform.position = new Vector2(this.transform.position.x, topbound);
+        //    }
+        //    else if (this.transform.position.y < bottombound)
+        //    {
+        //        transform.position = new Vector2(this.transform.position.x, bottombound);
+        //    }
+        //}
         else if (controlValue == 4)
         {
-            transform.position = new Vector2(this.transform.position.x, Angle2ScreenGrossKnob(hyper1.instance.ang2));
+            transform.position = new Vector2(this.transform.position.x, Angle2ScreenGrossKnob(JediSerialPayload.angle_2));
             if (this.transform.position.y > topbound)
             {
                 transform.position = new Vector2(this.transform.position.x, topbound);
@@ -325,7 +337,6 @@ public class BirdControl : MonoBehaviour
                 transform.position = new Vector2(this.transform.position.x, bottombound);
             }
         }
-
 
         else
         {

@@ -4500,7 +4500,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1058322519}
         m_TargetAssemblyTypeName: welcome, Assembly-CSharp
-        m_MethodName: ConnectToHypercube
+        m_MethodName: ConnectToHypercubex
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

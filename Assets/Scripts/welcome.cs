@@ -19,7 +19,7 @@ public class welcome : MonoBehaviour
     public Dropdown ComPortDropdown;
     public InputField Patientname;
     private SerialPort serialPort;
-    JediSerialCom serReader;
+  //  JediSerialCom serReader;
     public static string p_hospno;
 
     public static string p_patientname;
@@ -38,7 +38,7 @@ public class welcome : MonoBehaviour
         messageText.text = " ";
         PopulateComPorts();
     }
-    public void ConnectToHypercube()
+    public void ConnectToHypercubex()
     {
         if (serialPort != null && serialPort.IsOpen)
         {
@@ -49,8 +49,7 @@ public class welcome : MonoBehaviour
 
         if (selectedPort != "No Ports Found")
         {
-            serReader = new JediSerialCom(selectedPort);
-            serReader.ConnectToArduino();
+            ConnectToHypercube.Connect(selectedPort);
         }
     }
     void PopulateComPorts()

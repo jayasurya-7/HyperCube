@@ -63,7 +63,7 @@ public class ButtonClick : MonoBehaviour
     public int ComPortValue;
     public Dropdown ComPortDropdown;
     private SerialPort serialPort;
-    JediSerialCom serReader;
+    //JediSerialCom serReader;
 
     //Scenes
 
@@ -82,7 +82,7 @@ public class ButtonClick : MonoBehaviour
     {
         Timer.SetActive(false);
         PopulateComPorts();
-        ComPortDropdown.onValueChanged.AddListener(delegate { ConnectToHypercube(); });
+        //ComPortDropdown.onValueChanged.AddListener(delegate { ConnectToHypercube(); });
 
         //string[] ComPorts = GetComponent<hyper1>().Ports;
         //var dropdown = transform.GetComponent<Dropdown>();
@@ -95,22 +95,22 @@ public class ButtonClick : MonoBehaviour
 
 
     }
-    void ConnectToHypercube()
-    {
-        if (serialPort != null && serialPort.IsOpen)
-        {
-            serialPort.Close();
-        }
+    //void ConnectToHypercube()
+    //{
+    //    if (serialPort != null && serialPort.IsOpen)
+    //    {
+    //        serialPort.Close();
+    //    }
 
-        string selectedPort = ComPortDropdown.options[ComPortDropdown.value].text;
+    //    string selectedPort = ComPortDropdown.options[ComPortDropdown.value].text;
 
         
-        if (selectedPort != "No Ports Found")
-        {
-            serReader = new JediSerialCom(selectedPort);
-            serReader.ConnectToArduino();
-        }
-    }
+    //    if (selectedPort != "No Ports Found")
+    //    {
+    //        serReader = new JediSerialCom(selectedPort);
+    //        serReader.ConnectToArduino();
+    //    }
+    //}
     void PopulateComPorts()
     {
         string[] ports = SerialPort.GetPortNames();
@@ -121,7 +121,7 @@ public class ButtonClick : MonoBehaviour
             ComPortDropdown.AddOptions(ports.ToList());
             ComPortDropdown.value = 0;
             ComPortDropdown.RefreshShownValue();
-            ConnectToHypercube(); // Automatically connect to the first port
+            //ConnectToHypercube(); // Automatically connect to the first port
         }
         else
         {
