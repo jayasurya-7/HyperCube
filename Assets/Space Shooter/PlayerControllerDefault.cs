@@ -38,7 +38,7 @@ public class PlayerControllerDefault : MonoBehaviour {
     void Update ()
     { 
         
-        if ((Input.GetKeyDown(KeyCode.F))|| (hyper1.instance.force_total >= PlayerPrefs.GetFloat("Grip force")) && Time.time > nextFire)
+        if ((Input.GetKeyDown(KeyCode.F))|| (JediSerialPayload.totalForce >= PlayerPrefs.GetFloat("Grip force")) && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
 
@@ -68,7 +68,7 @@ public class PlayerControllerDefault : MonoBehaviour {
     public void PlayerControllerInput()
     {
         //rb.position = new Vector2(Angle2Screen(hyper1.instance.ang1), this.transform.position.y);
-        rb.position = new Vector3 (MovingAverage(Angle2Screen(hyper1.instance.ang1)), this.transform.position.y, Mathf.Clamp(rb.position.z, boundary.zMin, boundary.zMax));
+        rb.position = new Vector3 (MovingAverage(Angle2Screen(JediSerialPayload.angle_1)), this.transform.position.y, Mathf.Clamp(rb.position.z, boundary.zMin, boundary.zMax));
         //rb.velocity = speed; //movement * speed;
         rb.rotation = Quaternion.Euler(0.0f, 0.0f, rb.velocity.x * -tilt);
        // Debug.Log(Angle2Screen(hyper1.instance.ang1));

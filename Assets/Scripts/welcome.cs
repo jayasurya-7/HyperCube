@@ -12,6 +12,7 @@ using NeuroRehabLibrary;
 using System.IO.Ports;
 using System.Linq;
 using UnityEditor.Rendering;
+using static UnityEngine.Networking.UnityWebRequest;
 
 public class welcome : MonoBehaviour
 {
@@ -49,6 +50,7 @@ public class welcome : MonoBehaviour
 
         if (selectedPort != "No Ports Found")
         {
+            JediDataFormat.ReadSetJediDataFormat(AppData.jdfFilename);
             ConnectToHypercube.Connect(selectedPort);
         }
     }
@@ -86,7 +88,42 @@ public class welcome : MonoBehaviour
     }
 
 
+    private void assessment()
+    {
+        ROM romDate = new ROM();
+        string date = romDate.datetime;
+        // Debug.Log($"AppData.oldAROM.datetime: {date}");
 
+        if (!string.IsNullOrEmpty(date))
+        {
+            DateTime oldDate;
+            if (DateTime.TryParseExact(date, "dd-MM-yyyy HH:mm:ss", null, System.Globalization.DateTimeStyles.None, out oldDate))
+            {
+                DateTime currentDate = DateTime.Now;
+                TimeSpan timeDifference = currentDate - oldDate;
+
+               // result.text = $"Current Date: {currentDate}, Old Date: {oldDate}, Days Passed: {timeDifference.TotalDays:F1}";
+
+                if (timeDifference.TotalDays >= 7)
+                {
+                    SceneManager.LoadScene("ROM Assessment");
+                }
+                else
+                {
+                    SceneManager.LoadScene("Home");
+                    // Debug.Log($"Only {timeDifference.TotalDays:F1} days have passed. 7 days required.");
+                }
+            }
+            else
+            {
+                Debug.LogError($"Invalid date format: {date}. Expected format: 'dd-MM-yyyy HH:mm:ss'.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Date is null or empty.");
+        }
+    }
 
     public void login()
     {
@@ -105,6 +142,7 @@ public class welcome : MonoBehaviour
             if (!Directory.Exists(path_to_data + "\\" + p_hospno))
             {
                 string patientDir = path_to_data + "\\" + "Patient_Data" + "\\" + p_hospno;
+                AppData.idPath= patientDir;
                 circleclass.circlePath = patientDir;
                 if (Directory.Exists(patientDir))
                 {
@@ -130,8 +168,16 @@ public class welcome : MonoBehaviour
                     SessionManager.Initialize(baseDirectory);
 
                     SessionManager.Instance.Login();
+
+
+                    ROM romValues = new ROM();
+                    Debug.Log($" date : {romValues.datetime}");
                     AppData.hospno = p_hospno;
-                    SceneManager.LoadScene("Home");
+
+                    if (romValues.datetime == null) SceneManager.LoadScene("ROM Assessment");
+                    assessment();
+                   // SceneManager.LoadScene("Home");
+                   
                 }
                 else
                 {

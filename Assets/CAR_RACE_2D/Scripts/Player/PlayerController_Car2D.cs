@@ -345,7 +345,7 @@ public class PlayerController_Car2D : MonoBehaviour
         
         if (PcMech == 1)
         {
-            Vector2 target_pos = new Vector3(Angle2Screen(hyper1.instance.ang1), rigBody2D.position.y, 0f); //Replace angles value with the encoder value
+            Vector2 target_pos = new Vector3(Angle2Screen(JediSerialPayload.angle_1), rigBody2D.position.y, 0f); //Replace angles value with the encoder value
             rigBody2D.MovePosition(target_pos);
             if (movePlayerRot)
             {
@@ -373,7 +373,7 @@ public class PlayerController_Car2D : MonoBehaviour
         }
         else if (PcMech == 4)
         {
-            Vector2 target_pos = new Vector3(Angle2Screen2(hyper1.instance.Avg_Btw_dist), rigBody2D.position.y, 0f); //Replace angles value with the encoder value
+            Vector2 target_pos = new Vector3(Angle2Screen2(JediSerialPayload.avgBtwDistance), rigBody2D.position.y, 0f); //Replace angles value with the encoder value
             rigBody2D.MovePosition(target_pos);
             if (movePlayerRot)
             {
@@ -399,7 +399,7 @@ public class PlayerController_Car2D : MonoBehaviour
         }
         else if (PcMech == 5)
         {
-            Vector2 target_pos = new Vector3(Angle2screenGrossKnob(hyper1.instance.ang2), rigBody2D.position.y, 0f); //Replace angles value with the encoder value
+            Vector2 target_pos = new Vector3(Angle2screenGrossKnob(JediSerialPayload.angle_2), rigBody2D.position.y, 0f); //Replace angles value with the encoder value
             rigBody2D.MovePosition(target_pos);
             if (movePlayerRot)
             {
@@ -415,7 +415,7 @@ public class PlayerController_Car2D : MonoBehaviour
         }
         else if (PcMech == 6)
         {
-            Vector2 target_pos = new Vector3(Angle2screenFineKnob(hyper1.instance.ang4), rigBody2D.position.y, 0f); //Replace angles value with the encoder value
+            Vector2 target_pos = new Vector3(Angle2screenFineKnob(JediSerialPayload.angle_4), rigBody2D.position.y, 0f); //Replace angles value with the encoder value
             rigBody2D.MovePosition(target_pos);
             if (movePlayerRot)
             {
@@ -431,7 +431,7 @@ public class PlayerController_Car2D : MonoBehaviour
         }
         else
         {
-            Vector2 target_pos = new Vector3(Angle2screenKeyKnob(hyper1.instance.ang3), rigBody2D.position.y, 0f); //Replace angles value with the encoder value
+            Vector2 target_pos = new Vector3(Angle2screenKeyKnob(JediSerialPayload.angle_3), rigBody2D.position.y, 0f); //Replace angles value with the encoder value
             rigBody2D.MovePosition(target_pos);
             if (movePlayerRot)
             {
@@ -471,7 +471,7 @@ public class PlayerController_Car2D : MonoBehaviour
     public static float Angle2Screen1(float angle)
     {
        
-        return Mathf.Clamp((0.11f * hyper1.instance.ang2 - 7.7f), bottombound, topbound);
+        return Mathf.Clamp((0.11f * JediSerialPayload.angle_2- 7.7f), bottombound, topbound);
     }
     
     public static float Angle2Screen2(float angle)
@@ -561,12 +561,12 @@ public class PlayerController_Car2D : MonoBehaviour
 
     private void PincerGraspControl()
     {
-        if (hyper1.instance.buttonPin6State == 0)
+        if (JediSerialPayload.button_6 == 0)
         {
             //direction = Vector2.up;
             this.transform.Translate(0.05f, 0, 0);
         }
-        else if (hyper1.instance.buttonPin7State == 0)
+        else if (JediSerialPayload.button_7 == 0)
         {
             //direction = Vector2.down;
             this.transform.Translate(-0.05f, 0, 0);
@@ -579,11 +579,11 @@ public class PlayerController_Car2D : MonoBehaviour
 
     private void TripodGraspControl()
     {
-        if (hyper1.instance.Btw_dist > 6.5f)
+        if (JediSerialPayload.btwDistance > 6.5f)
         {
             this.transform.Translate(0.05f, 0, 0);
         }
-        else if (hyper1.instance.Btw_dist < 4.5f)
+        else if (JediSerialPayload.btwDistance < 4.5f)
         {
 
             this.transform.Translate(-0.05f, 0, 0);

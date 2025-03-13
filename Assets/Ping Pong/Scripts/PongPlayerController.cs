@@ -12,7 +12,6 @@ public class PongPlayerController : MonoBehaviour {
 	 static float topBound = 4.5F;
 	static float bottomBound = -4.5F;
     // player controls
-    public static hyper1 instance;
     private Vector2 direction;
     public static float playSize;
     //public float playSize;
@@ -98,7 +97,7 @@ public class PongPlayerController : MonoBehaviour {
         //    transform.position = new Vector3(transform.position.x, bottomBound, 0);
         //}
 
-        Debug.Log(Angle2ScreenTripodGrasp(Mathf.Round((MovingAveragePingPong(hyper1.instance.Btw_dist))*10.0f)*0.1f));
+        Debug.Log(Angle2ScreenTripodGrasp(Mathf.Round((MovingAveragePingPong(JediSerialPayload.btwDistance))*10.0f)*0.1f));
     }
     public static float Angle2Screen(float angle)
     {
@@ -213,7 +212,7 @@ public class PongPlayerController : MonoBehaviour {
         }
         else if (PcMech == 4)
         {
-            transform.position = new Vector2(this.transform.position.x, Angle2ScreenTripodGrasp(Mathf.Round((MovingAveragePingPong(hyper1.instance.Btw_dist))*10.0f)*0.1f));
+            transform.position = new Vector2(this.transform.position.x, Angle2ScreenTripodGrasp(Mathf.Round((MovingAveragePingPong(JediSerialPayload.btwDistance))*10.0f)*0.1f));
             if (this.transform.position.y > topBound)
             {
                 transform.position = new Vector2(this.transform.position.x, topBound);
@@ -226,7 +225,7 @@ public class PongPlayerController : MonoBehaviour {
         }
         else if (PcMech == 5)
         {
-            transform.position = new Vector2(this.transform.position.x, Angle2Screenknob(hyper1.instance.ang2));
+            transform.position = new Vector2(this.transform.position.x, Angle2Screenknob(JediSerialPayload.angle_2));
             if (this.transform.position.y > topBound)
             {
                 transform.position = new Vector2(this.transform.position.x, topBound);
@@ -238,7 +237,7 @@ public class PongPlayerController : MonoBehaviour {
         }
         else if (PcMech == 6 )
         {
-            transform.position = new Vector2(this.transform.position.x, Angle2ScreenknobFine(hyper1.instance.ang4));
+            transform.position = new Vector2(this.transform.position.x, Angle2ScreenknobFine(JediSerialPayload.angle_4));
             if (this.transform.position.y > topBound)
             {
                 transform.position = new Vector2(this.transform.position.x, topBound);
@@ -250,7 +249,7 @@ public class PongPlayerController : MonoBehaviour {
         }
         else
         {
-            transform.position = new Vector2(this.transform.position.x, Angle2ScreenknobKey(hyper1.instance.ang3));
+            transform.position = new Vector2(this.transform.position.x, Angle2ScreenknobKey(JediSerialPayload.angle_3));
             if (this.transform.position.y > topBound)
             {
                 transform.position = new Vector2(this.transform.position.x, topBound);
@@ -264,12 +263,12 @@ public class PongPlayerController : MonoBehaviour {
 
     private void PincerGraspControl()
     {
-        if (hyper1.instance.buttonPin7State == 0)
+        if (JediSerialPayload.button_7 == 0)
         {
             //direction = Vector2.up;
             this.transform.Translate(0, 0.05f, 0);
         }
-        else if (hyper1.instance.buttonPin6State == 0)
+        else if (JediSerialPayload.button_6 == 0)
         {
             //direction = Vector2.down;
             this.transform.Translate(0, -0.05f, 0);
@@ -282,11 +281,11 @@ public class PongPlayerController : MonoBehaviour {
 
     private void TripodGraspControl()
     {
-        if (hyper1.instance.Btw_dist > 6.5f)
+        if (JediSerialPayload.btwDistance > 6.5f)
         {
             this.transform.Translate(0, 0.05f, 0);
         }
-        else if (hyper1.instance.Btw_dist < 4.5f)
+        else if (JediSerialPayload.btwDistance < 4.5f)
         {
 
             this.transform.Translate(0, -0.05f, 0);
@@ -299,12 +298,12 @@ public class PongPlayerController : MonoBehaviour {
 
     private void ButtonManipulation()
     {
-        if (hyper1.instance.buttonPin4State == 0)
+        if (JediSerialPayload.button_4 == 0)
         {
             //direction = Vector2.up;
             this.transform.Translate(0, 0.05f, 0);
         }
-        else if (hyper1.instance.buttonPin2State == 0)
+        else if (JediSerialPayload.button_2 == 0)
         {
             //direction = Vector2.down;
             this.transform.Translate(0, -0.05f, 0);

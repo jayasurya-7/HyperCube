@@ -60,6 +60,8 @@ public class gamelogSG : MonoBehaviour
                 gameData.playerPos = Player.transform.eulerAngles.z.ToString();
                 gameData.TargetPos = Target.transform.eulerAngles.z.ToString();
                 gameData.enemyPos = Enemy.transform.eulerAngles.z.ToString();
+                Debug.Log($" x Player Position :{gameData.playerPos}");
+
             }
             else
             {
@@ -67,6 +69,9 @@ public class gamelogSG : MonoBehaviour
                     gameData.playerPos = Player.transform.position.y.ToString();
                 else
                     gameData.playerPos = "\"" + "XXX" ;
+
+
+                Debug.Log($" Player Position :{gameData.playerPos}");
 
                 //if (Target != null)
                 //    gameData.TargetPos = "\"" + Target.transform.position.x.ToString() + "," + Target.transform.position.y.ToString() + "\"";
@@ -77,10 +82,12 @@ public class gamelogSG : MonoBehaviour
                 //else
                 //    gameData.enemyPos = "\"" + "XXX" + "," + "XXX" + "\"";
             }
-
             gameData.LogDataHT();
+            Debug.Log($" y Player Position :{gameData.playerPos}");
+
         }
         time += Time.deltaTime;
+        Debug.Log($"Position :{gameData.isGameLogging}");
     }
 
     public void OnDestroy()

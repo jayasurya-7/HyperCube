@@ -23,17 +23,20 @@ public class Snake : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameData.isGameLogging = true;
+        Debug.Log("Hello");
         InvokeRepeating("Move", 0.3f, 0.3f);
         Time.timeScale = 1;
         StartNewGameSession();
-
-        gameData.isGameLogging = true;
+        hyper1.instance.start_data_log();
+       
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log($" isGameLogging :{ gameData.isGameLogging } ");
         MovementControl();
         if (gameOver == true)
         {
@@ -103,12 +106,13 @@ public class Snake : MonoBehaviour
     {
         if (currentGameSession != null)
         {
-            
-            //string trialDataFileLocation = savepath;
-            //SessionManager.Instance.SetTrialDataFileLocation(trialDataFileLocation, currentGameSession);
+            string savepath = null;
+            string trialDataFileLocation = savepath;
+            SessionManager.Instance.SetTrialDataFileLocation(trialDataFileLocation, currentGameSession);
 
             SessionManager.Instance.EndGameSession(currentGameSession);
         }
+        Debug.Log("Hello 2");
     }
 
 
@@ -171,29 +175,36 @@ public class Snake : MonoBehaviour
         //else if (Input.GetKey(KeyCode.UpArrow))
         //    dir = Vector2.up;
 
-        if (hyper1.instance.buttonPin2State == 0)
+        if (JediSerialPayload.button_2 == 0)
         {
             dir = Vector2.right;
             Debug.Log("Right");
         }
-        else if (hyper1.instance.buttonPin1State == 0)
+        else if (JediSerialPayload.button_1 == 0)
         {
             dir = Vector2.down;
             Debug.Log("Down");
         }
-        else if (hyper1.instance.buttonPin4State == 0)
+        else if (JediSerialPayload.button_4 == 0)
             dir = Vector2.left;
-        else if (hyper1.instance.buttonPin3State == 0)
+        else if (JediSerialPayload.button_3 == 0)
             dir = Vector2.up;   
     }
 
     private void GameOver()
     {
-        gameData.isGameLogging=false;
+       
         GameOverCanvas.SetActive(true);
         Time.timeScale = 0;
         GameOverSound.Play();
+        hyper1.instance.Stop_data_log();
+        
+    }
+    public void exitButton()
+    {
         EndCurrentGameSession();
+        gameData.isGameLogging = false;
+        SceneManager.LoadScene("Home");
     }
 
     public void Restart()

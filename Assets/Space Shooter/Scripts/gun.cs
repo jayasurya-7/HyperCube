@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class gun : MonoBehaviour
 {
-    public hyper1 h;
+   // public hyper1 h;
      
     private void Update()
     {

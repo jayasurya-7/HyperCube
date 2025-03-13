@@ -85,107 +85,135 @@ static class JediDataFormat
     }
 }
 
-//static class JediSerialPayload
-//{
-//    static public uint count;
-//    static public int plSz = 0;
-//    static public byte status = 0;
-//    //static public byte[] errorval = new byte[] { 0, 0x00 };
-//    static public int[] payload = new int[256];
-//    static public byte[] payloadBytes = new byte[256];
-//    static public List<object> data = new List<object>();
 
-//    static private bool IsFormatStringCorrect(string dataformat)
-//    {
-//        foreach (char c in dataformat)
-//        {
-//            if (Array.Exists(JediDataFormat.FormatChars, chr => chr == c) == false)
-//            {
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
+public class ROM
+{
+    // Class attributes to store data read from the file
+    public string datetime;
+    public string side;
 
-//    static public bool updateData()
-//    {
-//        // Ensure that the payload size is equal to the expect sizes for the
-//        //given data format.
-//        //Debug.Log(JediDataFormat.dformat.Length );
-//        if ((plSz - 1 == JediDataFormat.dataSize) )
-//        {
-//           // Debug.Log(JediDataFormat.dformat.Length && JediDataFormat.dformat.Length < 16);
-//            int byteArrayInx = 0;
-//            data.Clear();
-//            for (int i = 0; i <15; i++)
-//            {
-//                switch (JediDataFormat.dataTypes[i])
-//                {
-//                    case 'b':
-//                        data.Add(JediSerialPayload.payloadBytes[byteArrayInx]);
-//                        break;
-//                    case 'i':
-//                        data.Add(System.BitConverter.ToUInt16(JediSerialPayload.payloadBytes, byteArrayInx));
-//                        break;
-//                    case 'f':
-//                        data.Add(System.BitConverter.ToSingle(JediSerialPayload.payloadBytes, byteArrayInx));
-//                        break;
-//                }
-//                byteArrayInx += JediDataFormat.FormatCharSize[Array.IndexOf(JediDataFormat.FormatChars, JediDataFormat.dataTypes[i])];
-//            }
+    //handle
+    public float handleMin;
+    public float handleMax;
+    public float gripForce;
 
-//            foreach (object o in data)
-//            {
-//                //  Debug.Log(o);
-//                //Debug.Log(" ");
-//            }
-//            // Debug.Log("\r");
-//            return true;
-//        }
-//        else
-//        {
-//            Debug.Log("\r no data coming in.");
-//            AppData.HyperCubeConnected= false;
-//            return false;
-//        }
-//    }
+    //gross knob
+    public float grossKnobMin;
+    public float grossKnobMax;
+
+    //fine knob
+    public float fineKnobMin;
+    public float fineKnobMax;
+
+    //key Knob
+    public float keyKnobMin;
+    public float keyKnobMax;
+
+    //Tripod Grasp
+    public float tripodMin;
+    public float tripodMax;
 
 
-//    static public string GetFormatedData(List<object> data)
-//    {
-//        string _dstring = AppData.CurrentTime().ToString("G17");
-//        for (int i = 0; i < data.Count; i++)
-//        {
-//            switch (JediDataFormat.dataTypes[i])
-//            {
-//                case 'b':
-//                    _dstring += "," + ((byte)data[i]).ToString();
-//                    break;
-//                case 'i':
-//                    _dstring += "," + ((UInt16)data[i]).ToString();
-//                    break;
-//                case 'f':
-//                    _dstring += "," + ((float)data[i]).ToString("G17");
-//                    break;
-//            }
 
-//        }
-//        //_dstring += "\n";
-//        return _dstring;
-//    }
+    public string filePath = AppData.idPath;
 
-//    static public string GetFormatedDataWithLabels(List<object> data)
-//    {
-//        StringBuilder _strbldr = new StringBuilder();
-//        _strbldr.AppendLine($"    Time\t: {AppData.CurrentTime()}");
-//        for (int i = 0; i < data.Count; i++)
-//        {
-//            _strbldr.AppendLine($"[{JediDataFormat.dataTypes[i]}] {JediDataFormat.dataLabels[i]}\t: {data[i]}");
+    // Constructor that reads the file and initializes values based on the mechanism
+    public ROM()
+    {
+        string lastLine = "";
+        string[] values;
+        string fileName = $"{filePath}/rom.csv";
 
-//        }
-//        return _strbldr.ToString();
-//    }
-//}
+        try
+        {
+            using (StreamReader file = new StreamReader(fileName))
+            {
+                while (!file.EndOfStream)
+                {
+                    lastLine = file.ReadLine();
+                }
+            }
+            values = lastLine.Split(',');
+            if (values[0].Trim() != null)
+            {
+                // Assign values if mechanism matches
+                datetime = values[0].Trim();
+                handleMin = float.Parse(values[1].Trim());
+                handleMax = float.Parse(values[2].Trim());
+                gripForce = float.Parse(values[3].Trim());
+                grossKnobMin = float.Parse(values[4].Trim());
+                grossKnobMax = float.Parse(values[5].Trim());
+                fineKnobMin = float.Parse(values[6].Trim());
+                fineKnobMax = float.Parse(values[7].Trim());
+                keyKnobMin = float.Parse(values[8].Trim());
+                keyKnobMax = float.Parse(values[9].Trim());
+                tripodMin = float.Parse(values[10].Trim());
+                tripodMax = float.Parse(values[11].Trim());
+
+
+            }
+            else
+            {
+                // Handle case when no matching mechanism is found
+                datetime = null;
+                handleMin = 0;
+                handleMax = 0;
+                gripForce = 0;
+                grossKnobMin = 0;
+                grossKnobMax = 0;
+                fineKnobMin = 0;
+                fineKnobMax = 0;
+                keyKnobMin = 0;
+                keyKnobMax = 0;
+                tripodMin = 0;
+                tripodMax = 0;
+
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error reading the file: " + ex.Message);
+        }
+    }
+
+
+    public ROM(float hMin, float hMax, float gForce, float gMin, float gMax, float fMin, float fMax, float kMin, float kMax, float tMin, float tMax, bool tofile)
+    {
+        handleMin = hMin;
+        handleMax = hMax;
+        gripForce = gForce;
+        grossKnobMin = gMin;
+        grossKnobMax = gMax;
+        fineKnobMin = fMin;
+        fineKnobMax = fMax;
+        keyKnobMin = kMin;
+        keyKnobMax = kMax;
+        tripodMin = tMin;
+        tripodMax = tMax;
+        datetime = DateTime.Now.ToString();
+
+        if (tofile)
+        {
+            // Write data to assessment file.
+            WriteToAssessmentFile();
+        }
+    }
+
+    public void WriteToAssessmentFile()
+    {
+        string _fname = Path.Combine(filePath , "rom.csv");
+        UnityEngine.Debug.Log(_fname);
+        using (StreamWriter file = new StreamWriter(_fname, true))
+        {
+            file.WriteLine(datetime + ", " + handleMin.ToString() + ", " + handleMax.ToString() + ", " + gripForce.ToString() + ", " + grossKnobMin.ToString() + "," 
+                + grossKnobMax.ToString() + ", " + fineKnobMin.ToString() + ", " + fineKnobMax.ToString() +", "+ keyKnobMin.ToString() + ", " + keyKnobMax.ToString() + ", " + tripodMin.ToString() + ", " + tripodMax.ToString()+"");
+        }
+        Debug.Log("Writing");
+
+    }
+
+
+}
 
 
 public static class gameData
@@ -319,12 +347,12 @@ public static class gameData
     {
         
             string[] _data = new string[] {
-                hyper1.instance.ang1.ToString("F2"),
-                hyper1.instance.ang2.ToString("F2"),
-                hyper1.instance.ang3.ToString("F2"),
-                hyper1.instance.ang4.ToString("F2"),
-                hyper1.instance.Btw_dist.ToString("F2"),
-                hyper1.instance.force_total.ToString("F2"),
+                JediSerialPayload.angle_1.ToString("F2"),
+                JediSerialPayload.angle_2.ToString("F2"),
+                JediSerialPayload.angle_3.ToString("F2"),
+                JediSerialPayload.angle_4.ToString("F2"),
+                JediSerialPayload.avgBtwDistance.ToString("F2"),
+                JediSerialPayload.totalForce.ToString("F2"),
                 playerPos,
                 enemyPos,
                 gameData.events.ToString("F2"),
@@ -339,12 +367,12 @@ public static class gameData
     static public void LogDataHT()
     {
             string[] _data = new string[] {
-                hyper1.instance.ang1.ToString("F2"),
-                hyper1.instance.ang2.ToString("F2"),
-                hyper1.instance.ang3.ToString("F2"),
-                hyper1.instance.ang4.ToString("F2"),
-                hyper1.instance.Btw_dist.ToString("F2"),
-                hyper1.instance.force_total.ToString("F2"),
+                JediSerialPayload.angle_1.ToString("F2"),
+                JediSerialPayload.angle_2.ToString("F2"),
+                JediSerialPayload.angle_3.ToString("F2"),
+                JediSerialPayload.angle_4.ToString("F2"),
+                JediSerialPayload.avgBtwDistance.ToString("F2"),
+                JediSerialPayload.totalForce.ToString("F2"),
                playerPos,
                gameData.events.ToString("F2"),
                gameData.gameScore.ToString("F2")
@@ -444,6 +472,7 @@ static class AppData
     static public string jdfFilename = "Assets\\jeditextformat.txt";
     static public string[] comPorts;
 
+    static public string idPath = null;
 
     //def
     public static string selectedGame = null;
@@ -621,7 +650,7 @@ public static class JediSerialCom
                 // Read full packet.
                 if (readFullSerialPacket())
                 {
-                  
+                                                                                                                                                                                                                      
                     _count++;
                     JediSerialPayload.updateData();
                     newData = true;
@@ -633,16 +662,16 @@ public static class JediSerialCom
                         AppData.dataTime.Add(new float[] { (float)AppData.CurrentTime() });
                         AppData.dataBuffers.Add(JediSerialPayload.data);
                     }
-                   // Debug.Log(AppData.dlogger);
+                    // Debug.Log(AppData.dlogger);
                     //// Check if data is to be logged.
-                    //if (AppData.dlogger != null)
-                    //{
-                      
-                    //    string traildata =  hyper1.timer_+JediSerialPayload.GetFormatedData(JediSerialPayload.data)+ "\n";
-                        
-                    //    AppData.dlogger.logData(traildata);
-                    //   // Debug.Log(traildata);
-                    //}
+                    if (AppData.dlogger != null)
+                    {
+
+                        string traildata = hyper1.timer_ + JediSerialPayload.GetFormatedData(JediSerialPayload.data) + "\n";
+
+                        AppData.dlogger.logData(traildata);
+                        // Debug.Log(traildata);
+                    }
                     //if (AppData.afterLogger != null)
                     //{
 
@@ -661,6 +690,7 @@ public static class JediSerialCom
                 else
                 {
                     AppData.HyperCubeConnected = false;
+                    Debug.Log($" hypercube : {AppData.HyperCubeConnected}");
                 }
             }
             catch (TimeoutException)

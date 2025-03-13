@@ -8,7 +8,6 @@ public class AngleDisplay : MonoBehaviour
     public Text MaxAngle;
     public Text MinAngle;
     public Text CurrentAngle;
-    public static hyper1 instance;
     public GameObject AngleDisplayCanvas;
     
     
@@ -26,21 +25,26 @@ public class AngleDisplay : MonoBehaviour
             AngleDisplayCanvas.SetActive(true);
             MaxAngle.text = PlayerPrefs.GetFloat("Knob Ang Max").ToString();
             MinAngle.text = PlayerPrefs.GetFloat("Knob Ang Min").ToString();
-            CurrentAngle.text = hyper1.instance.ang2.ToString();
+           // CurrentAngle.text = hyper1.instance.ang2.ToString();
+            CurrentAngle.text = JediSerialPayload.angle_2.ToString();
         }
         else if (PlayerPrefs.GetInt("Control Method") == 6)
         {
             AngleDisplayCanvas.SetActive(true);
             MaxAngle.text = PlayerPrefs.GetFloat("Knob Fine Ang Max").ToString();
             MinAngle.text = PlayerPrefs.GetFloat("Knob Fine Ang Min").ToString();
-            CurrentAngle.text = hyper1.instance.ang4.ToString();
+            //CurrentAngle.text = hyper1.instance.ang4.ToString();
+            CurrentAngle.text = JediSerialPayload.angle_4.ToString();
+
         }
         else if (PlayerPrefs.GetInt("Control Method") == 7)
         {
             AngleDisplayCanvas.SetActive(true);
             MaxAngle.text = PlayerPrefs.GetFloat("Knob Key Ang Max").ToString();
             MinAngle.text = PlayerPrefs.GetFloat("Knob Key Ang Min").ToString();
-            CurrentAngle.text = hyper1.instance.ang3.ToString();
+            //  CurrentAngle.text = hyper1.instance.ang3.ToString();
+            CurrentAngle.text = JediSerialPayload.angle_3.ToString();
+
         }
     }
 }

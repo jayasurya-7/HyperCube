@@ -3297,9 +3297,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1928787134}
-        m_TargetAssemblyTypeName: ButtonClick, Assembly-CSharp
-        m_MethodName: Return
+      - m_Target: {fileID: 321679212}
+        m_TargetAssemblyTypeName: hyper1, Assembly-CSharp
+        m_MethodName: Stop_data_log
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3309,9 +3309,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 321679212}
-        m_TargetAssemblyTypeName: hyper1, Assembly-CSharp
-        m_MethodName: Stop_data_log
+      - m_Target: {fileID: 1031504773}
+        m_TargetAssemblyTypeName: Snake, Assembly-CSharp
+        m_MethodName: exitButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3793,7 +3793,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1871526707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4078,7 +4078,6 @@ MonoBehaviour:
   Index_dist_Min: 0
   Index_dist_Max: 0
   ComPortValue: 0
-  ComPortDropdown: {fileID: 0}
 --- !u!4 &1928787135
 Transform:
   m_ObjectHideFlags: 0

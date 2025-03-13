@@ -192,7 +192,9 @@ public static class JediSerialPayload
         else
         {
             Debug.Log("\r no data coming in.");
+            Debug.Log($"size of plsz-{ plSz}, jedi-{JediDataFormat.dataSize}");
             AppData.HyperCubeConnected = false;
+            Debug.Log($"size {AppData.HyperCubeConnected}");
             return false;
         }
     }

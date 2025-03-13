@@ -991,13 +991,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 60482302}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 879043453}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -70}
@@ -1079,9 +1079,9 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0
+  m_FillAmount: 0.5
   m_FillClockwise: 1
-  m_FillOrigin: 3
+  m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &60482306
@@ -3588,7 +3588,7 @@ MonoBehaviour:
   HandGripCanvas: {fileID: 879043449}
   HandGripForceCanvas: {fileID: 1654040814}
   GrossKnobCanvas: {fileID: 1032780272}
-  FineKnobCancas: {fileID: 518336662}
+  FineKnobCanvas: {fileID: 518336662}
   KeyKnobCanvas: {fileID: 77143834}
   TripodCanvas: {fileID: 762132332}
 --- !u!4 &406247529
@@ -5677,16 +5677,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 666582800}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 879043453}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -70}
+  m_AnchoredPosition: {x: 0, y: -71}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &666582802
@@ -5767,7 +5767,7 @@ MonoBehaviour:
   m_FillMethod: 4
   m_FillAmount: 0.5
   m_FillClockwise: 0
-  m_FillOrigin: 1
+  m_FillOrigin: 3
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &666582804
@@ -7666,7 +7666,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &879043450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12386,29 +12386,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf2fc1ae612a9749b58d73538e133df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force_1: 0
-  force_2: 0
-  force_total: 0
-  ang1: 0
-  ang2: 0
-  ang3: 0
-  ang4: 0
-  buttonPin1State: 0
-  buttonPin2State: 0
-  buttonPin3State: 0
-  buttonPin4State: 0
-  buttonPin5State: 0
-  buttonPin6State: 0
-  buttonPin7State: 0
-  distance1: 0
-  distance2: 0
-  Btw_dist: 0
-  Avg_Btw_dist: 0
-  x: 0
-  portnames: []
-  Hos_: {fileID: 0}
-  MovingAverageLength: 5
-  Ports: []
 --- !u!4 &1559357333
 Transform:
   m_ObjectHideFlags: 0
@@ -13113,7 +13090,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1654040815
 MonoBehaviour:
   m_ObjectHideFlags: 0

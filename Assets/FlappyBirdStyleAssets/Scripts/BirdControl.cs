@@ -8,7 +8,6 @@ using System;
 
 public class BirdControl : MonoBehaviour
 {
-    public static hyper1 instance;
     private bool isDead = false;
     public static Rigidbody2D rb2d;
     Animator anime;
@@ -254,7 +253,9 @@ public class BirdControl : MonoBehaviour
     {
         if (controlValue == 1)
         {
-            transform.position = new Vector2(this.transform.position.x, Angle2Screen(hyper1.instance.ang1));
+           // transform.position = new Vector2(this.transform.position.x, Angle2Screen(hyper1.instance.ang1));
+            transform.position = new Vector2(this.transform.position.x, Angle2Screen(JediSerialPayload.angle_1));
+
             if (this.transform.position.y > topbound)
             {
                 transform.position = new Vector2(this.transform.position.x, topbound);
@@ -263,13 +264,13 @@ public class BirdControl : MonoBehaviour
             {
                 transform.position = new Vector2(this.transform.position.x, bottombound);
             }
-            if (hyper1.instance.force_total < 1)
+            if (JediSerialPayload.totalForce < 1)
             {
                 FlappyGameControl.instance.scrollSpeed = -3f;
             }
             else
             {
-                FlappyGameControl.instance.scrollSpeed = -hyper1.instance.force_total * 2f;
+                FlappyGameControl.instance.scrollSpeed = -JediSerialPayload.totalForce * 2f;
             }
         }
 
@@ -302,7 +303,7 @@ public class BirdControl : MonoBehaviour
         }
         else if (controlValue == 3)
         {
-            transform.position = new Vector2(this.transform.position.x, Angle2ScreenFineKnob(hyper1.instance.ang4));
+            transform.position = new Vector2(this.transform.position.x, Angle2ScreenFineKnob(JediSerialPayload.angle_4));
             if (this.transform.position.y > topbound)
             {
                 transform.position = new Vector2(this.transform.position.x, topbound);
@@ -340,7 +341,7 @@ public class BirdControl : MonoBehaviour
 
         else
         {
-            transform.position = new Vector2(this.transform.position.x, Angle2ScreenKeyHold(hyper1.instance.ang3));
+            transform.position = new Vector2(this.transform.position.x, Angle2ScreenKeyHold(JediSerialPayload.angle_3));
             if (this.transform.position.y > topbound)
             {
                 transform.position = new Vector2(this.transform.position.x, topbound);
@@ -376,7 +377,7 @@ public class BirdControl : MonoBehaviour
             //{
             //    FlappyGameControl.instance.scrollSpeed = -hyper1.instance.force_total * 2f;
             //}
-            transform.position = new Vector2(this.transform.position.x, Force2Screen(hyper1.instance.force_total));
+            transform.position = new Vector2(this.transform.position.x, Force2Screen(JediSerialPayload.totalForce));
             if (this.transform.position.y > topbound)
             {
                 transform.position = new Vector2(this.transform.position.x, topbound);
@@ -385,7 +386,7 @@ public class BirdControl : MonoBehaviour
             {
                 transform.position = new Vector2(this.transform.position.x, bottombound);
             }
-            Debug.Log(hyper1.instance.force_total);
+            Debug.Log(JediSerialPayload.totalForce);
 
         }
         else if (PcMech == 2)
@@ -417,7 +418,7 @@ public class BirdControl : MonoBehaviour
 
         else if (PcMech == 4)
         {
-            transform.position = new Vector2(this.transform.position.x, Angle2ScreenTripodGrasp(hyper1.instance.Avg_Btw_dist));
+            transform.position = new Vector2(this.transform.position.x, Angle2ScreenTripodGrasp(JediSerialPayload.avgBtwDistance));
             if (this.transform.position.y > topbound)
             {
                 transform.position = new Vector2(this.transform.position.x, topbound);
@@ -430,7 +431,7 @@ public class BirdControl : MonoBehaviour
         }
         else if (PcMech == 5)
         {
-            transform.position = new Vector2(this.transform.position.x, Angle2ScreenGrossKnob(hyper1.instance.ang2));
+            transform.position = new Vector2(this.transform.position.x, Angle2ScreenGrossKnob(JediSerialPayload.angle_2));
             if (this.transform.position.y > topbound)
             {
                 transform.position = new Vector2(this.transform.position.x, topbound);
@@ -443,7 +444,7 @@ public class BirdControl : MonoBehaviour
         }
         else if (PcMech == 6)
         {
-            transform.position = new Vector2(this.transform.position.x, Angle2ScreenFineKnob(hyper1.instance.ang4));
+            transform.position = new Vector2(this.transform.position.x, Angle2ScreenFineKnob(JediSerialPayload.angle_4));
             if (this.transform.position.y > topbound)
             {
                 transform.position = new Vector2(this.transform.position.x, topbound);
@@ -455,7 +456,7 @@ public class BirdControl : MonoBehaviour
         }
         else
         {
-            transform.position = new Vector2(this.transform.position.x, Angle2ScreenKeyHold(hyper1.instance.ang3));
+            transform.position = new Vector2(this.transform.position.x, Angle2ScreenKeyHold(JediSerialPayload.angle_3));
             if (this.transform.position.y > topbound)
             {
                 transform.position = new Vector2(this.transform.position.x, topbound);
@@ -579,12 +580,12 @@ public class BirdControl : MonoBehaviour
 
     private void PincerGraspControl()
     {
-        if (hyper1.instance.buttonPin7State == 0)
+        if ( JediSerialPayload.button_7== 0)
         {
             //direction = Vector2.up;
             this.transform.Translate(0, Player_translate_UpSpeed, 0);
         }
-        else if (hyper1.instance.buttonPin6State == 0)
+        else if (JediSerialPayload.button_6 == 0)
         {
             //direction = Vector2.down;
             this.transform.Translate(0, Player_translate_DownSpeed, 0);
@@ -597,12 +598,12 @@ public class BirdControl : MonoBehaviour
 
     private void ButtonControl()
     {
-        if (hyper1.instance.buttonPin3State == 0)
+        if (JediSerialPayload.button_3 == 0)
         {
             //direction = Vector2.up;
             this.transform.Translate(0, Player_translate_UpSpeed, 0);
         }
-        else if (hyper1.instance.buttonPin1State == 0)
+        else if (JediSerialPayload.button_1 == 0)
         {
             //direction = Vector2.down;
             this.transform.Translate(0, Player_translate_DownSpeed, 0);
@@ -617,11 +618,11 @@ public class BirdControl : MonoBehaviour
 
     private void TripodGraspControl()
     {
-        if (hyper1.instance.Btw_dist > 6.5f)
+        if (JediSerialPayload.btwDistance > 6.5f)
         {
             this.transform.Translate(0, Player_translate_UpSpeed, 0);
         }
-        else if (hyper1.instance.Btw_dist < 4.5f)
+        else if (JediSerialPayload.btwDistance < 4.5f)
         {
 
             this.transform.Translate(0, Player_translate_DownSpeed, 0);

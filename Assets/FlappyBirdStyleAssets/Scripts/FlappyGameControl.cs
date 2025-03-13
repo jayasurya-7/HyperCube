@@ -8,10 +8,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Michsky.UI.ModernUIPack;
 using NeuroRehabLibrary;
-using static hyper1;
 public class FlappyGameControl : MonoBehaviour
 {
-    public hyper1 h;
     public AudioClip[] winClip;
     public AudioClip[] hitClip;
     public Text ScoreText;
@@ -99,7 +97,7 @@ public class FlappyGameControl : MonoBehaviour
             {
                 hidePaused();
                 playAgain();
-                h.Stop_data_log();
+                //h.Stop_data_log();
             }
         }
         
@@ -166,7 +164,7 @@ public class FlappyGameControl : MonoBehaviour
             GameOverText.GetComponent<Text>().text = "Try Again";
         GameOverText.SetActive(true);
         gameOver = true;
-        h.Stop_data_log();
+        //h.Stop_data_log();
         EndCurrentGameSession();
 
     }
@@ -322,7 +320,7 @@ public class FlappyGameControl : MonoBehaviour
     {
         currentGameSession = new GameSession
         {
-            GameName = sessionlocation.filename,
+            GameName = "tuk-tuk", //sessionlocation.filename,
             Assessment = 0 // Example assessment value, adjust as needed
         };
 
@@ -360,6 +358,7 @@ public class FlappyGameControl : MonoBehaviour
     {
         if (currentGameSession != null)
         {
+            string savepath = null;
             string trialDataFileLocation = savepath;
             SessionManager.Instance.SetTrialDataFileLocation(trialDataFileLocation, currentGameSession);
 

@@ -49,8 +49,8 @@ public class SpaceShooterPlayerController : MonoBehaviour
 		
 		
 
-	    if ((Input.GetKeyDown(KeyCode.P))||((hyper1.instance.buttonPin2State == 0) || hyper1.instance.force_total > 1 ||
-            hyper1.instance.buttonPin1State == 0 || hyper1.instance.buttonPin4State == 0) && myTime > nextFire) 
+	    if ((Input.GetKeyDown(KeyCode.P))||((JediSerialPayload.button_2 == 0) || JediSerialPayload.totalForce > 1 ||
+           JediSerialPayload.button_1 == 0 || JediSerialPayload.button_4 == 0) && myTime > nextFire) 
 		{
 				nextFire = myTime + fireRate;
 				Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
@@ -107,7 +107,7 @@ public class SpaceShooterPlayerController : MonoBehaviour
 
         if (PcMech == 1)
         {
-            transform.position = new Vector2(Angle2Screen(hyper1.instance.ang1), this.transform.position.y);
+            transform.position = new Vector2(Angle2Screen(JediSerialPayload.angle_1), this.transform.position.y);
             if (this.transform.position.y > topbound)
             {
                 transform.position = new Vector2(this.transform.position.x, topbound);
@@ -156,12 +156,12 @@ public class SpaceShooterPlayerController : MonoBehaviour
 
     private void PincerGraspControl()
     {
-        if (hyper1.instance.buttonPin6State == 0)
+        if (JediSerialPayload.button_6 == 0)
         {
             //direction = Vector2.up;
             this.transform.Translate(0.05f, 0, 0);
         }
-        else if (hyper1.instance.buttonPin7State == 0)
+        else if (JediSerialPayload.button_7== 0)
         {
             //direction = Vector2.down;
             this.transform.Translate(-0.05f, 0, 0);

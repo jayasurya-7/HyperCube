@@ -7,7 +7,6 @@ using TMPro;
 using System.IO;
 using System.IO.Ports;
 using NeuroRehabLibrary;
-using static hyper1;
 using System.Linq;
 using UnityEditor.Rendering;
 
@@ -61,7 +60,7 @@ public class ButtonClick : MonoBehaviour
     public float Index_dist_Max;
 
     public int ComPortValue;
-    public Dropdown ComPortDropdown;
+   // public Dropdown ComPortDropdown;
     private SerialPort serialPort;
     //JediSerialCom serReader;
 
@@ -113,21 +112,21 @@ public class ButtonClick : MonoBehaviour
     //}
     void PopulateComPorts()
     {
-        string[] ports = SerialPort.GetPortNames();
-        ComPortDropdown.ClearOptions();
+        //string[] ports = SerialPort.GetPortNames();
+        //ComPortDropdown.ClearOptions();
 
-        if (ports.Length > 0)
-        {
-            ComPortDropdown.AddOptions(ports.ToList());
-            ComPortDropdown.value = 0;
-            ComPortDropdown.RefreshShownValue();
-            //ConnectToHypercube(); // Automatically connect to the first port
-        }
-        else
-        {
-            ComPortDropdown.AddOptions(new System.Collections.Generic.List<string> { "No Ports Found" });
-            Debug.Log("No ports found");
-        }
+        //if (ports.Length > 0)
+        //{
+        //    ComPortDropdown.AddOptions(ports.ToList());
+        //    ComPortDropdown.value = 0;
+        //    ComPortDropdown.RefreshShownValue();
+        //    //ConnectToHypercube(); // Automatically connect to the first port
+        //}
+        //else
+        //{
+        //    ComPortDropdown.AddOptions(new System.Collections.Generic.List<string> { "No Ports Found" });
+        //    Debug.Log("No ports found");
+        //}
     }
     public void AutogameLoad()
     {

@@ -10,7 +10,6 @@ public class Shooter : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform firePoint;
     public GameObject player;
-    public hyper1 h;
     public int i = 1;
     public float a;
    //public float timer = 0f;
@@ -47,33 +46,76 @@ public class Shooter : MonoBehaviour
         //  }
 
 
+
+
+
+
+
+
+
+
+
+
+        if (JediSerialPayload.button_1 == 0)
+        {
+            Shoot();
+        }
+        if (JediSerialPayload.button_2 == 0)
+        {
+            Shoot();
+        }
+        if (JediSerialPayload.button_3 == 0)
+        {
+            Shoot();
+        }
+        if (JediSerialPayload.button_4 == 0)
+        {
+            Shoot();
+        }
+
+
+        if (JediSerialPayload.totalForce > 5f)
+        {
+            Shoot();
+        }
+
+
+
         //if (h.greenbuttonState == 0)
         //{
         //    Shoot();
         //}
 
-        if (h.buttonPin1State == 0)
-        {
-            Shoot();
-        }
-        if (h.buttonPin2State == 0)
-        {
-            Shoot();
-        }
-        if (h.buttonPin3State == 0)
-        {
-            Shoot();
-        }
-        if (h.buttonPin4State == 0)
-        {
-            Shoot();
-        }
+        //if (h.buttonPin1State == 0)
+        //{
+        //    Shoot();
+        //}
+        //if (h.buttonPin2State == 0)
+        //{
+        //    Shoot();
+        //}
+        //if (h.buttonPin3State == 0)
+        //{
+        //    Shoot();
+        //}
+        //if (h.buttonPin4State == 0)
+        //{
+        //    Shoot();
+        //}
 
 
-        if (h.force_total > 5f)
-        {
-            Shoot();
-        }
+        //if (h.force_total > 5f)
+        //{
+        //    Shoot();
+        //}
+
+
+
+
+
+
+
+
 
         //player.transform.position = new Vector3(-309.48f, 0.0f, 0.0f);
         //float value = h.theta2 - 300f;

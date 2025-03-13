@@ -2,13 +2,11 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using NeuroRehabLibrary;
-using static hyper1;
 using System;
 
 public class UIManagerPP : MonoBehaviour
 {
 	//public RockVR.Video.VideoCapture vdc;
-	public hyper1 h;
 	GameObject[] pauseObjects, finishObjects;
 	public BoundController rightBound;
 	public BoundController leftBound;
@@ -81,6 +79,7 @@ public class UIManagerPP : MonoBehaviour
     {
         if (currentGameSession != null)
         {
+			string savepath = null;
             string trialDataFileLocation = savepath;
             SessionManager.Instance.SetTrialDataFileLocation(trialDataFileLocation, currentGameSession);
 
@@ -148,7 +147,7 @@ public class UIManagerPP : MonoBehaviour
 			gameData.isGameLogging = false;
 
             LoadScene("pong_menu");
-			h.Stop_data_log();
+			//h.Stop_data_log();
 		}
 
 

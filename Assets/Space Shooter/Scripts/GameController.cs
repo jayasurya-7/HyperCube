@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-	public hyper1 h;
 	public GameObject[] asteroids;
 	public Vector3 spawnValues;
 	public int asteroidCount;
@@ -36,7 +35,7 @@ public class GameController : MonoBehaviour
 	{
 		spawnWait = PlayerPrefs.GetFloat("SpawnWait");
 		//ShowGameMenu();
-		h.start_data_log();
+		//h.start_data_log();
 		score = 0;
 		UpdateScore();
 		
@@ -158,7 +157,7 @@ public class GameController : MonoBehaviour
 		
 		Debug.Log(gameOver);
 		gameOverText.text = "GAME OVER";
-		h.Stop_data_log();
+		//h.Stop_data_log();
 		//GameOverCanvas.SetActive(true);
 	}
 
