@@ -35,7 +35,8 @@ public class GameController : MonoBehaviour
 	{
 		spawnWait = PlayerPrefs.GetFloat("SpawnWait");
 		//ShowGameMenu();
-		//h.start_data_log();
+		//h.
+		//();
 		score = 0;
 		UpdateScore();
 		

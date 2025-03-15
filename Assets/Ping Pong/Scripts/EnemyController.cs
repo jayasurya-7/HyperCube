@@ -43,7 +43,7 @@ public class EnemyController : MonoBehaviour {
     {
 
         float currSpeed = Mathf.Clamp(speed - (stopWatch / 90 * speed * 0.3f), 0.6f * speed, speed);
-		Debug.Log(currSpeed);
+		//Debug.Log(currSpeed);
 		//finding the ball
         if (ball == null){
 			ball = GameObject.FindGameObjectWithTag("Target").transform;

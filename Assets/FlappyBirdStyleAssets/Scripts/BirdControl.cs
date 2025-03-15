@@ -469,15 +469,18 @@ public class BirdControl : MonoBehaviour
 
     }
     public static float Force2Screen(float force)
-    {   float GripForce = PlayerPrefs.GetFloat("Grip force");
+    {   //float GripForce = PlayerPrefs.GetFloat("Grip force");
+        float GripForce = AppData.handleGripForce;
         return (-2.3f + (force - 2.3f ) * (playSize) / (GripForce - 2.3f));
     }
 
     public static float Angle2Screen(float angle)// Last used for handle surface testing
     {
         //angle1 = angle;
-        float AngMin = PlayerPrefs.GetFloat("Handle Ang Min");
-        float AngMax = PlayerPrefs.GetFloat("Handle Ang Max");
+        //float AngMin = PlayerPrefs.GetFloat("Handle Ang Min");
+        //float AngMax = PlayerPrefs.GetFloat("Handle Ang Max");
+        float AngMin = AppData.handleAngleMin;
+        float AngMax =AppData.handleAngleMax;
         if (angle > 45f)
         {
             //return (-0.5f + (angle - 40) * (playSize) / (20 - (-90)));
@@ -495,13 +498,15 @@ public class BirdControl : MonoBehaviour
     public static float Angle2ScreenTripodGrasp(float angle)// Last used for handle surface testing
     {
         //angle1 = angle;
-        float DistMin = PlayerPrefs.GetFloat("Dist Min");
-        float DistMax = PlayerPrefs.GetFloat("Dist Max");
-        
-        
-            //return (-0.5f + (angle - 40) * (playSize) / (20 - (-90)));
-            //return ((0.1636f * angle) - 10.8636f); // Last used for handle surface testing
-            return (-2.3f + (angle - DistMin) * (playSize) / (DistMax - DistMin));
+        //float DistMin = PlayerPrefs.GetFloat("Dist Min");
+        //float DistMax = PlayerPrefs.GetFloat("Dist Max");
+
+        float DistMin = AppData.graspMin;
+        float DistMax = AppData.graspMax;
+
+        //return (-0.5f + (angle - 40) * (playSize) / (20 - (-90)));
+        //return ((0.1636f * angle) - 10.8636f); // Last used for handle surface testing
+        return (-2.3f + (angle - DistMin) * (playSize) / (DistMax - DistMin));
         
 
        
@@ -514,8 +519,10 @@ public class BirdControl : MonoBehaviour
 
         //130 and -120 degrees.
         // return Mathf.Clamp((0.036f * angle + 0.82f), bottombound, topbound);
-        float AngMin = PlayerPrefs.GetFloat("Knob Fine Ang Min");
-        float AngMax = PlayerPrefs.GetFloat("Knob Fine Ang Max");
+        //        float AngMin = PlayerPrefs.GetFloat("Knob Fine Ang Min");
+        //      float AngMax = PlayerPrefs.GetFloat("Knob Fine Ang Max");
+        float AngMin = AppData.fineKnobMin;
+        float AngMax = AppData.fineKnobMax;
         return (-2.3f + (angle - AngMin) * (playSize) / (AngMax - AngMin));
 
     }
@@ -524,9 +531,12 @@ public class BirdControl : MonoBehaviour
     {
 
         //45 and -60 degrees.
-        //return Mathf.Clamp((-0.085f * angle + 0.325f), bottombound, topbound);
-        float AngMin = PlayerPrefs.GetFloat("Knob Ang Min");
-        float AngMax = PlayerPrefs.GetFloat("Knob Ang Max");
+        ////return Mathf.Clamp((-0.085f * angle + 0.325f), bottombound, topbound);
+        //float AngMin = PlayerPrefs.GetFloat("Knob Ang Min");
+        //float AngMax = PlayerPrefs.GetFloat("Knob Ang Max");
+
+        float AngMin = AppData.grossKnobMin;
+        float AngMax = AppData.grossKnobMax;
         return (-2.3f + (angle - AngMin) * (playSize) / (AngMax - AngMin));
 
     }
@@ -536,8 +546,11 @@ public class BirdControl : MonoBehaviour
 
         //95 and -40 degrees.
         //return Mathf.Clamp((-0.067f * angle + 2.865f), bottombound, topbound);
-        float AngMin = PlayerPrefs.GetFloat("Knob Key Ang Min");
-        float AngMax = PlayerPrefs.GetFloat("Knob Key Ang Max");
+        //float AngMin = PlayerPrefs.GetFloat("Knob Key Ang Min");
+        //float AngMax = PlayerPrefs.GetFloat("Knob Key Ang Max");
+
+        float AngMin = AppData.keyKnobMin;
+        float AngMax = AppData.keyKnobMax;
         return (-2.3f + (angle - AngMin) * (playSize) / (AngMax - AngMin));
 
     }

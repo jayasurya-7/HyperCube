@@ -144,6 +144,7 @@ public class hyper1 : MonoBehaviour
     }
     public void start_data_log()
     {
+        StartNewGameSession();
         Debug.Log("not created");
         //timerstart = true;
         //String name = name_subject.text;
@@ -207,7 +208,7 @@ public class hyper1 : MonoBehaviour
 
 
         }
-        StartNewGameSession();
+
 
 
 

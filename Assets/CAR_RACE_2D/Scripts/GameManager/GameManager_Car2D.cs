@@ -723,7 +723,7 @@ public class GameManager_Car2D : MonoBehaviour {
         isPlaying = false;
         ShowGameOverMenu();
         Time.timeScale = 0;
-       // h.Stop_data_log();
+        hyper1.instance.Stop_data_log();
         gameData.isGameLogging = false;
 
     }
@@ -732,7 +732,7 @@ public class GameManager_Car2D : MonoBehaviour {
     {
         EndCurrentGameSession();
          ButtonSound();
-        //h.Stop_data_log();
+        hyper1.instance.Stop_data_log();
 
     }
 

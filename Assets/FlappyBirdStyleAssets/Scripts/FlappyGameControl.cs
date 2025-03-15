@@ -69,7 +69,7 @@ public class FlappyGameControl : MonoBehaviour
         //vdc.StartCapture();
         // Time.timeScale = 0;
         ShowGameMenu();
-        StartNewGameSession();
+        //StartNewGameSession();
     }
 
     // Update is called once per frame
@@ -165,7 +165,7 @@ public class FlappyGameControl : MonoBehaviour
         GameOverText.SetActive(true);
         gameOver = true;
         //h.Stop_data_log();
-        EndCurrentGameSession();
+        //EndCurrentGameSession();
 
     }
     public void BirdScored()

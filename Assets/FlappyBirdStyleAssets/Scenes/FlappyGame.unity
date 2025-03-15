@@ -233,7 +233,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b44095298f815e644a39e017e0333a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  h: {fileID: 1118401470}
   winClip:
   - {fileID: 8300000, guid: dee5dc6ce0062f845982fb750e9afc1d, type: 3}
   - {fileID: 8300000, guid: 65df4bcfe463b044e8aab2918b564da4, type: 3}
@@ -6765,7 +6764,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1302883501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14333,7 +14332,6 @@ MonoBehaviour:
   Index_dist_Min: 0
   Index_dist_Max: 0
   ComPortValue: 0
-  ComPortDropdown: {fileID: 0}
 --- !u!4 &1791563882
 Transform:
   m_ObjectHideFlags: 0

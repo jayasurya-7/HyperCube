@@ -38,7 +38,7 @@ public class PlayerControllerDefault : MonoBehaviour {
     void Update ()
     { 
         
-        if ((Input.GetKeyDown(KeyCode.F))|| (JediSerialPayload.totalForce >= PlayerPrefs.GetFloat("Grip force")) && Time.time > nextFire)
+        if ((Input.GetKeyDown(KeyCode.F))|| (JediSerialPayload.totalForce >= AppData.handleGripForce) && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
 
@@ -76,9 +76,10 @@ public class PlayerControllerDefault : MonoBehaviour {
 
     public static float Angle2Screen(float angle)
     {
-        float AngMin = PlayerPrefs.GetFloat("Handle Ang Min");
-        float AngMax = PlayerPrefs.GetFloat("Handle Ang Max");
-        
+        //float AngMin = PlayerPrefs.GetFloat("Handle Ang Min");
+        //float AngMax = PlayerPrefs.GetFloat("Handle Ang Max");
+        float AngMin = AppData.handleAngleMin;
+        float AngMax = AppData.handleAngleMax;
         return Mathf.Clamp(- 15f + ((angle - AngMin) * (playSize) / (AngMax - AngMin)), bottombound, topbound);
     }
 

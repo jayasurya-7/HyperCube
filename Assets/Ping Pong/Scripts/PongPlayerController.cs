@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using TMPro;
+using Unity.Collections;
 
 public class PongPlayerController : MonoBehaviour {
 
@@ -111,30 +112,39 @@ public class PongPlayerController : MonoBehaviour {
 
     public float Angle2ScreenTripodGrasp(float angle)
     {
-        float DistMin = PlayerPrefs.GetFloat("Dist Min");
-        float DistMax = PlayerPrefs.GetFloat("Dist Max");
+        //   float DistMin = PlayerPrefs.GetFloat("Dist Min");
+        // float DistMax = PlayerPrefs.GetFloat("Dist Max");
+
+        float DistMin = AppData.graspMin;
+        float DistMax=AppData.graspMax;
         return (-4.5f + (angle - DistMin) * (playSize) / (DistMax - DistMin));
         //return (-17.38f + (angle) * (playSize) / (DistMax - DistMin));
     }
 
-    public float Angle2Screenknob(float angle)
-    {   float AngMin = PlayerPrefs.GetFloat("Knob Ang Min");
-        float AngMax = PlayerPrefs.GetFloat("Knob Ang Max");
+    public float Angle2Screenknob(float angle) { 
+    //{   float AngMin = PlayerPrefs.GetFloat("Knob Ang Min");
+    //    float AngMax = PlayerPrefs.GetFloat("Knob Ang Max");
+     float AngMin = AppData.grossKnobMin;
+    float AngMax = AppData.grossKnobMax;
         return (-4.5f + (angle - AngMin) * (playSize) / (AngMax - AngMin));
     }
 
     public float Angle2ScreenknobFine(float angle)
     {
-        float AngMin = PlayerPrefs.GetFloat("Knob Fine Ang Min");
-        float AngMax = PlayerPrefs.GetFloat("Knob Fine Ang Max");
+    //    float AngMin = PlayerPrefs.GetFloat("Knob Fine Ang Min");
+      //  float AngMax = PlayerPrefs.GetFloat("Knob Fine Ang Max");
+        float AngMin = AppData.fineKnobMin;
+        float AngMax = AppData .fineKnobMax;
         return (-4.5f + (angle - AngMin) * (playSize) / (AngMax - AngMin));
     }
 
     public float Angle2ScreenknobKey(float angle)
     {
-        float AngMin = PlayerPrefs.GetFloat("Knob Key Ang Min");
-        float AngMax = PlayerPrefs.GetFloat("Knob Key Ang Max");
-        return (-4.5f + (angle - AngMin) * (playSize) / (AngMax - AngMin));
+        //float AngMin = PlayerPrefs.GetFloat("Knob Key Ang Min");
+        //float AngMax = PlayerPrefs.GetFloat("Knob Key Ang Max");
+        float AngMin = AppData.keyKnobMin;
+        float AngMax = AppData.keyKnobMax;
+      return (-4.5f + (angle - AngMin) * (playSize) / (AngMax - AngMin));
     }
 
 

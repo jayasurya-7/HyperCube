@@ -453,8 +453,10 @@ public class PlayerController_Car2D : MonoBehaviour
     public static float Angle2Screen(float angle)
     {
         // return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
-        float AngMin = PlayerPrefs.GetFloat("Handle Ang Min");
-        float AngMax = PlayerPrefs.GetFloat("Handle Ang Max");
+        //float AngMin = PlayerPrefs.GetFloat("Handle Ang Min");
+        //float AngMax = PlayerPrefs.GetFloat("Handle Ang Max");
+
+
         //return b1 + (s - a1) * (b2 - b1) / (a2 - a1);
         //return((angle- AppData.aROM()[0])/(playSize- AppData.aROM()[0])*(-playSize -AppData.aROM()[1])+AppData.aROM()[1]);
 
@@ -465,6 +467,17 @@ public class PlayerController_Car2D : MonoBehaviour
 
         //return Mathf.Clamp((0.2f*hyper1.instance.ang1-18.5f), bottombound, topbound); //handle encoder value.
         //return Mathf.Clamp((0.11f * hyper1.instance.ang2 - 7.7f), bottombound, topbound);
+
+
+
+
+
+        float AngMin = AppData.handleAngleMin;
+        float AngMax = AppData.handleAngleMax;
+
+
+
+
         return Mathf.Clamp((-2.3f + (angle - AngMin) * (playSize) / (AngMax - AngMin)), bottombound, topbound); 
     }
 
@@ -476,30 +489,41 @@ public class PlayerController_Car2D : MonoBehaviour
     
     public static float Angle2Screen2(float angle)
     {
-        float DistMin = PlayerPrefs.GetFloat("Dist Min");
-        float DistMax = PlayerPrefs.GetFloat("Dist Max");
+        //float DistMin = PlayerPrefs.GetFloat("Dist Min");
+        //float DistMax = PlayerPrefs.GetFloat("Dist Max");
+
+        float DistMin = AppData.graspMin;
+        float DistMax = AppData.graspMax;
         return Mathf.Clamp((-6f + (angle - DistMin) * (playSize) / (DistMax - DistMin)), bottombound, topbound);
         //return Mathf.Clamp((-17.38f + (angle) * (playSize) / (DistMax - DistMin)), bottombound, topbound);
     }
 
     public static float Angle2screenGrossKnob(float angle)
     {
-        float AngMin = PlayerPrefs.GetFloat("Knob Ang Min");
-        float AngMax = PlayerPrefs.GetFloat("Knob Ang Max");
+        //float AngMin = PlayerPrefs.GetFloat("Knob Ang Min");
+        //float AngMax = PlayerPrefs.GetFloat("Knob Ang Max");
+
+        float AngMin = AppData.grossKnobMin;
+        float AngMax = AppData.grossKnobMax;
         return Mathf.Clamp((-6f + (angle - AngMin) * (playSize) / (AngMax - AngMin)), bottombound, topbound);
     }
 
     public static float Angle2screenFineKnob(float angle)
     {
-        float AngMin = PlayerPrefs.GetFloat("Knob Fine Ang Min");
-        float AngMax = PlayerPrefs.GetFloat("Knob Fine Ang Max");
+        //float AngMin = PlayerPrefs.GetFloat("Knob Fine Ang Min");
+        //float AngMax = PlayerPrefs.GetFloat("Knob Fine Ang Max");
+
+        float AngMin = AppData.fineKnobMin;
+        float AngMax = AppData.fineKnobMax;
         return Mathf.Clamp((-6f + (angle - AngMax) * (playSize) / (AngMax - AngMin)), bottombound, topbound);
     }
 
     public static float Angle2screenKeyKnob(float angle)
     {
-        float AngMin = PlayerPrefs.GetFloat("Knob Key Ang Min");
-        float AngMax = PlayerPrefs.GetFloat("Knob Key Ang Max");
+        //float AngMin = PlayerPrefs.GetFloat("Knob Key Ang Min");
+        //float AngMax = PlayerPrefs.GetFloat("Knob Key Ang Max");
+        float AngMin = AppData.keyKnobMin;
+        float AngMax = AppData.keyKnobMax;
         return Mathf.Clamp((-6f + (angle - AngMin) * (playSize) / (AngMax - AngMin)), bottombound, topbound);
     }
 
