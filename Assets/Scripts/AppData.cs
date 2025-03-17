@@ -480,6 +480,8 @@ static class AppData
     public static string hospno = null;
     public static int currentSessionNumber;
     public static string rawDataPath = null;
+    public static string rawData = null;   
+    public static string gameDataPath = null;
     public static string trialDataFileLocationTemp = null;
 
 

@@ -168,10 +168,10 @@ public class hyper1 : MonoBehaviour
         //string pth = "C:\\Users\\SRIRAMACHANDRAN\\Desktop\\HypercubeData\\";
         string pth = Path.Combine(AppData.rawDataPath, "RawData");
 
-        if (!Directory.Exists(pth))
+        if (!Directory.Exists(AppData.rawData))
         {
-            Directory.CreateDirectory(pth);
-            Debug.Log(pth);
+            Directory.CreateDirectory(AppData.rawData);
+            Debug.Log(AppData.rawData);
         }
         else
         {
@@ -200,7 +200,7 @@ public class hyper1 : MonoBehaviour
 
         string filename = Mech_name + "-" + Game_name + "-" + DateTime.UtcNow.ToLocalTime().ToString("yy-MM-dd-HH-mm-ss") +
              "-" + ".csv";
-        string rawDataFile = Path.Combine(pth, filename);
+        string rawDataFile = Path.Combine(AppData.rawData, filename);
         AppData.trialDataFileLocationTemp = rawDataFile;
         savepath = filename;
         PlayerPrefs.SetString("data", rawDataFile);

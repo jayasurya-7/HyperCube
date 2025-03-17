@@ -34,14 +34,15 @@ public class gamelogAR : MonoBehaviour
     private void InitializeSessionDetails()
     {
         dateTime = DateTime.Now.ToString("Dyyyy-MM-ddTHH-mm-ss");
-        date = DateTime.Now.ToString("yyyy-MM-dd");
         sessionNum = "Session_" + AppData.currentSessionNumber;
     }
 
     private void CreateLogFile()
     {
-        string dir = Path.Combine(AppData.rawDataPath, sessionNum);
-        Directory.CreateDirectory(dir);
+        //string dir = Path.Combine(AppData.rawDataPath, sessionNum);
+        //Directory.CreateDirectory(dir);
+
+        string dir = AppData.gameDataPath;
 
         fileName = Path.Combine(dir, $"{AppData.selectedGame}_{dateTime}.csv");
         AppData.trialDataFileLocationTemp = fileName;

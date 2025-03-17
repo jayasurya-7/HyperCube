@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,6 +25,21 @@ public class mechSceneHandler : MonoBehaviour
             AppData.graspMin = values.tripodMin;
         }
         else SceneManager.LoadScene("ROM Assessment");
+        string sessionNum = "Session_" + AppData.currentSessionNumber;
+        string pth = Path.Combine(AppData.rawDataPath, sessionNum, "RawData");
+        string gamepth = Path.Combine(AppData.rawDataPath, sessionNum, "GameData");
+        AppData.rawData = pth;
+        AppData.gameDataPath = gamepth;
+        if (!Directory.Exists(pth) || !Directory.Exists(gamepth))
+        {
+            Directory.CreateDirectory(pth);
+            Directory.CreateDirectory(gamepth);
+            Debug.Log(pth);
+        }
+        else
+        {
+            Debug.Log("not created");
+        }
     }
 
     // Update is called once per frame
