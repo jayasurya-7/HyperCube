@@ -50,6 +50,7 @@ public class gamelogAR : MonoBehaviour
     }
     void Update()
     {
+        Debug.Log($" logging {gameData.isGameLogging}");
         if (gameData.isGameLogging)
         {
             Player = GameObject.FindGameObjectWithTag("Player");
@@ -83,6 +84,10 @@ public class gamelogAR : MonoBehaviour
         time += Time.deltaTime;
     }
 
+    public void exitButton()
+    {
+        gameData.StopLogging();
+    }
     public void OnDestroy()
     {
         gameData.StopLogging();

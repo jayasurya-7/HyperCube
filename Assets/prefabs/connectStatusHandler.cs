@@ -19,7 +19,7 @@ public class connectStatusHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log($"connected :{AppData.HyperCubeConnected}");
+       // Debug.Log($"connected :{AppData.HyperCubeConnected}");
         // Update connection status
         if (AppData.HyperCubeConnected)
         {

@@ -1265,7 +1265,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 383257000}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: GameGUINavigation, Assembly-CSharp
         m_MethodName: TogglePause
         m_Mode: 1
         m_Arguments:
@@ -1275,7 +1275,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 2
 --- !u!114 &41135161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10831,7 +10831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50657a48ab4cd5d4cab5acf55d0665df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  h: {fileID: 1498465690}
+  hyper: {fileID: 1498465690}
   initialDelay: 1
   PauseCanvas: {fileID: 1316208619}
   QuitCanvas: {fileID: 574635027}
@@ -12036,6 +12036,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &439147313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13389,6 +13401,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+      - m_Target: {fileID: 1498465690}
+        m_TargetAssemblyTypeName: hyper1, Assembly-CSharp
+        m_MethodName: Stop_data_log
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1788294572}
+        m_TargetAssemblyTypeName: gamelogPM, Assembly-CSharp
+        m_MethodName: exitButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &536130274
 MonoBehaviour:
   m_ObjectHideFlags: 0

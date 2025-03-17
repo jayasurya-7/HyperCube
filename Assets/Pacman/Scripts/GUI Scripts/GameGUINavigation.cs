@@ -4,12 +4,13 @@ using System.Collections;
 using System.Text.RegularExpressions;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using NeuroRehabLibrary;
 
 public class GameGUINavigation : MonoBehaviour {
 
 	//------------------------------------------------------------------
 
-
+	public hyper1 hyper;
 	// Variable declarations
 	
 	private bool _paused;
@@ -30,13 +31,19 @@ public class GameGUINavigation : MonoBehaviour {
 	// buttons
 	public Button MenuButton;
 
-	//------------------------------------------------------------------
-	// Function Definitions
 
-	// Use this for initialization
-	void Start () 
+    private GameSession currentGameSession;
+
+    //------------------------------------------------------------------
+    // Function Definitions
+
+    // Use this for initialization
+    void Start () 
 	{
 		StartCoroutine("ShowReadyScreen", initialDelay);
+		StartNewGameSession();
+		gameData.isGameLogging = true;
+		//hyper.start_data_log();
 	}
 	
 	// Update is called once per frame
@@ -62,6 +69,7 @@ public class GameGUINavigation : MonoBehaviour {
 					TogglePause();
 			}
 		}
+		Debug.Log($"Time :{Time.timeScale}");
 	}
 
 	// public handle to show ready screen coroutine call
@@ -73,6 +81,7 @@ public class GameGUINavigation : MonoBehaviour {
     public void H_ShowGameOverScreen()
     {
         StartCoroutine("ShowGameOverScreen");
+		gameData.isGameLogging = false;
     }
 
 	IEnumerator ShowReadyScreen(float seconds)
@@ -92,7 +101,7 @@ public class GameGUINavigation : MonoBehaviour {
         GameOverCanvas.enabled = true;
         yield return new WaitForSeconds(2);
         Menu();
-		//h.Stop_data_log();
+		//hyper.Stop_data_log();
 
 	}
 
@@ -104,10 +113,57 @@ public class GameGUINavigation : MonoBehaviour {
 		ScoreCanvas.enabled = true;
 	}
 
-	//------------------------------------------------------------------
-	// Button functions
+    //------------------------------------------------------------------
+    // Button functions
+    void StartNewGameSession()
+    {
+        currentGameSession = new GameSession
+        {
+            GameName = "PacMan",
+            Assessment = 0 // Example assessment value, adjust as needed
+        };
 
-	public void TogglePause()
+        SessionManager.Instance.StartGameSession(currentGameSession);
+        Debug.Log($"Started new game session with session number: {currentGameSession.SessionNumber}");
+
+        SetSessionDetails();
+    }
+
+
+    private void SetSessionDetails()
+    {
+        string device = "HYPERCUBE"; // Set the device name
+        string assistMode = "Null"; // Set the assist mode
+        string assistModeParameters = "Null"; // Set the assist mode parameters
+        string deviceSetupLocation = "Null"; // Set the device setup location
+
+
+        string gameParameter = "Null";
+
+
+
+        SessionManager.Instance.SetGameParameter(gameParameter, currentGameSession);
+
+
+        SessionManager.Instance.SetDevice(device, currentGameSession);
+        SessionManager.Instance.SetAssistMode(assistMode, assistModeParameters, currentGameSession);
+        SessionManager.Instance.SetDeviceSetupLocation(deviceSetupLocation, currentGameSession);
+
+
+
+    }
+
+    void EndCurrentGameSession()
+    {
+        if (currentGameSession != null)
+        {
+            string trialDataFileLocation = AppData.trialDataFileLocationTemp;
+            SessionManager.Instance.SetTrialDataFileLocation(trialDataFileLocation, currentGameSession);
+
+            SessionManager.Instance.EndGameSession(currentGameSession);
+        }
+    }
+    public void TogglePause()
 	{
 		// if paused before key stroke, unpause the game
 		if(_paused)
@@ -116,15 +172,17 @@ public class GameGUINavigation : MonoBehaviour {
 			PauseCanvas.enabled = false;
 			_paused = false;
 			MenuButton.enabled = true;
+			gameData.isGameLogging = true;
 		}
 		
 		// if not paused before key stroke, pause the game
 		else
 		{
 			PauseCanvas.enabled = true;
-			Time.timeScale = 0.0f;
+		//	Time.timeScale = 0.0f;
 			_paused = true;
-			MenuButton.enabled = false;
+			gameData.isGameLogging = false ;
+			//MenuButton.enabled = false;
 		}
 
 
@@ -145,6 +203,7 @@ public class GameGUINavigation : MonoBehaviour {
             QuitCanvas.enabled = true;
 			PauseCanvas.enabled = false;
 			quit = true;
+			EndCurrentGameSession();
 		}
 	}
 
@@ -243,5 +302,13 @@ public class GameGUINavigation : MonoBehaviour {
             ErrorCanvas.GetComponentsInChildren<Text>()[1].text = errorMsg;
 
         }
+    }
+
+
+	public void exitButton()
+	{
+
+        gameData.isGameLogging = false;
+		SceneManager.LoadScene("Home");
     }
 }

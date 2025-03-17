@@ -2576,6 +2576,7 @@ MonoBehaviour:
   FGC: {fileID: 18032854}
   gravity: -9.8
   strength: 0
+  MovingAverageLength: 5
 --- !u!114 &542264635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2605,6 +2606,7 @@ MonoBehaviour:
   FGC: {fileID: 18032854}
   gravity: -9.8
   strength: 0
+  MovingAverageLength: 5
 --- !u!95 &542264636
 Animator:
   serializedVersion: 3
@@ -4033,9 +4035,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1791563881}
-        m_TargetAssemblyTypeName: ButtonClick, Assembly-CSharp
-        m_MethodName: Return
+      - m_Target: {fileID: 1118401470}
+        m_TargetAssemblyTypeName: hyper1, Assembly-CSharp
+        m_MethodName: Stop_data_log
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4045,9 +4047,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1118401470}
-        m_TargetAssemblyTypeName: hyper1, Assembly-CSharp
-        m_MethodName: Stop_data_log
+      - m_Target: {fileID: 18032854}
+        m_TargetAssemblyTypeName: FlappyGameControl, Assembly-CSharp
+        m_MethodName: exitButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6764,7 +6766,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1302883501
 MonoBehaviour:
   m_ObjectHideFlags: 0

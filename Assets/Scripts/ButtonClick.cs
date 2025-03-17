@@ -79,7 +79,7 @@ public class ButtonClick : MonoBehaviour
 
     void Start()
     {
-        Timer.SetActive(false);
+       // Timer.SetActive(false);
         PopulateComPorts();
         //ComPortDropdown.onValueChanged.AddListener(delegate { ConnectToHypercube(); });
 

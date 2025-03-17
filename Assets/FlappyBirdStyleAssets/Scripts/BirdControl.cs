@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 //using PlutoDataStructures;
 
 public class BirdControl : MonoBehaviour
@@ -12,7 +13,7 @@ public class BirdControl : MonoBehaviour
     public static Rigidbody2D rb2d;
     Animator anime;
     // player controls
-
+    public static hyper1 instance;
     public int controlValue;
     public static float playSize;
     public static int FlipAngle = 1;
@@ -59,6 +60,11 @@ public class BirdControl : MonoBehaviour
     public float gravity = -9.8f;
     public float strength;
 
+
+    public int MovingAverageLength = 5;
+    private int count;
+    private float movingAverage;
+
     void Start()
     {
         startTime = 0;
@@ -79,7 +85,10 @@ public class BirdControl : MonoBehaviour
     private void Update()
     {
 
+       // Debug.Log(($"avg :{Math.Round(hyper1.instance.Avg_Btw_dist)}")); //,-- avg jedi :{ Math.Round(JediSerialPayload.avgBtwDistance)}"));
+       // Debug.Log(($"avg :{JediSerialPayload.avgBtwDistance}")); //,-- avg jedi :{ Math.Round(JediSerialPayload.avgBtwDistance)}"));
 
+      //  Debug.Log("running");
         gameData.events = Array.IndexOf(gameData.tukEvents, "moving");
 
         //loadcell = -hyper1.instance.force_total + 2f;
@@ -418,16 +427,36 @@ public class BirdControl : MonoBehaviour
 
         else if (PcMech == 4)
         {
-            transform.position = new Vector2(this.transform.position.x, Angle2ScreenTripodGrasp(JediSerialPayload.avgBtwDistance));
+
+            //transform.position = new Vector2(this.transform.position.x, Angle2ScreenTripodGrasp(MovingAverage(JediSerialPayload.btwDistance)));
+            //if (this.transform.position.y > topbound)
+            //{
+            //    transform.position = new Vector2(this.transform.position.x, topbound);
+            //}
+            //else if (this.transform.position.y < bottombound)
+            //{
+            //    transform.position = new Vector2(this.transform.position.x, bottombound);
+            //}
+
+            transform.position = new Vector2(this.transform.position.x, Angle2ScreenTripodGrasp(AppData.avg));
             if (this.transform.position.y > topbound)
             {
                 transform.position = new Vector2(this.transform.position.x, topbound);
             }
             else if (this.transform.position.y < bottombound)
-            {    
+            {
                 transform.position = new Vector2(this.transform.position.x, bottombound);
             }
 
+            //transform.position = new Vector2(this.transform.position.x, Angle2ScreenTripodGrasp(JediSerialPayload.avgBtwDistance));
+            //if (this.transform.position.y > topbound)
+            //{
+            //    transform.position = new Vector2(this.transform.position.x, topbound);
+            //}
+            //else if (this.transform.position.y < bottombound)
+            //{
+            //    transform.position = new Vector2(this.transform.position.x, bottombound);
+            //}
         }
         else if (PcMech == 5)
         {
@@ -644,5 +673,26 @@ public class BirdControl : MonoBehaviour
         {
             direction = Vector2.zero;
         }
+    }
+    public float MovingAverage(float values)
+    {
+        count++;
+
+
+        if (count > MovingAverageLength)
+        {
+            movingAverage = movingAverage + (values - movingAverage) / (MovingAverageLength + 1);
+        }
+        else
+        {
+            movingAverage += values;
+
+            if (count == MovingAverageLength)
+            {
+                movingAverage = movingAverage / count;
+
+            }
+        }
+        return movingAverage;
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
-using NeuroRehabLibrary;
 
 public class PlayerController : MonoBehaviour
 {
@@ -28,15 +27,15 @@ public class PlayerController : MonoBehaviour
     private ScoreManager SM;
 
     private bool _deadPlaying = false;
-    private GameSession currentGameSession;
+
     // Use this for initialization
     void Start()
-    {   speed = PlayerPrefs.GetFloat("PlayerSpeed");
+    {
+        speed = PlayerPrefs.GetFloat("PlayerSpeed");
         GM = GameObject.Find("Game Manager").GetComponent<GameManager>();
         SM = GameObject.Find("Game Manager").GetComponent<ScoreManager>();
         GUINav = GameObject.Find("UI Manager").GetComponent<GameGUINavigation>();
         _dest = transform.position;
-        StartNewGameSession();
     }
 
     // Update is called once per frame
@@ -45,8 +44,6 @@ public class PlayerController : MonoBehaviour
         switch (GameManager.gameState)
         {
             case GameManager.GameState.Game:
-                gameData.isGameLogging= true;
-                gameData.events = Array.IndexOf(gameData.tukEvents, "moving");
                 ReadInputAndMove();
                 Animate();
                 break;
@@ -60,55 +57,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void StartNewGameSession()
-    {
-        currentGameSession = new GameSession
-        {
-             GameName = "PacMan",
-            Assessment = 0 // Example assessment value, adjust as needed
-        };
-
-        SessionManager.Instance.StartGameSession(currentGameSession);
-        Debug.Log($"Started new game session with session number: {currentGameSession.SessionNumber}");
-
-        SetSessionDetails();
-    }
-
-
-    private void SetSessionDetails()
-    {
-        string device = "HYPERCUBE"; // Set the device name
-        string assistMode = "Null"; // Set the assist mode
-        string assistModeParameters = "Null"; // Set the assist mode parameters
-        string deviceSetupLocation = "Null"; // Set the device setup location
-
-
-        string gameParameter = "Null";
-
-
-
-        SessionManager.Instance.SetGameParameter(gameParameter, currentGameSession);
-
-
-        SessionManager.Instance.SetDevice(device, currentGameSession);
-        SessionManager.Instance.SetAssistMode(assistMode, assistModeParameters, currentGameSession);
-        SessionManager.Instance.SetDeviceSetupLocation(deviceSetupLocation, currentGameSession);
-
-
-
-    }
-
-    void EndCurrentGameSession()
-    {
-        if (currentGameSession != null)
-        {
-            string trialDataFileLocation = "null";
-            SessionManager.Instance.SetTrialDataFileLocation(trialDataFileLocation, currentGameSession);
-
-            SessionManager.Instance.EndGameSession(currentGameSession);
-        }
-    }
-
     IEnumerator PlayDeadAnimation()
     {
         _deadPlaying = true;
@@ -119,9 +67,8 @@ public class PlayerController : MonoBehaviour
 
         if (GameManager.lives <= 0)
         {
-            Debug.Log("Treshold for High Score: " + SM.LowestHigh());
-            EndCurrentGameSession();
             gameData.isGameLogging = false;
+            Debug.Log("Treshold for High Score: " + SM.LowestHigh());
             if (GameManager.score >= SM.LowestHigh())
                 GUINav.getScoresMenu();
             else
@@ -168,10 +115,10 @@ public class PlayerController : MonoBehaviour
         //if (Input.GetAxis("Vertical") > 0) _nextDir = Vector2.up;
         //if (Input.GetAxis("Vertical") < 0) _nextDir = -Vector2.up;
 
-        if (JediSerialPayload.button_2 == 0) _nextDir = Vector2.right;
-        if (JediSerialPayload.button_4 == 0) _nextDir = -Vector2.right;
-        if (JediSerialPayload.button_3 == 0) _nextDir = Vector2.up;
-        if (JediSerialPayload.button_1 == 0) _nextDir = -Vector2.up;
+        if (hyper1.instance.buttonPin2State == 0) _nextDir = Vector2.right;
+        if (hyper1.instance.buttonPin4State == 0) _nextDir = -Vector2.right;
+        if (hyper1.instance.buttonPin3State == 0) _nextDir = Vector2.up;
+        if (hyper1.instance.buttonPin1State == 0) _nextDir = -Vector2.up;
 
         // if pacman is in the center of a tile
         if (Vector2.Distance(_dest, transform.position) < 0.00001f)

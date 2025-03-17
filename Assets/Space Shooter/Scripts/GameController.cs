@@ -4,10 +4,11 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using NeuroRehabLibrary;
 public class GameController : MonoBehaviour
 {
 	public GameObject[] asteroids;
+	public hyper1 hyper;
 	public Vector3 spawnValues;
 	public int asteroidCount;
 	public float startWait;
@@ -30,12 +31,14 @@ public class GameController : MonoBehaviour
 	public GameObject Canvas;
 	public GameObject PauseCanvas;
 
-	float countDownTimer;
+    private GameSession currentGameSession;
+
+    float countDownTimer;
 	void Start()
 	{
 		spawnWait = PlayerPrefs.GetFloat("SpawnWait");
 		//ShowGameMenu();
-		//h.
+		hyper.start_data_log();
 		//();
 		score = 0;
 		UpdateScore();
@@ -50,7 +53,7 @@ public class GameController : MonoBehaviour
 
 		highScoreText.text = "High Score:" + PlayerPrefs.GetInt("highScore").ToString();
 		StartCoroutine(SpawnWaves());
-
+		StartNewGameSession();
 		gameData.isGameLogging= true;
 		
 	}
@@ -67,8 +70,8 @@ public class GameController : MonoBehaviour
 		restart = false;
 		restartText.text = "";
 		if (!PlayerPrefs.HasKey("highScore")) PlayerPrefs.SetInt("highScore", 100);
-
-		highScoreText.text = "High Score:" + PlayerPrefs.GetInt("highScore").ToString();
+        gameData.isGameLogging = true;
+        highScoreText.text = "High Score:" + PlayerPrefs.GetInt("highScore").ToString();
 		StartCoroutine(SpawnWaves());
 	}
 	
@@ -89,6 +92,7 @@ public class GameController : MonoBehaviour
 		if (restart) {
 			if (Input.GetKeyDown(KeyCode.R)) {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+				StartNewGameSession();
                 //player.SetActive(true);
                 //restartGame();
             }
@@ -155,10 +159,10 @@ public class GameController : MonoBehaviour
 
 		}
 		gameOver = true;
-		
+		EndCurrentGameSession();
 		Debug.Log(gameOver);
 		gameOverText.text = "GAME OVER";
-		//h.Stop_data_log();
+		hyper.Stop_data_log();
 		//GameOverCanvas.SetActive(true);
 	}
 
@@ -169,8 +173,57 @@ public class GameController : MonoBehaviour
 		Canvas.SetActive(false);
 		Time.timeScale = 0;
 	}
+    void StartNewGameSession()
+    {
+        currentGameSession = new GameSession
+        {
+            GameName = PlayerPrefs.GetString("Game name"),
+            Assessment = 0 // Example assessment value, adjust as needed
+        };
 
-	public void StartGame()
+        SessionManager.Instance.StartGameSession(currentGameSession);
+        Debug.Log($"Started new game session with session number: {currentGameSession.SessionNumber}");
+
+        SetSessionDetails();
+    }
+
+
+    private void SetSessionDetails()
+    {
+        string device = "HYPERCUBE"; // Set the device name
+        string assistMode = "Null"; // Set the assist mode
+        string assistModeParameters = "Null"; // Set the assist mode parameters
+        string deviceSetupLocation = "Null"; // Set the device setup location
+
+
+        string gameParameter = "Null";
+
+
+
+        SessionManager.Instance.SetGameParameter(gameParameter, currentGameSession);
+
+
+        SessionManager.Instance.SetDevice(device, currentGameSession);
+        SessionManager.Instance.SetAssistMode(assistMode, assistModeParameters, currentGameSession);
+        SessionManager.Instance.SetDeviceSetupLocation(deviceSetupLocation, currentGameSession);
+
+
+
+    }
+
+    void EndCurrentGameSession()
+    {
+        if (currentGameSession != null)
+        {
+            string trialDataFileLocation = AppData.trialDataFileLocationTemp;
+            SessionManager.Instance.SetTrialDataFileLocation(trialDataFileLocation, currentGameSession);
+
+            SessionManager.Instance.EndGameSession(currentGameSession);
+        }
+    }
+
+
+    public void StartGame()
 	{
 		Canvas.SetActive(true);
 		MenuCanvas.SetActive(false);
@@ -197,6 +250,8 @@ public class GameController : MonoBehaviour
 		//SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 		Time.timeScale = 1;
 		gameData.isGameLogging = false;
+		EndCurrentGameSession();
+		gameData.StopLogging();
 
     }
 }

@@ -373,7 +373,7 @@ public class PlayerController_Car2D : MonoBehaviour
         }
         else if (PcMech == 4)
         {
-            Vector2 target_pos = new Vector3(Angle2Screen2(JediSerialPayload.avgBtwDistance), rigBody2D.position.y, 0f); //Replace angles value with the encoder value
+            Vector2 target_pos = new Vector3(Angle2Screen2(AppData.avg), rigBody2D.position.y, 0f); //Replace angles value with the encoder value
             rigBody2D.MovePosition(target_pos);
             if (movePlayerRot)
             {
@@ -603,11 +603,25 @@ public class PlayerController_Car2D : MonoBehaviour
 
     private void TripodGraspControl()
     {
-        if (JediSerialPayload.btwDistance > 6.5f)
+        //if (JediSerialPayload.btwDistance > 6.5f)
+        //{
+        //    this.transform.Translate(0.05f, 0, 0);
+        //}
+        //else if (JediSerialPayload.btwDistance < 4.5f)
+        //{
+
+        //    this.transform.Translate(-0.05f, 0, 0);
+        //}
+        //else
+        //{
+        //    direction = Vector2.zero;
+        //}
+
+        if (AppData.dist > 6.5f)
         {
             this.transform.Translate(0.05f, 0, 0);
         }
-        else if (JediSerialPayload.btwDistance < 4.5f)
+        else if (AppData.dist < 4.5f)
         {
 
             this.transform.Translate(-0.05f, 0, 0);
@@ -616,6 +630,7 @@ public class PlayerController_Car2D : MonoBehaviour
         {
             direction = Vector2.zero;
         }
+
 
     }
 

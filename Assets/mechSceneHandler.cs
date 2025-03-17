@@ -29,7 +29,7 @@ public class mechSceneHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log($" angle 1 :{JediSerialPayload.angle_1}");
+       // Debug.Log($" angle 1 :{JediSerialPayload.angle_1}");
 
         
     }

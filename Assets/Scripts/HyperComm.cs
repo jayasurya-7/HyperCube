@@ -236,10 +236,10 @@ public static class JediSerialPayload
     }
     static private float MovingAverage(float values)
     {
-        count++;
+        counter++;
 
 
-        if (count > MovingAverageLength)
+        if (counter > MovingAverageLength)
         {
             movingAverage = movingAverage + (values - movingAverage) / (MovingAverageLength + 1);
         }
@@ -247,9 +247,9 @@ public static class JediSerialPayload
         {
             movingAverage += values;
 
-            if (count == MovingAverageLength)
+            if (counter == MovingAverageLength)
             {
-                movingAverage = movingAverage / count;
+                movingAverage = movingAverage / counter;
 
             }
         }

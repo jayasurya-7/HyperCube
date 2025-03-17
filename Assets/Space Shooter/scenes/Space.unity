@@ -2068,7 +2068,6 @@ MonoBehaviour:
   Index_dist_Min: 0
   Index_dist_Max: 0
   ComPortValue: 0
-  ComPortDropdown: {fileID: 0}
 --- !u!4 &400729145
 Transform:
   m_ObjectHideFlags: 0
@@ -2558,12 +2557,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b9f8b481557d4036951ebf9e7dec575, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  h: {fileID: 124629903}
   asteroids:
   - {fileID: 1534602218764420, guid: b0180ffeda732491da78ffa53801766b, type: 3}
   - {fileID: 1813454921109368, guid: 7c611bbe783b3493f8f7d3363d1460ac, type: 3}
   - {fileID: 1348575270965784, guid: 6b6d6c78fdb5b404286cb82750e83183, type: 3}
   - {fileID: 1093887268274868, guid: 61acbff360156435c88550bac7aa1208, type: 3}
+  hyper: {fileID: 124629903}
   spawnValues: {x: 12, y: 0, z: 16}
   asteroidCount: 5
   startWait: 1

@@ -125,7 +125,19 @@ public class hyper1 : MonoBehaviour
             //Btw_dist = Average((11.2f - (distance1 + distance2)));
             //x = float.Parse(JediSerialPayload.data[15].ToString());
             Btw_dist = (11.2f - (distance1 + distance2));
+            AppData.dist = Btw_dist;
+            AppData.avg = MovingAverage(Btw_dist);
+            // AppData.avg = MovingAverage(JediSerialPayload.btwDistance);
+           // AppData.avg = JediSerialPayload.avgBtwDistance;
             Avg_Btw_dist = MovingAverage(Btw_dist);
+           // Debug.Log($" avg :{Avg_Btw_dist}, jedi :{JediSerialPayload.avgBtwDistance}");
+            //if(Math.Round(Avg_Btw_dist) == Math.Round(JediSerialPayload.avgBtwDistance))
+            //{
+            //    Debug.Log("equal");
+
+
+            //}
+            //else Debug.Log($" avg :{Avg_Btw_dist}, jedi :{JediSerialPayload.avgBtwDistance}");
         }
 
 
@@ -144,7 +156,6 @@ public class hyper1 : MonoBehaviour
     }
     public void start_data_log()
     {
-        StartNewGameSession();
         Debug.Log("not created");
         //timerstart = true;
         //String name = name_subject.text;
@@ -190,6 +201,7 @@ public class hyper1 : MonoBehaviour
         string filename = Mech_name + "-" + Game_name + "-" + DateTime.UtcNow.ToLocalTime().ToString("yy-MM-dd-HH-mm-ss") +
              "-" + ".csv";
         string rawDataFile = Path.Combine(pth, filename);
+        AppData.trialDataFileLocationTemp = rawDataFile;
         savepath = filename;
         PlayerPrefs.SetString("data", rawDataFile);
         //saver(total_path);
@@ -218,55 +230,6 @@ public class hyper1 : MonoBehaviour
     }
 
 
-    void StartNewGameSession()
-    {
-        currentGameSession = new GameSession
-        {
-            GameName = PlayerPrefs.GetString("Game name"),
-            Assessment = 0 // Example assessment value, adjust as needed
-        };
-
-        SessionManager.Instance.StartGameSession(currentGameSession);
-        Debug.Log($"Started new game session with session number: {currentGameSession.SessionNumber}");
-
-        SetSessionDetails();
-    }
-
-
-    private void SetSessionDetails()
-    {
-        string device = "HYPERCUBE"; // Set the device name
-        string assistMode = "Null"; // Set the assist mode
-        string assistModeParameters = "Null"; // Set the assist mode parameters
-        string deviceSetupLocation = "Null"; // Set the device setup location
-
-
-        string gameParameter = "Null";
-
-
-
-        SessionManager.Instance.SetGameParameter(gameParameter, currentGameSession);
-
-
-        SessionManager.Instance.SetDevice(device, currentGameSession);
-        SessionManager.Instance.SetAssistMode(assistMode, assistModeParameters, currentGameSession);
-        SessionManager.Instance.SetDeviceSetupLocation(deviceSetupLocation, currentGameSession);
-
-
-
-    }
-
-    void EndCurrentGameSession()
-    {
-        if (currentGameSession != null)
-        {
-            string trialDataFileLocation = savepath;
-            SessionManager.Instance.SetTrialDataFileLocation(trialDataFileLocation, currentGameSession);
-
-            SessionManager.Instance.EndGameSession(currentGameSession);
-        }
-    }
-
 
 
 
@@ -274,9 +237,8 @@ public class hyper1 : MonoBehaviour
     public void Stop_data_log()
     {
 
-        EndCurrentGameSession();
         AppData.dlogger.stopDataLog();
-        Debug.Log("dataStopped");
+        Debug.Log("end");
 
     }
 
@@ -317,16 +279,7 @@ public class hyper1 : MonoBehaviour
         return movingAverage;
     }
 
-    //public void ReconnectToArduino()
-    //{
-    //    //serReader.DisconnectArduino();
-    //    //Debug.Log("Dis");
-    //    JediDataFormat.ReadSetJediDataFormat(AppData.jdfFilename);
-    //    //serReader = new JediSerialCom(PlayerPrefs.GetString("COMPort"));
-    //    serReader = new JediSerialCom("COM11");
-    //   serReader.ConnectToArduino();
-    //    //Debug.Log("connected");
-    //}
+
 }
 
 

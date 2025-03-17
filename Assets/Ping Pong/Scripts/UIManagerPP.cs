@@ -79,8 +79,7 @@ public class UIManagerPP : MonoBehaviour
     {
         if (currentGameSession != null)
         {
-			string savepath = null;
-            string trialDataFileLocation = savepath;
+            string trialDataFileLocation = AppData.trialDataFileLocationTemp;
             SessionManager.Instance.SetTrialDataFileLocation(trialDataFileLocation, currentGameSession);
 
             SessionManager.Instance.EndGameSession(currentGameSession);
@@ -140,9 +139,7 @@ public class UIManagerPP : MonoBehaviour
 		{
 			//vdc.StopCapture();
 			showFinished();
-		}
-		if (isFinished )
-		{
+	
 			EndCurrentGameSession();
 			gameData.isGameLogging = false;
 
@@ -198,6 +195,8 @@ public class UIManagerPP : MonoBehaviour
 	public void LoadScene(string sceneName)
 	{
 		//Application.LoadLevel(sceneName);
+		EndCurrentGameSession();
+		gameData.StopLogging();
 		SceneManager.LoadScene(sceneName);
 	}
 

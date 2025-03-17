@@ -61,7 +61,7 @@ namespace NeuroRehabLibrary
             if (!_loginCalled)
             {
                 _currentSessionNumber = GetLastSessionNumber() + 1;
-                Debug.Log($"Session number incremented to: {_currentSessionNumber}");
+              //  Debug.Log($"Session number incremented to: {_currentSessionNumber}");
                 AppData.currentSessionNumber = _currentSessionNumber;
                 _loginCalled = true;
             }
@@ -92,7 +92,7 @@ namespace NeuroRehabLibrary
                 WriteSession(session);
                 _sessionStarted = false; // End the current game session
 
-                Debug.Log($"Ending game session with session number: {session.SessionNumber}");
+             //   Debug.Log($"Ending game session with session number: {session.SessionNumber}");
             }
         }
 

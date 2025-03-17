@@ -7474,7 +7474,6 @@ MonoBehaviour:
   Index_dist_Min: 0
   Index_dist_Max: 0
   ComPortValue: 0
-  ComPortDropdown: {fileID: 0}
 --- !u!1 &500213077
 GameObject:
   m_ObjectHideFlags: 0
@@ -19199,7 +19198,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2601469cca5d6cd4e8c9630f2be6e4ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  h: {fileID: 314958239}
   gameSpeed: 1
   scrollspeed: -2
   spawnTime: 1
@@ -22931,7 +22929,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 184110, guid: 87731fdbe4b6bff4bb74e787a0ade004, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11401530, guid: 87731fdbe4b6bff4bb74e787a0ade004, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

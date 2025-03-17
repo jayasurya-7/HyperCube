@@ -24,11 +24,10 @@ public class Snake : MonoBehaviour
     void Start()
     {
         gameData.isGameLogging = true;
-        Debug.Log("Hello");
         InvokeRepeating("Move", 0.3f, 0.3f);
         Time.timeScale = 1;
         StartNewGameSession();
-        hyper1.instance.start_data_log();
+        //hyper1.instance.start_data_log();
        
 
     }
@@ -36,7 +35,7 @@ public class Snake : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log($" isGameLogging :{ gameData.isGameLogging } ");
+       // Debug.Log($" isGameLogging :{ gameData.isGameLogging } ");
         MovementControl();
         if (gameOver == true)
         {
@@ -106,13 +105,11 @@ public class Snake : MonoBehaviour
     {
         if (currentGameSession != null)
         {
-            string savepath = null;
-            string trialDataFileLocation = savepath;
+            string trialDataFileLocation = AppData.trialDataFileLocationTemp;
             SessionManager.Instance.SetTrialDataFileLocation(trialDataFileLocation, currentGameSession);
 
             SessionManager.Instance.EndGameSession(currentGameSession);
         }
-        Debug.Log("Hello 2");
     }
 
 
@@ -193,11 +190,10 @@ public class Snake : MonoBehaviour
 
     private void GameOver()
     {
-       
+        EndCurrentGameSession();
         GameOverCanvas.SetActive(true);
         Time.timeScale = 0;
         GameOverSound.Play();
-        hyper1.instance.Stop_data_log();
         
     }
     public void exitButton()

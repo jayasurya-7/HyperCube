@@ -69,7 +69,7 @@ public class FlappyGameControl : MonoBehaviour
         //vdc.StartCapture();
         // Time.timeScale = 0;
         ShowGameMenu();
-        //StartNewGameSession();
+       
     }
 
     // Update is called once per frame
@@ -265,7 +265,8 @@ public class FlappyGameControl : MonoBehaviour
             //gameOver = false;
             //Time.timeScale = 1;
             //hidePaused();
-           // gameduration = 20;
+            // gameduration = 20;
+            EndCurrentGameSession();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         }
@@ -285,6 +286,15 @@ public class FlappyGameControl : MonoBehaviour
         }
 
     }
+
+    public void exitButton()
+    {
+        EndCurrentGameSession();
+        gameOver = true;
+        gameData.isGameLogging = false;
+        gameData.StopLogging();
+        SceneManager.LoadScene("Home");
+    }
     public void PlayStart()
     {
         endValSet = false;
@@ -296,6 +306,7 @@ public class FlappyGameControl : MonoBehaviour
           if (Time.timeScale == 0)
         {
             Time.timeScale = 1;
+            gameData.isGameLogging = true;
             hidePaused();
 
         }
@@ -303,7 +314,7 @@ public class FlappyGameControl : MonoBehaviour
 
     public void ShowGameMenu()
     {
-        
+        gameData.isGameLogging = false;
         menuCanvas.SetActive(true);
         Canvas.SetActive(false);
         Time.timeScale = 0;
@@ -314,6 +325,8 @@ public class FlappyGameControl : MonoBehaviour
         Canvas.SetActive(true);
         menuCanvas.SetActive(false);
         Time.timeScale = 1;
+        gameData.isGameLogging = true;
+        StartNewGameSession();
     }
 
     void StartNewGameSession()
@@ -325,7 +338,7 @@ public class FlappyGameControl : MonoBehaviour
         };
 
         SessionManager.Instance.StartGameSession(currentGameSession);
-        Debug.Log($"Started new game session with session number: {currentGameSession.SessionNumber}");
+       // Debug.Log($"Started new game session with session number: {currentGameSession.SessionNumber}");
 
         SetSessionDetails();
     }
@@ -358,8 +371,7 @@ public class FlappyGameControl : MonoBehaviour
     {
         if (currentGameSession != null)
         {
-            string savepath = null;
-            string trialDataFileLocation = savepath;
+            string trialDataFileLocation = AppData.trialDataFileLocationTemp;
             SessionManager.Instance.SetTrialDataFileLocation(trialDataFileLocation, currentGameSession);
 
             SessionManager.Instance.EndGameSession(currentGameSession);

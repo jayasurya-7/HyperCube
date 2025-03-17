@@ -50,6 +50,7 @@ public class gamelogPM : MonoBehaviour
     }
     void Update()
     {
+        Debug.Log($" logg : {gameData.isGameLogging}");
         if (gameData.isGameLogging)
         {
             Player = GameObject.FindGameObjectWithTag("Player");
@@ -77,10 +78,16 @@ public class gamelogPM : MonoBehaviour
                 //else
                 //    gameData.enemyPos = "\"" + "XXX" + "," + "XXX" + "\"";
             }
-
+            Debug.Log(gameData.playerPos);
             gameData.LogDataHT();
         }
         time += Time.deltaTime;
+    }
+
+    public void exitButton()
+    {
+        gameData.StopLogging();
+
     }
 
     public void OnDestroy()

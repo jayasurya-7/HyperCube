@@ -138,7 +138,7 @@ public class GameManager_Car2D : MonoBehaviour {
         //AppData.timeOnTrail = timeleft;
         //AppData.reps = 0;
 
-        StartNewGameSession();
+      
 
     }
 
@@ -571,8 +571,7 @@ public class GameManager_Car2D : MonoBehaviour {
     {
         if (currentGameSession != null)
         {
-            string savepath = null;
-            string trialDataFileLocation = savepath;
+            string trialDataFileLocation = AppData.trialDataFileLocationTemp;
             SessionManager.Instance.SetTrialDataFileLocation(trialDataFileLocation, currentGameSession);
 
             SessionManager.Instance.EndGameSession(currentGameSession);
@@ -648,6 +647,7 @@ public class GameManager_Car2D : MonoBehaviour {
         isGameOver = false;
         //gameScore = 0;
         ResetTime();
+        StartNewGameSession();
        // SoundManager_Car2D.instance.SetSoundOnOff(false);
         //RequestInterstial();
         //DisplayInterstial();
@@ -679,6 +679,10 @@ public class GameManager_Car2D : MonoBehaviour {
         ButtonSound();
             endValSet = false;
             isGameOver = false;
+        gameData.isGameLogging = false;
+        EndCurrentGameSession();
+        gameData.StopLogging();
+
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             GameStart();
        

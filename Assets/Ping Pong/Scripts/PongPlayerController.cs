@@ -222,7 +222,16 @@ public class PongPlayerController : MonoBehaviour {
         }
         else if (PcMech == 4)
         {
-            transform.position = new Vector2(this.transform.position.x, Angle2ScreenTripodGrasp(Mathf.Round((MovingAveragePingPong(JediSerialPayload.btwDistance))*10.0f)*0.1f));
+            //transform.position = new Vector2(this.transform.position.x, Angle2ScreenTripodGrasp(Mathf.Round((MovingAveragePingPong(AppData.dist))*10.0f)*0.1f));
+            //if (this.transform.position.y > topBound)
+            //{
+            //    transform.position = new Vector2(this.transform.position.x, topBound);
+            //}
+            //else if (this.transform.position.y < bottomBound)
+            //{
+            //    transform.position = new Vector2(this.transform.position.x, bottomBound);
+            //}
+            transform.position = new Vector2(this.transform.position.x, Angle2ScreenTripodGrasp(AppData.avg));
             if (this.transform.position.y > topBound)
             {
                 transform.position = new Vector2(this.transform.position.x, topBound);
@@ -231,6 +240,7 @@ public class PongPlayerController : MonoBehaviour {
             {
                 transform.position = new Vector2(this.transform.position.x, bottomBound);
             }
+
 
         }
         else if (PcMech == 5)
