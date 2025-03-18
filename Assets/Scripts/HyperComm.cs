@@ -6,6 +6,11 @@ using UnityEngine;
 
 public static class JediSerialPayload
 {
+
+
+    public static readonly string[] MECHANISMS = new string[] { "NOMECH", "HGF", "GKNOB", "FKNOB", "KKNOB", "TGRASP", "PGRASP", "BUTTONS" };
+    public static readonly string[] MECHANISMSTEXT = new string[] { "NOMECH", "Handle Grip Force", "Gross knob", "Fine knob", "key knob", "tripod grasp", "pinch grasp", "Buttons" };
+
     static public uint count;
     static public int plSz = 0;
     static public byte status = 0;
