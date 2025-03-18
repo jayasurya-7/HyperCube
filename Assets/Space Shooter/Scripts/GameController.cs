@@ -78,7 +78,7 @@ public class GameController : MonoBehaviour
 	void Update()
 	{
 		PlayerPrefs.SetInt("highScore", 1750);
-
+		gameData.events = Array.IndexOf(gameData.spaceEvents, "moving");
 		if (gameOver)
 		{
 			gameData.isGameLogging = false;

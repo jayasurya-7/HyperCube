@@ -245,6 +245,8 @@ public static class gameData
     public static readonly string[] pongEvents = new string[] { "moving", "wallBounce", "playerHit", "enemyHit", "playerFail", "enemyFail" };
     public static readonly string[] hatEvents = new string[] { "moving", "BallCaught", "BombCaught", "BallMissed", "BombMissed" };
     public static readonly string[] tukEvents = new string[] { "moving", "collided", "passed" };
+    public static readonly string[] pacManEvents = new string[] { "moving", "captured", "Dead" };
+    public static readonly string[] spaceEvents = new string[] { "moving", "destroyed", "dead" };
     public static int events;
     public static string TargetPos;
     public static float successRate;
@@ -254,12 +256,12 @@ public static class gameData
     public static float predictedHitY;
     public static bool setNeutral = false;
     private static DataLogger dataLog;
-    private static readonly string[] gameHeader = new string[] {
-       "ang1","ang2","ang3","ang4","dist_btw","forceTotal","playerPosY","enemyPosY","events","playerScore","enemyScore"
+    private static readonly string[] gameHeader = new string[] {"playerPosY","enemyPosY","targetPosXY","events","playerScore","enemyScore"
     };
-    private static readonly string[] tukTukHeader = new string[] {
-        "ang1","ang2","ang3","ang4","dist_btw","forceTotal","playerPosx","events","playerScore"
+    private static readonly string[] tukTukHeader = new string[] {"playerPosx", "targetPos","events","playerScore"
     };
+    private static readonly string[] pacManHeader = new string[] { "events", "playerScore" };
+    public static readonly string[] spaceHeader = new string[] { "playerPosX", "events", "playerScore" };
     public static bool isLogging { get; private set; }
     public static bool moving = true; // used to manipulate events in HAT TRICK
     static public void StartDataLog(string fname)
@@ -284,7 +286,7 @@ public static class gameData
                 isLogging = false;
             }
         }
-        else if (AppData.selectedGame == "autoRider")
+        else if ((AppData.selectedGame == "autoRider")||(AppData.selectedGame == "highwayRacer"))
         {
             if (fname != "")
             {
@@ -303,8 +305,23 @@ public static class gameData
         {
             if (fname != "")
             {
-                string instructionLine = "0 - moving, 1 - collided, 2 - enemyDestroyed, 3 -asteroidDestroyed\n";
-                string headerWithInstructions = instructionLine + String.Join(", ", tukTukHeader) + "\n";
+                string instructionLine = "0 - moving, 1 - enemyDestroyed, 2 - dead\n";
+                string headerWithInstructions = instructionLine + String.Join(", ", spaceHeader) + "\n";
+                dataLog = new DataLogger(fname, headerWithInstructions);
+                isLogging = true;
+            }
+            else
+            {
+                dataLog = null;
+                isLogging = false;
+            }
+        }
+        else if ((AppData.selectedGame == "pacMan") || (AppData.selectedGame == "snakeGame"))
+        {
+            if (fname != "")
+            {
+                string instructionLine = "0 - moving, 1 - captured, 2 - Dead \n";
+                string headerWithInstructions = instructionLine + String.Join(", ", pacManHeader) + "\n";
                 dataLog = new DataLogger(fname, headerWithInstructions);
                 isLogging = true;
             }
@@ -316,18 +333,7 @@ public static class gameData
         }
         else
         {
-            if (fname != "")
-            {
-                string instructionLine = "0 - moving, 1 - collided, 2 - enemyDestroyed, 3 -asteroidDestroyed\n";
-                string headerWithInstructions = instructionLine + String.Join(", ", tukTukHeader) + "\n";
-                dataLog = new DataLogger(fname, headerWithInstructions);
-                isLogging = true;
-            }
-            else
-            {
-                dataLog = null;
-                isLogging = false;
-            }
+            Debug.Log("Unknown Game");
         }
     }
     static public void StopLogging()
@@ -343,37 +349,53 @@ public static class gameData
             UnityEngine.Debug.Log("Null log");
     }
 
-    static public void LogData()
+    static public void LogDataPP()
     {
         
             string[] _data = new string[] {
-                JediSerialPayload.angle_1.ToString("F2"),
-                JediSerialPayload.angle_2.ToString("F2"),
-                JediSerialPayload.angle_3.ToString("F2"),
-                JediSerialPayload.angle_4.ToString("F2"),
-                JediSerialPayload.avgBtwDistance.ToString("F2"),
-                JediSerialPayload.totalForce.ToString("F2"),
                 playerPos,
                 enemyPos,
-                gameData.events.ToString("F2"),
-                gameData.playerScore.ToString("F2"),
-                gameData.enemyScore.ToString("F2")
+                TargetPos,
+                events.ToString("F2"),
+                playerScore.ToString("F2"),
+                enemyScore.ToString("F2")
             };
             string _dstring = String.Join(", ", _data);
             _dstring += "\n";
             dataLog.logData(_dstring);
         
     }
-    static public void LogDataHT()
+
+    static public void LogDataAR()
+    {
+        string[] _data = new string[] {
+                playerPos,
+                TargetPos,
+                events.ToString("F2"),
+                gameScore.ToString("F2")
+            };
+        string _dstring = String.Join(", ", _data);
+        _dstring += "\n";
+        dataLog.logData(_dstring);
+
+    }
+    static public void LogDataSS()
+    {
+        string[] _data = new string[] {
+                playerPos,
+                events.ToString("F2"),
+                gameScore.ToString("F2")
+            };
+        string _dstring = String.Join(", ", _data);
+        _dstring += "\n";
+        dataLog.logData(_dstring);
+
+    }
+    static public void LogDataHR()
     {
             string[] _data = new string[] {
-                JediSerialPayload.angle_1.ToString("F2"),
-                JediSerialPayload.angle_2.ToString("F2"),
-                JediSerialPayload.angle_3.ToString("F2"),
-                JediSerialPayload.angle_4.ToString("F2"),
-                JediSerialPayload.avgBtwDistance.ToString("F2"),
-                JediSerialPayload.totalForce.ToString("F2"),
                playerPos,
+               enemyPos,
                gameData.events.ToString("F2"),
                gameData.gameScore.ToString("F2")
             };
@@ -381,7 +403,19 @@ public static class gameData
             _dstring += "\n";
             dataLog.logData(_dstring);
         }
-    
+
+    static public void LogDataPM()
+    {
+        string[] _data = new string[] {
+                events.ToString("F2"),
+                gameScore.ToString("F2")
+            };
+        string _dstring = String.Join(", ", _data);
+        _dstring += "\n";
+        dataLog.logData(_dstring);
+
+    }
+
 }
 public class DataLogger
 {

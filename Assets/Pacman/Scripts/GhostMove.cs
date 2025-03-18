@@ -67,6 +67,7 @@ public class GhostMove : MonoBehaviour {
 
 	void FixedUpdate ()
 	{
+		gameData.events = Array.IndexOf(gameData.pacManEvents, "moving");
 	    DISTANCE = Vector3.Distance(transform.position, waypoint);
 
 		if(GameManager.gameState == GameManager.GameState.Game){
@@ -302,14 +303,14 @@ public class GhostMove : MonoBehaviour {
 		        Calm();
 		        InitializeGhost(_startPos);
                 pacman.UpdateScore();
-                gameData.events = Array.IndexOf(gameData.tukEvents, "passed");
+                gameData.events = Array.IndexOf(gameData.pacManEvents, "captured");
 
             }
 
             else
 		    {
 		        _gm.LoseLife();
-                gameData.events = Array.IndexOf(gameData.tukEvents, "collided");
+                gameData.events = Array.IndexOf(gameData.pacManEvents, "Dead");
 
             }
 

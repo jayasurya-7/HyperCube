@@ -179,7 +179,7 @@ public class GameGUINavigation : MonoBehaviour {
 		else
 		{
 			PauseCanvas.enabled = true;
-		//	Time.timeScale = 0.0f;
+			Time.timeScale = 0.0f;
 			_paused = true;
 			gameData.isGameLogging = false ;
 			//MenuButton.enabled = false;

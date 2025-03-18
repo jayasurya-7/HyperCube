@@ -52,25 +52,15 @@ public class gamelogSS : MonoBehaviour
         if (gameData.isGameLogging)
         {
             Player = GameObject.FindGameObjectWithTag("Player");
-            //Target = GameObject.FindGameObjectWithTag("Target");
-            //Enemy = GameObject.FindGameObjectWithTag("Enemy");
-            if (gameData.game == "COMPENSATION")
-            {
-                gameData.playerPos = Player.transform.eulerAngles.z.ToString();
-                //gameData.TargetPos = Target.transform.eulerAngles.z.ToString();
-                //gameData.enemyPos = Enemy.transform.eulerAngles.z.ToString();
-
-            }
-            else
-            {
+           
                 if (Player != null)
                     gameData.playerPos = Player.transform.position.x.ToString();
 
                 else
                     gameData.playerPos = x.ToString("F2");
                 
-            }
-            gameData.LogDataHT();
+            
+            gameData.LogDataSS();
         }
         time += Time.deltaTime;
     }

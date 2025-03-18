@@ -149,7 +149,6 @@ public class welcome : MonoBehaviour
 
                     string dateTimeNow = DateTime.Now.ToString("dd-MM-yyyy");
                     string newDirPath = Path.Combine(patientDir, dateTimeNow);
-                    Debug.Log(newDirPath + "xxx");
                     if (Directory.Exists(newDirPath))
                     {
                         staticclass.FolderPath = newDirPath;

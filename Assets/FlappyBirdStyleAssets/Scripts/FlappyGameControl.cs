@@ -232,6 +232,7 @@ public class FlappyGameControl : MonoBehaviour
                     GetComponent<AudioSource>().Play();
                 }
                 score += 1;
+                gameData.gameScore++;
                 //AppData.gameScore ++;
                 //Debug.Log("Score");
                 //AppData.reps += 1;

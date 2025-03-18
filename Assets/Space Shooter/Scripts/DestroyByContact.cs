@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class DestroyByContact : MonoBehaviour
 {
@@ -36,10 +37,12 @@ public class DestroyByContact : MonoBehaviour
 
 		if (other.CompareTag("Player")) {
 			Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
-			
+			gameData.events = Array.IndexOf(gameData.spaceEvents, "dead");
 			gameController.GameOver();
 		} else {
-			gameController.AddScore(scoreValue); // Only add to the score when not hitting the Player!
+            gameData.events = Array.IndexOf(gameData.spaceEvents, "destroyed");
+
+            gameController.AddScore(scoreValue); // Only add to the score when not hitting the Player!
 		}
 
 		if (other.tag != "Player")

@@ -52,41 +52,18 @@ public class gamelogSG : MonoBehaviour
         if (gameData.isGameLogging)
         {
             Player = GameObject.FindGameObjectWithTag("Snake Head");
-            //Target = GameObject.FindGameObjectWithTag("Target");
-            //Enemy = GameObject.FindGameObjectWithTag("Enemy");
-            if (gameData.game == "COMPENSATION")
-            {
-                gameData.playerPos = Player.transform.eulerAngles.z.ToString();
-                gameData.TargetPos = Target.transform.eulerAngles.z.ToString();
-                gameData.enemyPos = Enemy.transform.eulerAngles.z.ToString();
-                Debug.Log($" x Player Position :{gameData.playerPos}");
-
-            }
-            else
-            {
+        
                 if (Player != null)
                     gameData.playerPos = Player.transform.position.y.ToString();
                 else
                     gameData.playerPos = "\"" + "XXX" ;
 
 
-                Debug.Log($" Player Position :{gameData.playerPos}");
-
-                //if (Target != null)
-                //    gameData.TargetPos = "\"" + Target.transform.position.x.ToString() + "," + Target.transform.position.y.ToString() + "\"";
-                //else
-                //    gameData.TargetPos = "\"" + "XXX" + "," + "XXX" + "\"";
-                //if (Enemy != null)
-                //    gameData.enemyPos = Enemy.transform.position.y.ToString();
-                //else
-                //    gameData.enemyPos = "\"" + "XXX" + "," + "XXX" + "\"";
-            }
-            gameData.LogDataHT();
-            Debug.Log($" y Player Position :{gameData.playerPos}");
+            gameData.LogDataPM();
+            
 
         }
         time += Time.deltaTime;
-        Debug.Log($"Position :{gameData.isGameLogging}");
     }
 
     public void OnDestroy()

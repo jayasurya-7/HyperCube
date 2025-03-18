@@ -54,30 +54,23 @@ public class gamelogHR : MonoBehaviour
             Player = GameObject.FindGameObjectWithTag("Player");
             Target = GameObject.FindGameObjectWithTag("Target");
             Enemy = GameObject.FindGameObjectWithTag("Enemy");
-            if (gameData.game == "COMPENSATION")
-            {
-                gameData.playerPos = Player.transform.eulerAngles.z.ToString();
-                gameData.TargetPos = Target.transform.eulerAngles.z.ToString();
-                gameData.enemyPos = Enemy.transform.eulerAngles.z.ToString();
-            }
-            else
-            {
-                if (Player != null)
-                    gameData.playerPos = Player.transform.position.y.ToString();
+
+           if (Player != null)
+                    gameData.playerPos = Player.transform.position.y.ToString("F3");
                 else
                     gameData.playerPos = x.ToString("F2"); ;
 
                 if (Target != null)
-                    gameData.TargetPos = "\"" + Target.transform.position.x.ToString() + "," + Target.transform.position.y.ToString() + "\"";
+                    gameData.TargetPos= Target.transform.position.x.ToString("F3");
                 else
                     gameData.TargetPos = x.ToString("F2") ;
                 if (Enemy != null)
-                    gameData.enemyPos = Enemy.transform.position.y.ToString();
+                    gameData.enemyPos = Enemy.transform.position.y.ToString("F3");
                 else
                     gameData.enemyPos = x.ToString("F2");
-            }
+            
 
-            gameData.LogDataHT();
+            gameData.LogDataAR();
         }
         time += Time.deltaTime;
     }

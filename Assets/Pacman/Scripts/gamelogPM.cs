@@ -53,32 +53,14 @@ public class gamelogPM : MonoBehaviour
         if (gameData.isGameLogging)
         {
             Player = GameObject.FindGameObjectWithTag("Player");
-            Target = GameObject.FindGameObjectWithTag("Target");
-            Enemy = GameObject.FindGameObjectWithTag("Enemy");
-            if (gameData.game == "COMPENSATION")
-            {
-                gameData.playerPos = Player.transform.eulerAngles.z.ToString();
-                gameData.TargetPos = Target.transform.eulerAngles.z.ToString();
-                gameData.enemyPos = Enemy.transform.eulerAngles.z.ToString();
-            }
-            else
-            {
+           
                 if (Player != null)
                     gameData.playerPos = Player.transform.position.y.ToString();
                 else
                     gameData.playerPos = x.ToString("F2");
 
-                //if (Target != null)
-                //    gameData.TargetPos = "\"" + Target.transform.position.x.ToString() + "," + Target.transform.position.y.ToString() + "\"";
-                //else
-                //    gameData.TargetPos = "\"" + "XXX" + "," + "XXX" + "\"";
-                //if (Enemy != null)
-                //    gameData.enemyPos = Enemy.transform.position.y.ToString();
-                //else
-                //    gameData.enemyPos = "\"" + "XXX" + "," + "XXX" + "\"";
-            }
-            Debug.Log(gameData.playerPos);
-            gameData.LogDataHT();
+    
+            gameData.LogDataPM();
         }
         time += Time.deltaTime;
     }

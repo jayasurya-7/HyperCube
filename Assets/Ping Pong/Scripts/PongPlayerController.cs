@@ -98,7 +98,7 @@ public class PongPlayerController : MonoBehaviour {
         //    transform.position = new Vector3(transform.position.x, bottomBound, 0);
         //}
 
-        Debug.Log(Angle2ScreenTripodGrasp(Mathf.Round((MovingAveragePingPong(JediSerialPayload.btwDistance))*10.0f)*0.1f));
+      //  Debug.Log(Angle2ScreenTripodGrasp(Mathf.Round((MovingAveragePingPong(JediSerialPayload.btwDistance))*10.0f)*0.1f));
     }
     public static float Angle2Screen(float angle)
     {
