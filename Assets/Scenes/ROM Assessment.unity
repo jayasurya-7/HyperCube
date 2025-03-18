@@ -12386,6 +12386,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf2fc1ae612a9749b58d73538e133df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  force_1: 0
+  force_2: 0
+  force_total: 0
+  ang1: 0
+  ang2: 0
+  ang3: 0
+  ang4: 0
+  buttonPin1State: 0
+  buttonPin2State: 0
+  buttonPin3State: 0
+  buttonPin4State: 0
+  buttonPin5State: 0
+  buttonPin6State: 0
+  buttonPin7State: 0
+  distance1: 0
+  distance2: 0
+  Btw_dist: 0
+  Avg_Btw_dist: 0
+  x: 0
+  portnames: []
+  Hos_: {fileID: 0}
+  MovingAverageLength: 5
+  Ports: []
 --- !u!4 &1559357333
 Transform:
   m_ObjectHideFlags: 0
