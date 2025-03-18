@@ -22,7 +22,7 @@ public class welcome : MonoBehaviour
     private SerialPort serialPort;
   //  JediSerialCom serReader;
     public static string p_hospno;
-
+    public GameObject connectionPanel;
     public static string p_patientname;
     public static string newDirPath;
     public static string finalpath;
@@ -75,6 +75,9 @@ public class welcome : MonoBehaviour
 
     void Update()
     {
+        if (AppData.HyperCubeConnected) { 
+            connectionPanel.SetActive(false);
+        }
     }
 
     public void signup()

@@ -211,7 +211,7 @@ public class GameGUINavigation : MonoBehaviour {
 	{
 		SceneManager.LoadScene("menu");
 		Time.timeScale = 1.0f;
-		//h.Stop_data_log();
+		hyper.Stop_data_log();
 		// take care of game manager
 		GameManager.DestroySelf();
 	}
