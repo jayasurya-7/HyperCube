@@ -190,22 +190,18 @@ public class GameController : MonoBehaviour
 
     private void SetSessionDetails()
     {
+
         string device = "HYPERCUBE"; // Set the device name
         string assistMode = "Null"; // Set the assist mode
         string assistModeParameters = "Null"; // Set the assist mode parameters
         string deviceSetupLocation = "Null"; // Set the device setup location
-
-
         string gameParameter = "Null";
-
-
-
-        SessionManager.Instance.SetGameParameter(gameParameter, currentGameSession);
-
-
+        string mech = AppData.selectedMechanism;
         SessionManager.Instance.SetDevice(device, currentGameSession);
         SessionManager.Instance.SetAssistMode(assistMode, assistModeParameters, currentGameSession);
         SessionManager.Instance.SetDeviceSetupLocation(deviceSetupLocation, currentGameSession);
+        SessionManager.Instance.SetGameParameter(gameParameter, currentGameSession);
+        SessionManager.Instance.mechanism(mech, currentGameSession);
 
 
 

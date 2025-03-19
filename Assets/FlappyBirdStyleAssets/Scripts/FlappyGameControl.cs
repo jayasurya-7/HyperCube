@@ -32,6 +32,8 @@ public class FlappyGameControl : MonoBehaviour
     public int startGameLevelRom = 1;
     public float ypos;
 
+    private float gameMoveTime = 0f;
+    private float lastTimestamp = 0f;       // Last recorded time for time scale changes
     public GameObject menuCanvas;
     public GameObject Canvas;
 
@@ -76,7 +78,17 @@ public class FlappyGameControl : MonoBehaviour
     void Update()
     {
         UpdateGameDurationUI();
-       
+        if (Time.timeScale > 0 && !gameOver)
+        {
+            float currentTime = Time.unscaledTime;
+            gameMoveTime += currentTime - lastTimestamp;
+            lastTimestamp = currentTime;
+        }
+        else
+        {
+            lastTimestamp = Time.unscaledTime; // Update timestamp even if paused or finished
+        }
+
         //uses the p button to pause and unpause the game
         if ((Input.GetKeyDown(KeyCode.P)))
         {
@@ -141,11 +153,14 @@ public class FlappyGameControl : MonoBehaviour
         }
     }
     public void BirdDied()
+
     {
+        gameData.moveTime = gameMoveTime;
         //AppData.plutoData.desTorq = 0;
         //SendToRobot.ControlParam(AppData.plutoData.mechs[AppData.plutoData.mechIndex], ControlType.TORQUE, true, false);
         gameData.isGameLogging = false;
         endValSet = true;
+       
         if (win == 1)
         {
             GameOverText.GetComponent<Text>().text = "Great Work! \n You WON! :)";
@@ -347,22 +362,18 @@ public class FlappyGameControl : MonoBehaviour
 
     private void SetSessionDetails()
     {
+
         string device = "HYPERCUBE"; // Set the device name
         string assistMode = "Null"; // Set the assist mode
         string assistModeParameters = "Null"; // Set the assist mode parameters
         string deviceSetupLocation = "Null"; // Set the device setup location
-
-
         string gameParameter = "Null";
-
-
-
-        SessionManager.Instance.SetGameParameter(gameParameter, currentGameSession);
-
-
+        string mech = AppData.selectedMechanism;
         SessionManager.Instance.SetDevice(device, currentGameSession);
         SessionManager.Instance.SetAssistMode(assistMode, assistModeParameters, currentGameSession);
         SessionManager.Instance.SetDeviceSetupLocation(deviceSetupLocation, currentGameSession);
+        SessionManager.Instance.SetGameParameter(gameParameter, currentGameSession);
+        SessionManager.Instance.mechanism(mech, currentGameSession);
 
 
 

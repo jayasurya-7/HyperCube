@@ -24,24 +24,24 @@ namespace NeuroRehabLibrary
         {
             _sessionFilePath = Path.Combine(baseDirectory, "Sessions.csv");
 
-            // Ensure the base directory exists
+            // ensure the base directory exists
             Directory.CreateDirectory(baseDirectory);
 
-            // Ensure the Sessions.csv file has headers if it doesn't exist
+            // ensure the Sessions.csv file has headers if it doesn't exist
             csvFilePath = _sessionFilePath;
             if (!File.Exists(csvFilePath))
             {
                 using (var writer = new StreamWriter(csvFilePath, false, Encoding.UTF8))
                 {
-                    writer.WriteLine("SessionNumber,DateTime,Device,Assessment,StartTime,StopTime,GameName,TrialDataFileLocation,DeviceSetupLocation,AssistMode,AssistModeParameters,GameParameter");
+                    writer.WriteLine("SessionNumber,DateTime,Device,Assessment,StartTime,StopTime,GameName,TrialDataFileLocation," +
+                        "DeviceSetupLocation,AssistMode,AssistModeParameters,GameParameter,Mechanism");
                 }
                 Debug.Log("Initialized SessionManager with session number: 0");
             }
             else
             {
                 _currentSessionNumber = GetLastSessionNumber();
-                AppData.currentSessionNumber = _currentSessionNumber;
-                Debug.Log($"Initialized SessionManager with session number: {_currentSessionNumber}");
+                //Debug.Log($"Initialized SessionManager with session number: {_currentSessionNumber}");
             }
 
             _loginCalled = false; // Initialize login called flag
@@ -61,7 +61,7 @@ namespace NeuroRehabLibrary
             if (!_loginCalled)
             {
                 _currentSessionNumber = GetLastSessionNumber() + 1;
-              //  Debug.Log($"Session number incremented to: {_currentSessionNumber}");
+                Debug.Log($"Session number incremented to: {_currentSessionNumber}");
                 AppData.currentSessionNumber = _currentSessionNumber;
                 _loginCalled = true;
             }
@@ -92,7 +92,7 @@ namespace NeuroRehabLibrary
                 WriteSession(session);
                 _sessionStarted = false; // End the current game session
 
-             //   Debug.Log($"Ending game session with session number: {session.SessionNumber}");
+                //Debug.Log($"Ending game session with session number: {session.SessionNumber}");
             }
         }
 
@@ -103,6 +103,7 @@ namespace NeuroRehabLibrary
                 session.Device = device;
             }
         }
+     
 
         public void SetAssistMode(string assistMode, string assistModeParameters, GameSession session)
         {
@@ -154,7 +155,13 @@ namespace NeuroRehabLibrary
             }
         }
 
-
+        public void mechanism(string mech, GameSession session)
+        {
+            if (session != null)
+            {
+                session.mechanism = mech;
+            }
+        }
 
         private void WriteSession(GameSession session)
         {
@@ -166,9 +173,9 @@ namespace NeuroRehabLibrary
                 string stopTime = session.StopTime?.ToString("dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture) ?? string.Empty;
 
                 // Log the datetime values to ensure they are correctly formatted
-                Debug.Log($"SessionDateTime: {sessionDateTime}");
-                Debug.Log($"StartTime: {startTime}");
-                Debug.Log($"StopTime: {stopTime}");
+                //Debug.Log($"SessionDateTime: {sessionDateTime}");
+                //Debug.Log($"StartTime: {startTime}");
+                //Debug.Log($"StopTime: {stopTime}");
 
                 var csvLine = string.Join(",",
                     session.SessionNumber,
@@ -182,7 +189,9 @@ namespace NeuroRehabLibrary
                     session.DeviceSetupLocation,
                     session.AssistMode,
                     session.AssistModeParameters,
-                    session.GameParameter);
+                    session.GameParameter,
+                    session.mechanism
+                    );
 
                 writer.WriteLine(csvLine);
             }
@@ -204,6 +213,7 @@ namespace NeuroRehabLibrary
         public string AssistMode { get; set; }
         public string AssistModeParameters { get; set; }
         public string GameParameter { get; set; }
+        public string mechanism { get; set; }
 
         public void SetStartTime()
         {

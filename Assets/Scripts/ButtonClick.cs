@@ -80,54 +80,17 @@ public class ButtonClick : MonoBehaviour
     void Start()
     {
        // Timer.SetActive(false);
-        PopulateComPorts();
-        //ComPortDropdown.onValueChanged.AddListener(delegate { ConnectToHypercube(); });
-
-        //string[] ComPorts = GetComponent<hyper1>().Ports;
-        //var dropdown = transform.GetComponent<Dropdown>();
-        //dropdown.options.Clear();
-
-        //foreach (string ComPort in ComPorts)
-        //{
-        //    dropdown.options.Add(new Dropdown.OptionData() { text = ComPort });
-        //}
-
 
     }
-    //void ConnectToHypercube()
-    //{
-    //    if (serialPort != null && serialPort.IsOpen)
-    //    {
-    //        serialPort.Close();
-    //    }
 
-    //    string selectedPort = ComPortDropdown.options[ComPortDropdown.value].text;
-
-        
-    //    if (selectedPort != "No Ports Found")
-    //    {
-    //        serReader = new JediSerialCom(selectedPort);
-    //        serReader.ConnectToArduino();
-    //    }
-    //}
-    void PopulateComPorts()
+    private void Update()
     {
-        //string[] ports = SerialPort.GetPortNames();
-        //ComPortDropdown.ClearOptions();
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
 
-        //if (ports.Length > 0)
-        //{
-        //    ComPortDropdown.AddOptions(ports.ToList());
-        //    ComPortDropdown.value = 0;
-        //    ComPortDropdown.RefreshShownValue();
-        //    //ConnectToHypercube(); // Automatically connect to the first port
-        //}
-        //else
-        //{
-        //    ComPortDropdown.AddOptions(new System.Collections.Generic.List<string> { "No Ports Found" });
-        //    Debug.Log("No ports found");
-        //}
+        }
     }
+
     public void AutogameLoad()
     {
         SceneManager.LoadScene(flappyGame);
@@ -235,6 +198,7 @@ public class ButtonClick : MonoBehaviour
     {
         Canvas.SetActive(false);
         HandGripCanvas.SetActive(true);
+        AppData.selectedMechanism = JediSerialPayload.MECHANISMS[1];
         PlayerPrefs.SetInt("Control Method", 1);
         PlayerPrefs.SetString("Mechanism", "Hand Grip");
     }
@@ -243,6 +207,8 @@ public class ButtonClick : MonoBehaviour
     {
         Canvas.SetActive(false);
         PinchGraspCanvas.SetActive(true);
+        AppData.selectedMechanism = JediSerialPayload.MECHANISMS[6];
+
         PlayerPrefs.SetInt("Control Method", 2);
         PlayerPrefs.SetString("Mechanism", "Pinch Grasp");
     }
@@ -251,6 +217,8 @@ public class ButtonClick : MonoBehaviour
     {
         Canvas.SetActive(false);
         ButtonsCanvas.SetActive(true);
+        AppData.selectedMechanism = JediSerialPayload.MECHANISMS[7];
+
         PlayerPrefs.SetInt("Control Method", 3);
         PlayerPrefs.SetString("Mechanism", "Buttons");
     }
@@ -259,6 +227,7 @@ public class ButtonClick : MonoBehaviour
     {
         Canvas.SetActive(false);
         TripodGraspCanvas.SetActive(true);
+        AppData.selectedMechanism = JediSerialPayload.MECHANISMS[5];
         PlayerPrefs.SetInt("Control Method", 4);
         PlayerPrefs.SetString("Mechanism", "Tripod Grasp");
     }
@@ -267,6 +236,7 @@ public class ButtonClick : MonoBehaviour
     {
         Canvas.SetActive(false);
         GrossKnobCanvas.SetActive(true);
+        AppData.selectedMechanism = JediSerialPayload.MECHANISMS[2];
         PlayerPrefs.SetInt("Control Method", 5);
         PlayerPrefs.SetString("Mechanism", "Gross Knob");
         //PingPongLoad();
@@ -276,6 +246,7 @@ public class ButtonClick : MonoBehaviour
     {
         Canvas.SetActive(false);
         FineKnobCanvas.SetActive(true);
+        AppData.selectedMechanism = JediSerialPayload.MECHANISMS[3];
         PlayerPrefs.SetInt("Control Method", 6);
         PlayerPrefs.SetString("Mechanism", "Fine Knob");
         //PingPongLoad();
@@ -284,6 +255,7 @@ public class ButtonClick : MonoBehaviour
     {
         Canvas.SetActive(false);
         KeyKnobCanvas.SetActive(true);
+        AppData.selectedMechanism = JediSerialPayload.MECHANISMS[4];
         PlayerPrefs.SetInt("Control Method", 7);
         PlayerPrefs.SetString("Mechanism", "Key Knob");
         //PingPongLoad();
@@ -318,74 +290,8 @@ public class ButtonClick : MonoBehaviour
     {
         //PlayerPrefs.SetString("Address", Path.text.ToString());
        msg.text = " [ ! ] Settings Applied ";
-        //PlayerPrefs.SetFloat("Time", float.Parse(Time.text));
-        //Debug.Log(ComPortValue);
-        //if (ComPortValue == 0)
-        //{
-        //    PlayerPrefs.SetString("COMPort", "COM3");
-        //}
-        //else if (ComPortValue == 1)
-        //{
-        //    PlayerPrefs.SetString("COMPort", "COM4");
-        //}
-        //else if (ComPortValue == 2)
-        //{
-        //    PlayerPrefs.SetString("COMPort", "COM5");
-        //}
-        //else if (ComPortValue == 3)
-        //{
-        //    PlayerPrefs.SetString("COMPort", "COM6");
-        //}
-        //else if (ComPortValue == 4)
-        //{
-        //    PlayerPrefs.SetString("COMPort", "COM7");
-        //}
-        //else if (ComPortValue == 5)
-        //{
-        //    PlayerPrefs.SetString("COMPort", "COM8");
-        //}
-        //else if (ComPortValue == 6)
-        //{
-        //    PlayerPrefs.SetString("COMPort", "COM9");
-        //}
-
     }
-    
-    //public void ApplyComPort()
-    //{
-    //    //PlayerPrefs.SetString("Address", Path.text);
-    //    //Debug.Log(ComPortValue);
-    //    if (ComPortValue == 1)
-    //    {
-    //        PlayerPrefs.SetString("COMPort", "COM3");
-    //    }
-    //    else if (ComPortValue == 2)
-    //    {
-    //        PlayerPrefs.SetString("COMPort", "COM4");
-    //    }
-    //    else if (ComPortValue == 3)
-    //    {
-    //        PlayerPrefs.SetString("COMPort", "COM5");
-    //    }
-    //    else if (ComPortValue == 4)
-    //    {
-    //        PlayerPrefs.SetString("COMPort", "COM6");
-    //    }
-    //    else if (ComPortValue == 5)
-    //    {
-    //        PlayerPrefs.SetString("COMPort", "COM7");
-    //    }
-    //    else if (ComPortValue == 6)
-    //    {
-    //        PlayerPrefs.SetString("COMPort", "COM8");
-    //    }
-    //    else if (ComPortValue == 7)
-    //    {
-    //        PlayerPrefs.SetString("COMPort", "COM9");
-    //    }
-    //    Debug.Log(PlayerPrefs.GetString("COMPort"));
-    //}
-
+   
 
     public void LoadGameSpeedControl()
     {

@@ -107,9 +107,11 @@ public class GameManager_Car2D : MonoBehaviour {
 
     GameObject newColumn;
 
+    private float gameMoveTime = 0f;
+    private float lastTimestamp = 0f;
 
     public Camera cam;
-    void Awake() {
+    void Awake() { 
 		if (instance == null)
 			instance = this;
 		else if (instance != this)
@@ -151,6 +153,16 @@ public class GameManager_Car2D : MonoBehaviour {
             Debug.Log("G is pressed.change the sprite");
             currentsprite = GameObject.FindWithTag("Player");
             currentsprite.GetComponent<SpriteRenderer>().sprite = playersprites[UnityEngine.Random.Range(0,playersprites.Length)];
+        }
+        if (Time.timeScale > 0 && !isGameOver)
+        {
+            float currentTime = Time.unscaledTime;
+            gameMoveTime += currentTime - lastTimestamp;
+            lastTimestamp = currentTime;
+        }
+        else
+        {
+            lastTimestamp = Time.unscaledTime; // Update timestamp even if paused or finished
         }
 
         if ((!isGameOver) && (!isGamePaused))
@@ -540,30 +552,25 @@ public class GameManager_Car2D : MonoBehaviour {
         SessionManager.Instance.StartGameSession(currentGameSession);
         Debug.Log($"Started new game session with session number: {currentGameSession.SessionNumber}");
 
+        
         SetSessionDetails();
     }
 
 
     private void SetSessionDetails()
     {
+
         string device = "HYPERCUBE"; // Set the device name
         string assistMode = "Null"; // Set the assist mode
         string assistModeParameters = "Null"; // Set the assist mode parameters
         string deviceSetupLocation = "Null"; // Set the device setup location
-
-
         string gameParameter = "Null";
-
-
-
-        SessionManager.Instance.SetGameParameter(gameParameter, currentGameSession);
-
-
+        string mech = AppData.selectedMechanism;
         SessionManager.Instance.SetDevice(device, currentGameSession);
         SessionManager.Instance.SetAssistMode(assistMode, assistModeParameters, currentGameSession);
         SessionManager.Instance.SetDeviceSetupLocation(deviceSetupLocation, currentGameSession);
-
-
+        SessionManager.Instance.SetGameParameter(gameParameter, currentGameSession);
+        SessionManager.Instance.mechanism(mech, currentGameSession);
 
     }
 

@@ -102,6 +102,10 @@ public class UImanager : MonoBehaviour
     public GameObject TripodCanvas;
 
 
+    //array gameCanvas
+
+    public GameObject[] assessmentScenes;
+
 
     private GameSession currentGameSession;
 
@@ -114,7 +118,7 @@ public class UImanager : MonoBehaviour
     private bool keyKnob = false;
     private bool tripodgrasp = false;
 
-
+    private int enterCounter = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -156,24 +160,18 @@ public class UImanager : MonoBehaviour
 
     private void SetSessionDetails()
     {
-        string device = "HyperCube"; // Set the device name
+
+        string device = "HYPERCUBE"; // Set the device name
         string assistMode = "Null"; // Set the assist mode
         string assistModeParameters = "Null"; // Set the assist mode parameters
         string deviceSetupLocation = "Null"; // Set the device setup location
-        
-
         string gameParameter = "Null";
-
-      
-
-        SessionManager.Instance.SetGameParameter(gameParameter, currentGameSession);
-
-
+        string mech = AppData.selectedMechanism;
         SessionManager.Instance.SetDevice(device, currentGameSession);
         SessionManager.Instance.SetAssistMode(assistMode, assistModeParameters, currentGameSession);
         SessionManager.Instance.SetDeviceSetupLocation(deviceSetupLocation, currentGameSession);
-
-
+        SessionManager.Instance.SetGameParameter(gameParameter, currentGameSession);
+        SessionManager.Instance.mechanism(mech, currentGameSession);
 
     }
 
@@ -194,7 +192,40 @@ public class UImanager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HandleAngleROM();
+
+        /*
+                if (Input.GetKeyDown(KeyCode.N))
+                {
+                    enterCounter++;
+
+                    while (enterCounter < 7)
+                    {
+                        Debug.Log($"enter : {enterCounter}+{enterCounter == 2}");
+                        HandGripCanvas.SetActive(enterCounter == 1);
+                        HandGripForceCanvas.SetActive(enterCounter == 2);
+                        GrossKnobCanvas.SetActive(enterCounter == 3);
+                        FineKnobCanvas.SetActive(enterCounter == 4);
+                        KeyKnobCanvas.SetActive(enterCounter == 5);
+                        TripodCanvas.SetActive(enterCounter == 6);
+
+                    }
+                    Debug.Log($"enter : {enterCounter}+{enterCounter == 2}");
+                }*/
+
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            enterCounter++;
+
+            while (enterCounter < 7)
+            {
+                if (enterCounter == 2) Next1();
+                if (enterCounter == 3) Next2();
+                    if (enterCounter == 4) Next3();
+                    if (enterCounter == 5) Next4();
+                    if (enterCounter == 6) Next5();
+            }
+        }
+                HandleAngleROM();
         HandleForce();
         GrossKnob();
         FineKnob();
@@ -203,8 +234,9 @@ public class UImanager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             Reset();
-        }
+            Debug.Log($"outer enter : {enterCounter}+{enterCounter == 2}");
 
+        }
 
     }
 

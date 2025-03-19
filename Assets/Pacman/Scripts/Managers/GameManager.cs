@@ -98,7 +98,6 @@ public class GameManager : MonoBehaviour {
 	{
 		if(scared && _timeToCalm <= Time.time)
 			CalmGhosts();
-
 	}
 
 	public void ResetScene()

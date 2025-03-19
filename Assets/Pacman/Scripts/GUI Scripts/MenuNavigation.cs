@@ -18,19 +18,19 @@ public class MenuNavigation : MonoBehaviour {
 		SceneManager.LoadScene("game");
 	}
 	
-	public void HighScores()
-	{
-		SceneManager.LoadScene("scores");
+	//public void HighScores()
+	//{
+	//	SceneManager.LoadScene("scores");
 		
-	}
+	//}
 
-    public void Credits()
-    {
-		SceneManager.LoadScene("credits");
-    }
+ //   public void Credits()
+ //   {
+	//	SceneManager.LoadScene("credits");
+ //   }
 
-	public void SourceCode()
-	{
-		Application.OpenURL("https://github.com/vilbeyli/Pacman-Clone/");
-	}
+	//public void SourceCode()
+	//{
+	//	Application.OpenURL("https://github.com/vilbeyli/Pacman-Clone/");
+	//}
 }

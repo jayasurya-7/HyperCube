@@ -141,11 +141,9 @@ public class welcome : MonoBehaviour
         }
         else
         {
-            string path_to_data = Application.dataPath;
-            Debug.Log("path "+ path_to_data);
-            if (!Directory.Exists(path_to_data + "\\" + p_hospno))
-            {
-                string patientDir = path_to_data + "\\" + "Patient_Data" + "\\" + p_hospno;
+            string path_to_data = Path.Combine(Application.dataPath, "Patient_Data",p_hospno);
+         
+                string patientDir = path_to_data;
                 AppData.idPath= patientDir;
                 circleclass.circlePath = patientDir;
                 if (Directory.Exists(patientDir))
@@ -179,25 +177,16 @@ public class welcome : MonoBehaviour
 
                     if (romValues.datetime == null) SceneManager.LoadScene("ROM Assessment");
                     assessment();
-                   // SceneManager.LoadScene("Home");
-                   
+                    // SceneManager.LoadScene("Home");
+
                 }
                 else
                 {
                     Debug.Log("Hospital Number Does not exist");
                     messageText.text = " Hosptial Number doesn't exist";
                     SceneManager.LoadScene("Register");
-
-                    //StartCoroutine(ShowMessageFor3Seconds("PLEASE ENTER SIGN UP AND REGISTER"));
                 }
-            }
-
-
-
-
         }
-
-
     }
 }
 

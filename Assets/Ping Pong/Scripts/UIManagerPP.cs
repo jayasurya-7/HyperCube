@@ -17,9 +17,9 @@ public class UIManagerPP : MonoBehaviour
 	public int win;
 
 	public GameObject dropdown;
-    // Use this for initialization
+	// Use this for initialization
 
-
+	private float lastTimestamp = 0f, gameMoveTime =0f;
 
     private GameSession currentGameSession;
 
@@ -64,14 +64,12 @@ public class UIManagerPP : MonoBehaviour
         string assistModeParameters = "Null"; // Set the assist mode parameters
         string deviceSetupLocation = "Null"; // Set the device setup location
         string gameParameter = "Null";
-        SessionManager.Instance.SetGameParameter(gameParameter, currentGameSession);
-
-
+        string mech = AppData.selectedMechanism;
         SessionManager.Instance.SetDevice(device, currentGameSession);
         SessionManager.Instance.SetAssistMode(assistMode, assistModeParameters, currentGameSession);
         SessionManager.Instance.SetDeviceSetupLocation(deviceSetupLocation, currentGameSession);
-
-
+        SessionManager.Instance.SetGameParameter(gameParameter, currentGameSession);
+        SessionManager.Instance.mechanism(mech, currentGameSession);
 
     }
 
@@ -91,6 +89,16 @@ public class UIManagerPP : MonoBehaviour
     // Update is called once per frame
     void Update()
 	{
+        if (Time.timeScale > 0 && !isFinished)
+        {
+            float currentTime = Time.unscaledTime;
+            gameMoveTime += currentTime - lastTimestamp;
+            lastTimestamp = currentTime;
+        }
+        else
+        {
+            lastTimestamp = Time.unscaledTime; // Update timestamp even if paused or finished
+        }
 
         //gameData.events = Array.IndexOf(gameData.pongEvents, "playerFail");
         if (rightBound.enemyScore >= winScore && !isFinished)
