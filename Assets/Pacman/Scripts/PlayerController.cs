@@ -31,7 +31,8 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        speed = PlayerPrefs.GetFloat("PlayerSpeed");
+        if (PlayerPrefs.GetFloat("PlayerSpeed") > 0.1) speed = PlayerPrefs.GetFloat("PlayerSpeed");
+        else speed = 0.1f;
         GM = GameObject.Find("Game Manager").GetComponent<GameManager>();
         SM = GameObject.Find("Game Manager").GetComponent<ScoreManager>();
         GUINav = GameObject.Find("UI Manager").GetComponent<GameGUINavigation>();
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        Debug.Log($" PlayerSpeed : {speed}");
         switch (GameManager.gameState)
         {
             case GameManager.GameState.Game:
@@ -115,10 +117,10 @@ public class PlayerController : MonoBehaviour
         //if (Input.GetAxis("Vertical") > 0) _nextDir = Vector2.up;
         //if (Input.GetAxis("Vertical") < 0) _nextDir = -Vector2.up;
 
-        if (hyper1.instance.buttonPin2State == 0) _nextDir = Vector2.right;
-        if (hyper1.instance.buttonPin4State == 0) _nextDir = -Vector2.right;
-        if (hyper1.instance.buttonPin3State == 0) _nextDir = Vector2.up;
-        if (hyper1.instance.buttonPin1State == 0) _nextDir = -Vector2.up;
+        if (JediSerialPayload.button_2 == 0) _nextDir = Vector2.right;
+        if (JediSerialPayload.button_4 == 0) _nextDir = -Vector2.right;
+        if (JediSerialPayload.button_3 == 0) _nextDir = Vector2.up;
+        if (JediSerialPayload.button_1 == 0) _nextDir = -Vector2.up;
 
         // if pacman is in the center of a tile
         if (Vector2.Distance(_dest, transform.position) < 0.00001f)

@@ -57,7 +57,9 @@ public class GhostMove : MonoBehaviour {
 	//-----------------------------------------------------------------------------------------
 	// variables end, functions begin
 	void Start()
-	{	speed = PlayerPrefs.GetFloat("GhostSpeed");
+	{
+		if (PlayerPrefs.GetFloat("GhostSpeed") > 0.1) speed = PlayerPrefs.GetFloat("GhostSpeed");
+		else speed = 0.1f;
 	    _gm = GameObject.Find("Game Manager").GetComponent<GameManager>();
         _toggleInterval = _gm.scareLength * 0.33f * 0.20f;  
 		InitializeGhost();
@@ -69,7 +71,7 @@ public class GhostMove : MonoBehaviour {
 	{
 		gameData.events = Array.IndexOf(gameData.pacManEvents, "moving");
 	    DISTANCE = Vector3.Distance(transform.position, waypoint);
-
+		Debug.Log($"GhostSpeed : {speed}");
 		if(GameManager.gameState == GameManager.GameState.Game){
 			animate ();
 
