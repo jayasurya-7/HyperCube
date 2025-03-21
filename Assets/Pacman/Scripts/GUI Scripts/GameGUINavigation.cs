@@ -154,7 +154,7 @@ public class GameGUINavigation : MonoBehaviour {
         {
             string trialDataFileLocation = AppData.trialDataFileLocationTemp;
             SessionManager.Instance.SetTrialDataFileLocation(trialDataFileLocation, currentGameSession);
-
+			SessionManager.Instance.moveTime(gameData.moveTime.ToString("F0"), currentGameSession);
             SessionManager.Instance.EndGameSession(currentGameSession);
         }
     }

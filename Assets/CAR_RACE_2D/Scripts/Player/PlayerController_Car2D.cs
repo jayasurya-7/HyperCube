@@ -66,6 +66,7 @@ public class PlayerController_Car2D : MonoBehaviour
     public float spriteBlinkingTotalDuration = 2f;
     public bool startBlinking = false;
 
+
     void Awake()
     {
         if (instance == null)
@@ -104,11 +105,13 @@ public class PlayerController_Car2D : MonoBehaviour
             SpriteBlinkingEffect();
 
         }
-        //Debug.Log(hyper1.instance.ang2);
-        //Debug.Log(ControlMethod.value);
-        //InputControl();
-        //ConrolData();
-        gameData.events = Array.IndexOf(gameData.tukEvents, "moving");
+
+
+    //Debug.Log(hyper1.instance.ang2);
+    //Debug.Log(ControlMethod.value);
+    //InputControl();
+    //ConrolData();
+    gameData.events = Array.IndexOf(gameData.tukEvents, "moving");
         PlayerControllerInput();
         //KeyboardControl();
         //Vector2 target_pos = new Vector3(Angle2Screen(Average(angles)), rigBody2D.position.y, 0f); //Replace angles value with the encoder value

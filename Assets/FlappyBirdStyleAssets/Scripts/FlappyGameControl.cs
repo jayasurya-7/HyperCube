@@ -82,6 +82,7 @@ public class FlappyGameControl : MonoBehaviour
         {
             float currentTime = Time.unscaledTime;
             gameMoveTime += currentTime - lastTimestamp;
+            gameData.moveTime = gameMoveTime;
             lastTimestamp = currentTime;
         }
         else
@@ -385,7 +386,7 @@ public class FlappyGameControl : MonoBehaviour
         {
             string trialDataFileLocation = AppData.trialDataFileLocationTemp;
             SessionManager.Instance.SetTrialDataFileLocation(trialDataFileLocation, currentGameSession);
-
+            SessionManager.Instance.moveTime(gameData.moveTime.ToString("F0"), currentGameSession);
             SessionManager.Instance.EndGameSession(currentGameSession);
         }
     }

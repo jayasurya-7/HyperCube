@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
 
     private bool _deadPlaying = false;
 
+    private float lastTimestamp = 0f, gameMoveTime = 0f;
+
     // Use this for initialization
     void Start()
     {
@@ -42,6 +44,17 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (Time.timeScale > 0 && GameManager.lives <= 0)
+        {
+            float currentTime = Time.unscaledTime;
+            gameMoveTime += currentTime - lastTimestamp;
+            lastTimestamp = currentTime;
+            gameData.moveTime = gameMoveTime;
+        }
+        else
+        {
+            lastTimestamp = Time.unscaledTime; // Update timestamp even if paused or finished
+        }
         Debug.Log($" PlayerSpeed : {speed}");
         switch (GameManager.gameState)
         {

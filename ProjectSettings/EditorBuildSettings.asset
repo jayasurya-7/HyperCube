@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Main scene(not in use).unity
-    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/Start.unity
     guid: 8316822a3f338624f816125a8bccaaf6
@@ -29,15 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Register.unity
     guid: 8c27f210d7e2bdd4fa15d831e56025b9
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/summaryScene.unity
+    guid: db69d0f454ae3064ba819e0653956654
   - enabled: 1
     path: Assets/Ping Pong/pong_game.unity
     guid: 3657ba6bdfe304124bbaab754398b089
@@ -53,9 +44,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Pacman/Scenes 1/scores.unity
     guid: 4c12986e248057440b5330fe60d951f0
-  - enabled: 1
-    path: Assets/Scenes/Assessment.unity
-    guid: 3490bdc2105767b45abbcfa7463e3510
   - enabled: 1
     path: Assets/Scenes/Settings.unity
     guid: f69e8cb3784df3040a653729bb41daf2

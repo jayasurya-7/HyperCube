@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI.Table;
 using Debug = UnityEngine.Debug;
 
 public class SessionDataHandler
@@ -19,7 +20,7 @@ public class SessionDataHandler
     public string[] summaryDate;
     public string DATEFORMAT = "dd/MM";
     //Session file header format
-    public string DATEFORMAT_INFILE = "dd-MM-yyyy HH:mm:ss";
+    public string DATEFORMAT_INFILE = "dd-MM-yyyy HH:mm";
     public string DATETIME = "DateTime";
     public string MOVETIME = "MoveTime";
     public string STARTTIME = "StartTime";
@@ -53,77 +54,103 @@ public class SessionDataHandler
         }
         else
         {
-           UnityEngine.Debug.Log("CSV file not found at: " + filePath);
+            UnityEngine.Debug.Log("CSV file not found at: " + filePath);
         }
     }
- 
+
+    //public void summaryCalculateMovTimePerDayWithLinq()
+    //{
+    //    // Group by date and calculate the total movement time for each day
+    //    IEnumerable<DataRow> rows = sessionTable.Rows.Cast<DataRow>();
+    //    var movTimePerDay = rows
+    //       .GroupBy(row => DateTime.ParseExact(row.Field<string>(DATETIME), DATEFORMAT_INFILE, CultureInfo.InvariantCulture).Date) // Group by date only
+    //       .Select(group => new
+    //       {
+    //           Date = group.Key,
+    //           DayOfWeek = group.Key.DayOfWeek,
+    //           TotalMovTime = group.Sum(row => Convert.ToInt32(row[MOVETIME]))
+    //       })
+    //       .ToList();
+
+    //    summaryElapsedTimeDay = new float[movTimePerDay.Count];
+    //    summaryDate = new string[movTimePerDay.Count];
+
+    //    for (int i = 0; i < movTimePerDay.Count; i++)
+    //    {
+    //        summaryElapsedTimeDay[i] = movTimePerDay[i].TotalMovTime / 60f; // Convert seconds to minutes
+
+    //        summaryDate[i] = movTimePerDay[i].Date.ToString(DATEFORMAT);       // Format date as "dd/MM"
+
+    //          }
+    //    }
+
     public void summaryCalculateMovTimePerDayWithLinq()
     {
-        // Group by date and calculate the total movement time for each day
-        //var movTimePerDay = sessionTable.AsEnumerable()
-        //    .GroupBy(row => DateTime.ParseExact(row.Field<string>(DATETIME), DATEFORMAT_INFILE, CultureInfo.InvariantCulture).Date) // Group by date only
-        //    .Select(group => new
-        //    {
-        //        Date = group.Key,
-        //        DayOfWeek = group.Key.DayOfWeek,   
-        //        TotalMovTime = group.Sum(row => Convert.ToInt32(row[MOVETIME]))
-        //    })
-        //    .ToList();
+        var rows = sessionTable.Rows.Cast<DataRow>();
+        var movTimePerDay = rows
+            .GroupBy(row => DateTime.ParseExact(
+                row[DATETIME].ToString(), DATEFORMAT_INFILE, CultureInfo.InvariantCulture).Date) // Convert to DateTime and group
+            .Select(group => new
+            {
+                Date = group.Key,
+                DayOfWeek = group.Key.DayOfWeek,
+                TotalMovTime = group.Sum(row => Convert.ToInt32(row[MOVETIME])) // Sum movement time
+            })
+            .ToList();
 
-        //summaryElapsedTimeDay = new float[movTimePerDay.Count];
-        //summaryDate = new string[movTimePerDay.Count];
-       
-        //for (int i = 0; i < movTimePerDay.Count; i++)
-        //{
-        //    summaryElapsedTimeDay[i] = movTimePerDay[i].TotalMovTime / 60f; // Convert seconds to minutes
-           
-        //    summaryDate[i] = movTimePerDay[i].Date.ToString(DATEFORMAT);       // Format date as "dd/MM"
-           
-     //   }
+        summaryElapsedTimeDay = new float[movTimePerDay.Count];
+        summaryDate = new string[movTimePerDay.Count];
+
+        for (int i = 0; i < movTimePerDay.Count; i++)
+        {
+            summaryElapsedTimeDay[i] = movTimePerDay[i].TotalMovTime / 60f; // Convert seconds to minutes
+            summaryDate[i] = movTimePerDay[i].Date.ToString(DATEFORMAT); // Format date
+        }
     }
 
-    
     public void CalculateMovTimeForMechanism(string mechanism)
-    {
-        // Filter session data for the specified mechanism
-        //var filteredData = sessionTable.AsEnumerable()
-        //    .Where(row => row.Field<string>(MECHANISM) == mechanism)
-        //    .Select(row => new
-        //    {
-        //        Date = DateTime.ParseExact(row.Field<string>(DATETIME), DATEFORMAT_INFILE , CultureInfo.InvariantCulture).Date,
-        //        MovTime = Convert.ToDouble(row[MOVETIME])
-        //    })
-        //    .GroupBy(entry => entry.Date)
-        //    .Select(group => new
-        //    {
-        //        Date = group.Key,
-        //        TotalMovTime = group.Sum(entry => entry.MovTime) / 60.0 
-        //    })
-        //    .OrderBy(result => result.Date)
-        //    .ToList();
-        //int len = filteredData.Count;
-        //summaryDate = new string[len];
-        //summaryElapsedTimeDay = new float[len];
+        {
+            // Filter session data for the specified mechanism
+            var rows = sessionTable.Rows.Cast<DataRow>();
+            var filteredData = rows
+               .Where(row => row[MECHANISM].ToString() == mechanism)
+               .Select(row => new
+               {
+                   Date = DateTime.ParseExact(row[DATETIME].ToString(), DATEFORMAT_INFILE, CultureInfo.InvariantCulture).Date,
+                   MovTime = Convert.ToDouble(row[MOVETIME])
+               })
+               .GroupBy(entry => entry.Date)
+               .Select(group => new
+               {
+                   Date = group.Key,
+                   TotalMovTime = group.Sum(entry => entry.MovTime) / 60.0
+               })
+               .OrderBy(result => result.Date)
+               .ToList();
+            int len = filteredData.Count;
+            summaryDate = new string[len];
+            summaryElapsedTimeDay = new float[len];
 
-        //for (int i = 0; i < len; i++)
-        //{
-        //    summaryDate[i] = filteredData[i].Date.ToString(DATEFORMAT); 
-        //    summaryElapsedTimeDay[i] = (float)filteredData[i].TotalMovTime; // Store movement time in minutes
-          
-        //}
+            for (int i = 0; i < len; i++)
+            {
+                summaryDate[i] = filteredData[i].Date.ToString(DATEFORMAT);
+                summaryElapsedTimeDay[i] = (float)filteredData[i].TotalMovTime; // Store movement time in minutes
+
+            }
+        }
+
+
+        // grt days in short form['mon','tue',...]
+        private string GetAbbreviatedDayName(DayOfWeek dayOfWeek)
+        {
+
+            string[] abbreviatedDayNames = CultureInfo.CurrentCulture.DateTimeFormat.AbbreviatedDayNames;
+
+            return abbreviatedDayNames[(int)dayOfWeek];
+        }
+
+
+
+
     }
 
-
-    // grt days in short form['mon','tue',...]
-    private string GetAbbreviatedDayName(DayOfWeek dayOfWeek)
-    {
-
-        string[] abbreviatedDayNames = CultureInfo.CurrentCulture.DateTimeFormat.AbbreviatedDayNames;
-
-        return abbreviatedDayNames[(int)dayOfWeek];
-    }
-  
-
-   
-    
-}

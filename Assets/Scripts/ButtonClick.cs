@@ -164,6 +164,10 @@ public class ButtonClick : MonoBehaviour
         
     }
 
+    public void summaryScene()
+    {
+        SceneManager.LoadScene("summaryScene");
+    }
     public void Set()
     {
         //float Grip_Force = float.Parse(GripForce.text);

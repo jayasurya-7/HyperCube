@@ -32,6 +32,7 @@ public class GameController : MonoBehaviour
 	public GameObject PauseCanvas;
 
     private GameSession currentGameSession;
+    private float lastTimestamp = 0f, gameMoveTime = 0f;
 
     float countDownTimer;
 	void Start()
@@ -79,7 +80,19 @@ public class GameController : MonoBehaviour
 	{
 		PlayerPrefs.SetInt("highScore", 1750);
 		gameData.events = Array.IndexOf(gameData.spaceEvents, "moving");
-		if (gameOver)
+        if (Time.timeScale > 0 && !gameOver)
+        {
+            float currentTime = Time.unscaledTime;
+            gameMoveTime += currentTime - lastTimestamp;
+            gameData.moveTime = gameMoveTime;
+            lastTimestamp = currentTime;
+        }
+        else
+        {
+            lastTimestamp = Time.unscaledTime; // Update timestamp even if paused or finished
+        }
+
+        if (gameOver)
 		{
 			gameData.isGameLogging = false;
             restart = true;
@@ -213,7 +226,7 @@ public class GameController : MonoBehaviour
         {
             string trialDataFileLocation = AppData.trialDataFileLocationTemp;
             SessionManager.Instance.SetTrialDataFileLocation(trialDataFileLocation, currentGameSession);
-
+            SessionManager.Instance.moveTime(gameData.moveTime.ToString("F0"), currentGameSession);
             SessionManager.Instance.EndGameSession(currentGameSession);
         }
     }

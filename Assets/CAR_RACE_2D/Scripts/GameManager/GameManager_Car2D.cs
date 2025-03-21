@@ -158,6 +158,7 @@ public class GameManager_Car2D : MonoBehaviour {
         {
             float currentTime = Time.unscaledTime;
             gameMoveTime += currentTime - lastTimestamp;
+            gameData.moveTime = gameMoveTime;
             lastTimestamp = currentTime;
         }
         else
@@ -580,7 +581,7 @@ public class GameManager_Car2D : MonoBehaviour {
         {
             string trialDataFileLocation = AppData.trialDataFileLocationTemp;
             SessionManager.Instance.SetTrialDataFileLocation(trialDataFileLocation, currentGameSession);
-
+            SessionManager.Instance.moveTime(gameData.moveTime.ToString("F0"), currentGameSession);
             SessionManager.Instance.EndGameSession(currentGameSession);
         }
     }

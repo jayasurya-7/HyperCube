@@ -79,7 +79,7 @@ public class UIManagerPP : MonoBehaviour
         {
             string trialDataFileLocation = AppData.trialDataFileLocationTemp;
             SessionManager.Instance.SetTrialDataFileLocation(trialDataFileLocation, currentGameSession);
-
+			SessionManager.Instance.moveTime(gameData.moveTime.ToString("F0"), currentGameSession);
             SessionManager.Instance.EndGameSession(currentGameSession);
         }
     }
@@ -94,6 +94,7 @@ public class UIManagerPP : MonoBehaviour
             float currentTime = Time.unscaledTime;
             gameMoveTime += currentTime - lastTimestamp;
             lastTimestamp = currentTime;
+			gameData.moveTime = gameMoveTime;
         }
         else
         {
@@ -147,7 +148,7 @@ public class UIManagerPP : MonoBehaviour
 		{
 			//vdc.StopCapture();
 			showFinished();
-	
+			gameData.moveTime = gameMoveTime;
 			EndCurrentGameSession();
 			gameData.isGameLogging = false;
 

@@ -20,6 +20,8 @@ public class Snake : MonoBehaviour
     public AudioSource PauseSound;
     public AudioSource UnpauseSound;
     private GameSession currentGameSession;
+    private float lastTimestamp = 0f, gameMoveTime = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +39,18 @@ public class Snake : MonoBehaviour
     {
        // Debug.Log($" isGameLogging :{ gameData.isGameLogging } ");
         MovementControl();
+        if (Time.timeScale > 0 && !gameOver)
+        {
+            float currentTime = Time.unscaledTime;
+            gameMoveTime += currentTime - lastTimestamp;
+            gameData.moveTime = gameMoveTime;
+            lastTimestamp = currentTime;
+        }
+        else
+        {
+            lastTimestamp = Time.unscaledTime; // Update timestamp even if paused or finished
+        }
+
         if (gameOver == true)
         {
             Restart();
@@ -103,7 +117,7 @@ public class Snake : MonoBehaviour
         {
             string trialDataFileLocation = AppData.trialDataFileLocationTemp;
             SessionManager.Instance.SetTrialDataFileLocation(trialDataFileLocation, currentGameSession);
-
+            SessionManager.Instance.moveTime(gameData.moveTime.ToString("F0"), currentGameSession);
             SessionManager.Instance.EndGameSession(currentGameSession);
         }
     }

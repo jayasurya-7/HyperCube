@@ -6173,7 +6173,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1282500871}
         m_TargetAssemblyTypeName: ButtonClick, Assembly-CSharp
-        m_MethodName: LoadStartScene
+        m_MethodName: summaryScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
