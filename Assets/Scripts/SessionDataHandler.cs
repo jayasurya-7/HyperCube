@@ -58,32 +58,6 @@ public class SessionDataHandler
         }
     }
 
-    //public void summaryCalculateMovTimePerDayWithLinq()
-    //{
-    //    // Group by date and calculate the total movement time for each day
-    //    IEnumerable<DataRow> rows = sessionTable.Rows.Cast<DataRow>();
-    //    var movTimePerDay = rows
-    //       .GroupBy(row => DateTime.ParseExact(row.Field<string>(DATETIME), DATEFORMAT_INFILE, CultureInfo.InvariantCulture).Date) // Group by date only
-    //       .Select(group => new
-    //       {
-    //           Date = group.Key,
-    //           DayOfWeek = group.Key.DayOfWeek,
-    //           TotalMovTime = group.Sum(row => Convert.ToInt32(row[MOVETIME]))
-    //       })
-    //       .ToList();
-
-    //    summaryElapsedTimeDay = new float[movTimePerDay.Count];
-    //    summaryDate = new string[movTimePerDay.Count];
-
-    //    for (int i = 0; i < movTimePerDay.Count; i++)
-    //    {
-    //        summaryElapsedTimeDay[i] = movTimePerDay[i].TotalMovTime / 60f; // Convert seconds to minutes
-
-    //        summaryDate[i] = movTimePerDay[i].Date.ToString(DATEFORMAT);       // Format date as "dd/MM"
-
-    //          }
-    //    }
-
     public void summaryCalculateMovTimePerDayWithLinq()
     {
         var rows = sessionTable.Rows.Cast<DataRow>();

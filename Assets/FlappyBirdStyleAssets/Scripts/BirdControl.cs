@@ -226,7 +226,7 @@ public class BirdControl : MonoBehaviour
 
                 FlappyGameControl.instance.gameduration = -1;
                 FlappyGameControl.instance.gameOver = true;
-                //FlappyGameControl.instance.BirdDied();
+                FlappyGameControl.instance.BirdDied();
                 anime.SetTrigger("Die");
                 isDead = true;
                 anime.SetTrigger("Die");

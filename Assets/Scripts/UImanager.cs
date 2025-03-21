@@ -101,6 +101,7 @@ public class UImanager : MonoBehaviour
     public GameObject KeyKnobCanvas;
     public GameObject TripodCanvas;
 
+    private string homeScene = "home";
 
     //array gameCanvas
 
@@ -126,16 +127,8 @@ public class UImanager : MonoBehaviour
         //JediDataFormat.ReadSetJediDataFormat(AppData.jdfFilename);
         //ConnectToHypercube.Connect("COM10");
 
-        string dir = Path.Combine(AppData.idPath, "rom.csv");
-        if (!File.Exists(dir))
-        {
-            using (var writer = new StreamWriter(dir, false, Encoding.UTF8))
-            {
-                writer.WriteLine("datetime,handleMin,handleMax,gripForce,grossKnobMin,grossKnobMax,fineKnobMin,fineKnobMax,keyKnobMin,KeyKnobMax,tripodMin,tripodMax");
-            }
-        }
 
-        StartNewGameSession();
+        //StartNewGameSession();
         Debug.Log($"handle :{AppData.handleAngleMax}, handle  :{AppData.handleAngleMin}, grip :{AppData.handleGripForce},gross :{AppData.grossKnobMax},gross min:{AppData.grossKnobMin}, fine max:{AppData.fineKnobMax}, fine min :{AppData.fineKnobMin}," +
             $",key max : {AppData.keyKnobMax},key Min :{AppData.keyKnobMin}, grasp max :{AppData.graspMax},grasp Min :{AppData.graspMin}");
 
@@ -192,7 +185,7 @@ public class UImanager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+     
         /*
                 if (Input.GetKeyDown(KeyCode.N))
                 {
@@ -643,10 +636,21 @@ public class UImanager : MonoBehaviour
 
     public void ReturnToHome()
     {
+
+        string dir = Path.Combine(AppData.idPath, "rom.csv");
+        if (!File.Exists(dir))
+        {
+            using (var writer = new StreamWriter(dir, false, Encoding.UTF8))
+            {
+                writer.WriteLine("datetime,handleMin,handleMax,gripForce,grossKnobMin,grossKnobMax,fineKnobMin,fineKnobMax,keyKnobMin,KeyKnobMax,tripodMin,tripodMax");
+            }
+        }
         ROM values = new ROM(AppData.handleAngleMin, AppData.handleAngleMax,AppData.handleGripForce,AppData.grossKnobMin,AppData.grossKnobMax,AppData.fineKnobMin,AppData.fineKnobMax,AppData.keyKnobMin,
             AppData.keyKnobMax,AppData.graspMin,AppData.graspMax,true);
-        EndCurrentGameSession();
-        SceneManager.LoadScene("Home");
+
+        //End the sessionfile, not sure whether it will be working or not
+        //EndCurrentGameSession();
+        SceneManager.LoadScene(homeScene);
     }
 
     public void BackToBaseCanvas()
