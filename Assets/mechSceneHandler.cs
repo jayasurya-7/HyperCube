@@ -6,23 +6,22 @@ using UnityEngine.SceneManagement;
 
 public class mechSceneHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
-        ROM values = new ROM();
-        if (values.datetime != null)
+        AppData.rom = new ROM();
+        if (AppData.rom.datetime != null)
         {
-            AppData.handleAngleMax = values.handleMax;
-            AppData.handleAngleMin = values.handleMin;
-            AppData.handleGripForce = values.gripForce;
-            AppData.grossKnobMin = values.grossKnobMin;
-            AppData.grossKnobMax = values.grossKnobMax;
-            AppData.fineKnobMin = values.fineKnobMin;
-            AppData.fineKnobMax = values.fineKnobMax;
-            AppData.keyKnobMin = values.keyKnobMin;
-            AppData.keyKnobMax = values.keyKnobMax;
-            AppData.graspMax = values.tripodMax;
-            AppData.graspMin = values.tripodMin;
+            AppData.handleAngleMax = AppData.rom.handleMax;
+            AppData.handleAngleMin = AppData.rom.handleMin;
+            AppData.handleGripForce = AppData.rom.gripForce;
+            AppData.grossKnobMin = AppData.rom.grossKnobMin;
+            AppData.grossKnobMax = AppData.rom.grossKnobMax;
+            AppData.fineKnobMin = AppData.rom.fineKnobMin;
+            AppData.fineKnobMax = AppData.rom.fineKnobMax;
+            AppData.keyKnobMin = AppData.rom.keyKnobMin;
+            AppData.keyKnobMax = AppData.rom.keyKnobMax;
+            AppData.graspMax = AppData.rom.tripodMax;
+            AppData.graspMin = AppData.rom.tripodMin;
         }
         else SceneManager.LoadScene("ROM Assessment");
         string sessionNum = "Session_" + AppData.currentSessionNumber;
@@ -42,10 +41,8 @@ public class mechSceneHandler : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-       // Debug.Log($" angle 1 :{JediSerialPayload.angle_1}");
 
         
     }

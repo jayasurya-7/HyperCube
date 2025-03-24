@@ -18,21 +18,15 @@ public class welcome : MonoBehaviour
 {
     public InputField hospno;
     public Dropdown ComPortDropdown;
-    public InputField Patientname;
     private SerialPort serialPort;
-  //  JediSerialCom serReader;
-    public static string p_hospno;
+    private string patientID;
     public GameObject connectionPanel, loginPanel;
-    public static string p_patientname;
-    public static string newDirPath;
-    public static string finalpath;
-    public static string patientDir;
-    public static string gamedata;
-    public static string sessionfile;
     public Text messageText;
 
-
-    //private const string SessionFilePath = "session_count.txt";
+    // scene names
+    private string registerScene = "Register";
+    private string mechScene = "Home";
+    private string assessmentScene = "ROM Assessment";
 
     void Start()
     {
@@ -67,7 +61,7 @@ public class welcome : MonoBehaviour
         }
         else
         {
-            ComPortDropdown.AddOptions(new System.Collections.Generic.List<string> { "No Ports Found" });
+            ComPortDropdown.AddOptions(new List<string> { "No Ports Found" });
             Debug.Log("No ports found");
         }
         Debug.Log("No ports found 2");
@@ -83,7 +77,7 @@ public class welcome : MonoBehaviour
 
     public void signup()
     {
-        SceneManager.LoadScene("Register");
+        SceneManager.LoadScene(registerScene);
     }
 
     public void onCLickQuit()
@@ -94,9 +88,7 @@ public class welcome : MonoBehaviour
 
     private void assessment()
     {
-        ROM romDate = new ROM();
-        string date = romDate.datetime;
-        // Debug.Log($"AppData.oldAROM.datetime: {date}");
+        string date = AppData.rom.datetime;
 
         if (!string.IsNullOrEmpty(date))
         {
@@ -106,16 +98,13 @@ public class welcome : MonoBehaviour
                 DateTime currentDate = DateTime.Now;
                 TimeSpan timeDifference = currentDate - oldDate;
 
-               // result.text = $"Current Date: {currentDate}, Old Date: {oldDate}, Days Passed: {timeDifference.TotalDays:F1}";
-
                 if (timeDifference.TotalDays >= 7)
                 {
-                    SceneManager.LoadScene("ROM Assessment");
+                    SceneManager.LoadScene(assessmentScene);
                 }
                 else
                 {
-                    SceneManager.LoadScene("Home");
-                    // Debug.Log($"Only {timeDifference.TotalDays:F1} days have passed. 7 days required.");
+                    SceneManager.LoadScene(mechScene);
                 }
             }
             else
@@ -131,61 +120,52 @@ public class welcome : MonoBehaviour
 
     public void login()
     {
+        patientID = hospno.text;
+        bool hospno_check = string.IsNullOrEmpty(patientID);
+        AppData.hospno = patientID;
 
-        p_hospno = hospno.text;
-        bool hospno_check = string.IsNullOrEmpty(p_hospno);
+        if (AppData.rom != null) AppData.rom = null;
+
         if (hospno_check == true)
         {
-            Debug.Log("Empty hospno");
             messageText.text = "Empty Patient ID";
         }
         else
         {
-            string path_to_data = Path.Combine(Application.dataPath, "Patient_Data",p_hospno);
-         
-                string patientDir = path_to_data;
-                AppData.idPath= patientDir;
-                circleclass.circlePath = patientDir;
-                if (Directory.Exists(patientDir))
+            string patientDir = Path.Combine(Application.dataPath, "Patient_Data",patientID);
+            AppData.idPath= patientDir;
+            if (Directory.Exists(patientDir))
+            {
+
+                string dateTimeNow = DateTime.Now.ToString("dd-MM-yyyy");
+                string newDirPath = Path.Combine(patientDir, dateTimeNow);
+                if (Directory.Exists(newDirPath))
                 {
-
-                    string dateTimeNow = DateTime.Now.ToString("dd-MM-yyyy");
-                    string newDirPath = Path.Combine(patientDir, dateTimeNow);
-                    if (Directory.Exists(newDirPath))
-                    {
-                        staticclass.FolderPath = newDirPath;
-                        AppData.rawDataPath = newDirPath;
-                    }
-                    else
-                    {
-                        Directory.CreateDirectory(newDirPath);
-                        staticclass.FolderPath = newDirPath;
-                        AppData.rawDataPath = newDirPath;
-                        Debug.Log(newDirPath);
-                    }
-                    string baseDirectory = patientDir;
-
-
-                    SessionManager.Initialize(baseDirectory);
-
-                    SessionManager.Instance.Login();
-
-
-                    ROM romValues = new ROM();
-                    Debug.Log($" date : {romValues.datetime}");
-                    AppData.hospno = p_hospno;
-
-                    if (romValues.datetime == null) SceneManager.LoadScene("ROM Assessment");
-                    assessment();
-                    // SceneManager.LoadScene("Home");
-
+                    AppData.rawDataPath = newDirPath;
                 }
                 else
                 {
-                    Debug.Log("Hospital Number Does not exist");
-                    messageText.text = " Hosptial Number doesn't exist";
-                    SceneManager.LoadScene("Register");
+                    Directory.CreateDirectory(newDirPath);
+                    AppData.rawDataPath = newDirPath;
+                    Debug.Log(newDirPath);
                 }
+
+                string baseDirectory = patientDir;
+                SessionManager.Initialize(baseDirectory);
+                SessionManager.Instance.Login();
+                Debug.Log($"Base Directory :{baseDirectory}");
+                AppData.rom = new ROM();
+
+                if (AppData.rom.datetime == null) SceneManager.LoadScene(assessmentScene);
+                assessment();
+
+            }
+            else
+            {
+                Debug.Log("Hospital Number Does not exist");
+                messageText.text = " Hosptial Number doesn't exist";
+                SceneManager.LoadScene(registerScene);
+            }
         }
     }
 }
@@ -198,17 +178,3 @@ public class welcome : MonoBehaviour
 
 
 
-public static class circleclass
-{
-    public static string circlePath;
-    public static string sessionpath;
-
-    // public static string CrossSceneInformation;
-}
-
-
-public static class staticclass
-{
-    public static string FolderPath;
-
-}

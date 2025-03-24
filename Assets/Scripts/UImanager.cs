@@ -136,107 +136,78 @@ public class UImanager : MonoBehaviour
 
 
 
-    void StartNewGameSession()
-    {
-        currentGameSession = new GameSession
-        {
-            GameName = "ASSESSMENT",
-            Assessment = 1 // Example assessment value, adjust as needed
-        };
+    //void StartNewGameSession()
+    //{
+    //    currentGameSession = new GameSession
+    //    {
+    //        GameName = "ASSESSMENT",
+    //        Assessment = 1 // Example assessment value, adjust as needed
+    //    };
 
-        SessionManager.Instance.StartGameSession(currentGameSession);
-        Debug.Log($"Started new game session with session number: {currentGameSession.SessionNumber}");
+    //    SessionManager.Instance.StartGameSession(currentGameSession);
+    //    Debug.Log($"Started new game session with session number: {currentGameSession.SessionNumber}");
 
-        SetSessionDetails();
-    }
-
-
-    private void SetSessionDetails()
-    {
-
-        string device = "HYPERCUBE"; // Set the device name
-        string assistMode = "Null"; // Set the assist mode
-        string assistModeParameters = "Null"; // Set the assist mode parameters
-        string deviceSetupLocation = "Null"; // Set the device setup location
-        string gameParameter = "Null";
-        string mech = AppData.selectedMechanism;
-        SessionManager.Instance.SetDevice(device, currentGameSession);
-        SessionManager.Instance.SetAssistMode(assistMode, assistModeParameters, currentGameSession);
-        SessionManager.Instance.SetDeviceSetupLocation(deviceSetupLocation, currentGameSession);
-        SessionManager.Instance.SetGameParameter(gameParameter, currentGameSession);
-        SessionManager.Instance.mechanism(mech, currentGameSession);
-
-    }
+    //    SetSessionDetails();
+    //}
 
 
-    void EndCurrentGameSession()
-    {
-        if (currentGameSession != null)
-        {
-            string trialDataFileLocation = "Null";
-            SessionManager.Instance.SetTrialDataFileLocation(trialDataFileLocation, currentGameSession);
+    //private void SetSessionDetails()
+    //{
 
-            SessionManager.Instance.EndGameSession(currentGameSession);
-        }
-    }
+    //    string device = "HYPERCUBE"; // Set the device name
+    //    string assistMode = "Null"; // Set the assist mode
+    //    string assistModeParameters = "Null"; // Set the assist mode parameters
+    //    string deviceSetupLocation = "Null"; // Set the device setup location
+    //    string gameParameter = "Null";
+    //    string mech = AppData.selectedMechanism;
+    //    SessionManager.Instance.SetDevice(device, currentGameSession);
+    //    SessionManager.Instance.SetAssistMode(assistMode, assistModeParameters, currentGameSession);
+    //    SessionManager.Instance.SetDeviceSetupLocation(deviceSetupLocation, currentGameSession);
+    //    SessionManager.Instance.SetGameParameter(gameParameter, currentGameSession);
+    //    SessionManager.Instance.mechanism(mech, currentGameSession);
+
+    //}
+
+
+    //void EndCurrentGameSession()
+    //{
+    //    if (currentGameSession != null)
+    //    {
+    //        string trialDataFileLocation = "Null";
+    //        SessionManager.Instance.SetTrialDataFileLocation(trialDataFileLocation, currentGameSession);
+
+    //        SessionManager.Instance.EndGameSession(currentGameSession);
+    //    }
+    //}
 
     
 
-    // Update is called once per frame
     void Update()
     {
      
-        /*
-                if (Input.GetKeyDown(KeyCode.N))
-                {
-                    enterCounter++;
-
-                    while (enterCounter < 7)
-                    {
-                        Debug.Log($"enter : {enterCounter}+{enterCounter == 2}");
-                        HandGripCanvas.SetActive(enterCounter == 1);
-                        HandGripForceCanvas.SetActive(enterCounter == 2);
-                        GrossKnobCanvas.SetActive(enterCounter == 3);
-                        FineKnobCanvas.SetActive(enterCounter == 4);
-                        KeyKnobCanvas.SetActive(enterCounter == 5);
-                        TripodCanvas.SetActive(enterCounter == 6);
-
-                    }
-                    Debug.Log($"enter : {enterCounter}+{enterCounter == 2}");
-                }*/
-
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            enterCounter++;
-
-            while (enterCounter < 7)
-            {
-                if (enterCounter == 2) Next1();
-                if (enterCounter == 3) Next2();
-                    if (enterCounter == 4) Next3();
-                    if (enterCounter == 5) Next4();
-                    if (enterCounter == 6) Next5();
-            }
-        }
-                HandleAngleROM();
+        HandleAngleROM();
         HandleForce();
         GrossKnob();
         FineKnob();
         KeyKnob();
-        TripodGrasp(); 
+        TripodGrasp();
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             Reset();
-            Debug.Log($"outer enter : {enterCounter}+{enterCounter == 2}");
-
         }
 
     }
 
 
+    private float angleValue( float angle)
+    {
+        return (Mathf.Round(angle * 10.0f) * 0.1f);
+    }
+
     public void HandleAngleROM()
     {
-        HandleAngle.text = (Mathf.Round((JediSerialPayload.angle_1) * 10.0f) * 0.1f) + "Deg".ToString();
+        HandleAngle.text = angleValue(JediSerialPayload.angle_1) + "Deg".ToString();
 
         if (!handleRom && HandGripCanvas.gameObject.activeSelf)
         {
@@ -252,24 +223,22 @@ public class UImanager : MonoBehaviour
 
             if (HandleMax == false && Input.GetKeyDown(KeyCode.Return))
             {
-                PlayerPrefs.SetFloat("Handle Ang Max", JediSerialPayload.angle_1);
                 AppData.handleAngleMax = JediSerialPayload.angle_1;
                 HandleMax = true;
                 Instruction3.SetActive(false);
                 Instruction4.SetActive(true);
-                HandleMaxAngle.text = "Max Angle: " + Mathf.Round(((PlayerPrefs.GetFloat("Handle Ang Max")) * 10.0f) * 0.1f).ToString();
+                HandleMaxAngle.text = "Max Angle: " + angleValue(AppData.handleAngleMax).ToString();
             }
 
             if (HandleMin == false && Input.GetKeyDown(KeyCode.Space))
             {
-                PlayerPrefs.SetFloat("Handle Ang Min", JediSerialPayload.angle_1);
                 AppData.handleAngleMin = JediSerialPayload.angle_1;
 
                 HandleMin = true;
                 HandleAngSet = true;
 
                 Instruction4.SetActive(false);
-                HandleMinAngle.text = "Min Angle: " + Mathf.Round(((PlayerPrefs.GetFloat("Handle Ang Min")) * 10.0f) * 0.1f).ToString();
+                HandleMinAngle.text = "Min Angle: " + angleValue(AppData.handleAngleMin).ToString();
                 handleRom = true;
             }
         }
@@ -280,12 +249,11 @@ public class UImanager : MonoBehaviour
         if (!handleGrip)
         {
             ForceBar.fillAmount = 0.05f * JediSerialPayload.totalForce;
-            HandGripForce.text = (Mathf.Round((JediSerialPayload.totalForce) * 10.0f) * 0.1f) + "Kgs".ToString();
+            HandGripForce.text = angleValue(JediSerialPayload.totalForce) + "Kgs".ToString();
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                PlayerPrefs.SetFloat("Grip force", JediSerialPayload.totalForce);
                 AppData.handleGripForce = JediSerialPayload.totalForce;
-                ForceAcknowledgement.text = "Threshold force set as  " + PlayerPrefs.GetFloat("Grip force") + "  Kgs".ToString();
+                ForceAcknowledgement.text = "Threshold force set as  " + AppData.handleGripForce+ "  Kgs".ToString();
                 handleGrip = true;
             }
 
@@ -297,7 +265,7 @@ public class UImanager : MonoBehaviour
 
         if (!grossKnob)
         {
-            GrossAngle.text = (Mathf.Round((JediSerialPayload.angle_2) * 10.0f) * 0.1f).ToString();
+            GrossAngle.text = angleValue(JediSerialPayload.angle_2).ToString();
 
             if (GrossClockwise == false && GrossAnticlockwise == false)
             {
@@ -308,10 +276,9 @@ public class UImanager : MonoBehaviour
             {
                 if (GrossMaxAngSet == false)
                 {
-                    PlayerPrefs.SetFloat("Knob Ang Max", JediSerialPayload.angle_2);
                     AppData.grossKnobMax = JediSerialPayload.angle_2;
 
-                    GrossMaxAngle.text = "Max angle: " + PlayerPrefs.GetFloat("Knob Ang Max").ToString();
+                    GrossMaxAngle.text = "Max angle: " + AppData.grossKnobMax.ToString();
                     GrossInstruction_1.SetActive(false);
                     GrossInstruction_3.SetActive(false);
                     GrossClockwise = true;
@@ -331,10 +298,9 @@ public class UImanager : MonoBehaviour
             {
                 if (GrossMinAngSet == false)
                 {
-                    PlayerPrefs.SetFloat("Knob Ang Min", JediSerialPayload.angle_2);
                     AppData.grossKnobMin = JediSerialPayload.angle_2;
 
-                    GrossMinAngle.text = "Min angle: " + PlayerPrefs.GetFloat("Knob Ang Min").ToString();
+                    GrossMinAngle.text = "Min angle: " + AppData.grossKnobMin.ToString();
                     GrossClockwise = false;
                     GrossMinAngSet = true;
                     GrossInstruction_2.SetActive(false);
@@ -351,7 +317,7 @@ public class UImanager : MonoBehaviour
     {
         if (!fineKnob)
         {
-            FineAngle.text = (Mathf.Round((JediSerialPayload.angle_4) * 10.0f) * 0.1f).ToString();
+            FineAngle.text = angleValue(JediSerialPayload.angle_4).ToString();
 
             if (FineClockwise == false && FineAnticlockwise == false)
             {
@@ -362,10 +328,9 @@ public class UImanager : MonoBehaviour
             {
                 if (FineMaxAngSet == false)
                 {
-                    PlayerPrefs.SetFloat("Knob Fine Ang Max", JediSerialPayload.angle_4);
                     AppData.fineKnobMax = JediSerialPayload.angle_4;
 
-                    FineMaxAngle.text = "Max angle: " + PlayerPrefs.GetFloat("Knob Fine Ang Max").ToString();
+                    FineMaxAngle.text = "Max angle: " + AppData.fineKnobMax.ToString();
                     FineInstruction_1.SetActive(false);
                     FineInstruction_3.SetActive(false);
                     FineClockwise = true;
@@ -385,9 +350,8 @@ public class UImanager : MonoBehaviour
             {
                 if (FineMinAngSet == false)
                 {
-                    PlayerPrefs.SetFloat("Knob Fine Ang Min", JediSerialPayload.angle_4);
                     AppData.fineKnobMin = JediSerialPayload.angle_4;
-                    FineMinAngle.text = "Min angle: " + PlayerPrefs.GetFloat("Knob Fine Ang Min").ToString();
+                    FineMinAngle.text = "Min angle: " + AppData.fineKnobMin.ToString();
                     FineClockwise = false;
                     FineMinAngSet = true;
                     FineInstruction_2.SetActive(false);
@@ -402,7 +366,7 @@ public class UImanager : MonoBehaviour
 
     public void KeyKnob()
     {
-        KeyAngle.text = (Mathf.Round((JediSerialPayload.angle_3) * 10.0f) * 0.1f).ToString();
+        KeyAngle.text = angleValue(JediSerialPayload.angle_3).ToString();
 
         if (!keyKnob)
         {
@@ -415,10 +379,8 @@ public class UImanager : MonoBehaviour
             {
                 if (KeyMaxAngSet == false)
                 {
-                    PlayerPrefs.SetFloat("Knob Key Ang Max", JediSerialPayload.angle_3);
                     AppData.keyKnobMax = JediSerialPayload.angle_3;
-
-                    KeyMaxAngle.text = "Max angle: " + PlayerPrefs.GetFloat("Knob Key Ang Max").ToString();
+                    KeyMaxAngle.text = "Max angle: " + AppData.keyKnobMax.ToString();
                     KeyInstruction_1.SetActive(false);
                     KeyInstruction_3.SetActive(false);
                     KeyClockwise = true;
@@ -438,10 +400,9 @@ public class UImanager : MonoBehaviour
             {
                 if (KeyMinAngSet == false)
                 {
-                    PlayerPrefs.SetFloat("Knob Key Ang Min", JediSerialPayload.angle_3);
                     AppData.keyKnobMin = JediSerialPayload.angle_3;
 
-                    KeyMinAngle.text = "Min angle: " + PlayerPrefs.GetFloat("Knob Key Ang Min").ToString();
+                    KeyMinAngle.text = "Min angle: " + AppData.keyKnobMin.ToString();
                     KeyClockwise = false;
                     KeyMinAngSet = true;
                     KeyInstruction_2.SetActive(false);
@@ -458,7 +419,7 @@ public class UImanager : MonoBehaviour
 
     public void TripodGrasp()
     {
-        DistanceValues.text = (Mathf.Round((JediSerialPayload.avgBtwDistance) * 10.0f) * 0.1f).ToString();
+        DistanceValues.text = angleValue(JediSerialPayload.avgBtwDistance).ToString();
 
         if (!tripodgrasp)
         {
@@ -472,10 +433,8 @@ public class UImanager : MonoBehaviour
             {
                 if (GraspMaxSet == false)
                 {
-                    PlayerPrefs.SetFloat("Dist Min", (Mathf.Round((JediSerialPayload.btwDistance) * 10.0f) * 0.1f));
-                    AppData.graspMax = (Mathf.Round((JediSerialPayload.btwDistance) * 10.0f) * 0.1f);
-
-                    MaxDistance.text = "Min distance: " + PlayerPrefs.GetFloat("Dist Min").ToString();
+                    AppData.graspMin = angleValue(JediSerialPayload.btwDistance);
+                    MaxDistance.text = "Min distance: " + AppData.graspMin.ToString();
                     GraspInstruction_1.SetActive(false);
                     GraspInstruction_3.SetActive(false);
                     GraspIn = true;
@@ -496,10 +455,8 @@ public class UImanager : MonoBehaviour
             {
                 if (GraspMinSet == false)
                 {
-                    PlayerPrefs.SetFloat("Dist Max", (Mathf.Round((JediSerialPayload.btwDistance) * 10.0f) * 0.1f));
-                    AppData.graspMin = (Mathf.Round((JediSerialPayload.btwDistance) * 10.0f) * 0.1f);
-
-                    MinDistance.text = "Max distance: " + PlayerPrefs.GetFloat("Dist Max").ToString();
+                    AppData.graspMax = angleValue(JediSerialPayload.btwDistance);
+                    MinDistance.text = "Max distance: " + AppData.graspMax.ToString();
                     GraspInstruction_2.SetActive(false);
                     GraspInstruction_4.SetActive(false);
                     GraspInstruction_5.SetActive(true);

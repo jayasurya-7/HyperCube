@@ -117,7 +117,6 @@ public class ROM
 
     public string filePath = AppData.idPath;
 
-    // Constructor that reads the file and initializes values based on the mechanism
     public ROM()
     {
         string lastLine = "";
@@ -218,9 +217,6 @@ public class ROM
 
 public static class gameData
 {
-    //Assessment check
-    public static bool isPROMcompleted = false;
-    public static bool isAROMcompleted = false;
     //AAN controller check
     public static bool isBallReached = false;
     public static bool targetSpwan = false;
@@ -575,6 +571,10 @@ static class AppData
     //static public List<string> msgQ = new List<string>();
     //static public bool logData = false;
     //static public bool exitApp = false;
+
+
+    //ROM
+    public static ROM rom;
 
     static public double CurrentTime()
     {

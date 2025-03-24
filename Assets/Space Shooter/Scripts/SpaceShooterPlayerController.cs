@@ -137,8 +137,8 @@ public class SpaceShooterPlayerController : MonoBehaviour
     public static float Angle2Screen(float angle)// Last used for handle surface testing
     {
         //angle1 = angle;
-        float AngMin = PlayerPrefs.GetFloat("Handle Ang Min");
-        float AngMax = PlayerPrefs.GetFloat("Handle Ang Max");
+        float AngMin = AppData.handleAngleMin;
+        float AngMax = AppData.handleAngleMax;
         if (angle > 45f)
         {
             //return (-0.5f + (angle - 40) * (playSize) / (20 - (-90)));

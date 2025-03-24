@@ -331,6 +331,7 @@ public class ButtonClick : MonoBehaviour
     }
     public void LoadStartScene()
     {
+        AppData.rom = null;
         SceneManager.LoadScene(startScene);
        // PlayerPrefs.SetFloat("Time", float.Parse(Time.text));
         

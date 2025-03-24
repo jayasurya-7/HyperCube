@@ -49,11 +49,11 @@ namespace NeuroRehabLibrary
 
         public static void Initialize(string baseDirectory)
         {
-            if (_instance == null)
-            {
-                _instance = new SessionManager(baseDirectory);
-                Instance = _instance;
-            }
+            if (_instance != null) _instance = null;
+            
+             _instance = new SessionManager(baseDirectory);
+              Instance = _instance;
+            
         }
 
         public void Login()
