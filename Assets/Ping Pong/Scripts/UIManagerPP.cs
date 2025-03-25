@@ -121,8 +121,7 @@ public class UIManagerPP : MonoBehaviour
 /*			AppData.timeOnTrail = 0;
 			AppData.reps = 0;*/
 		}
-		else if (leftBound.playerScore >= winScore && !isFinished
-			)
+		else if (leftBound.playerScore >= winScore && !isFinished)
 		{
 			Camera.main.GetComponent<AudioSource>().Stop();
 /*			AppData.DifficultyManager(1);

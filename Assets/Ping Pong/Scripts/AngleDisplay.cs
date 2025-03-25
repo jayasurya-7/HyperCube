@@ -23,16 +23,16 @@ public class AngleDisplay : MonoBehaviour
         if (PlayerPrefs.GetInt("Control Method") == 5) 
         {
             AngleDisplayCanvas.SetActive(true);
-            MaxAngle.text = PlayerPrefs.GetFloat("Knob Ang Max").ToString();
-            MinAngle.text = PlayerPrefs.GetFloat("Knob Ang Min").ToString();
+            MaxAngle.text = AppData.grossKnobMax.ToString();
+            MinAngle.text = AppData.grossKnobMin.ToString();
            // CurrentAngle.text = hyper1.instance.ang2.ToString();
             CurrentAngle.text = JediSerialPayload.angle_2.ToString();
         }
         else if (PlayerPrefs.GetInt("Control Method") == 6)
         {
             AngleDisplayCanvas.SetActive(true);
-            MaxAngle.text = PlayerPrefs.GetFloat("Knob Fine Ang Max").ToString();
-            MinAngle.text = PlayerPrefs.GetFloat("Knob Fine Ang Min").ToString();
+            MaxAngle.text = AppData.fineKnobMax.ToString();
+            MinAngle.text = AppData.fineKnobMin.ToString();
             //CurrentAngle.text = hyper1.instance.ang4.ToString();
             CurrentAngle.text = JediSerialPayload.angle_4.ToString();
 
@@ -40,8 +40,8 @@ public class AngleDisplay : MonoBehaviour
         else if (PlayerPrefs.GetInt("Control Method") == 7)
         {
             AngleDisplayCanvas.SetActive(true);
-            MaxAngle.text = PlayerPrefs.GetFloat("Knob Key Ang Max").ToString();
-            MinAngle.text = PlayerPrefs.GetFloat("Knob Key Ang Min").ToString();
+            MaxAngle.text = AppData.graspMax.ToString();
+            MinAngle.text = AppData.graspMin.ToString();
             //  CurrentAngle.text = hyper1.instance.ang3.ToString();
             CurrentAngle.text = JediSerialPayload.angle_3.ToString();
 

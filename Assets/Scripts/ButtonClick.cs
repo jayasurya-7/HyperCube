@@ -206,7 +206,14 @@ public class ButtonClick : MonoBehaviour
         PlayerPrefs.SetInt("Control Method", 1);
         PlayerPrefs.SetString("Mechanism", "Hand Grip");
     }
-
+    public void HandGripForceLoad()
+    {
+        Canvas.SetActive(false);
+        HandGripCanvas.SetActive(true);
+        AppData.selectedMechanism = JediSerialPayload.MECHANISMS[1];
+        PlayerPrefs.SetInt("Control Method", 1);
+        PlayerPrefs.SetString("Mechanism", "Hand Grip");
+    }
     public void PinchGraspGamesLoad()
     {
         Canvas.SetActive(false);

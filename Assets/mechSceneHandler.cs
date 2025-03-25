@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class mechSceneHandler : MonoBehaviour
 {
+    private string assessmentScene = "ROM Assessment";
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +25,7 @@ public class mechSceneHandler : MonoBehaviour
             AppData.graspMax = values.tripodMax;
             AppData.graspMin = values.tripodMin;
         }
-        else SceneManager.LoadScene("ROM Assessment");
+        else SceneManager.LoadScene(assessmentScene);
         string sessionNum = "Session_" + AppData.currentSessionNumber;
         string pth = Path.Combine(AppData.rawDataPath, sessionNum, "RawData");
         string gamepth = Path.Combine(AppData.rawDataPath, sessionNum, "GameData");
@@ -48,5 +49,9 @@ public class mechSceneHandler : MonoBehaviour
        // Debug.Log($" angle 1 :{JediSerialPayload.angle_1}");
 
         
+    }
+    public void assessmentButton()
+    {
+        SceneManager.LoadScene(assessmentScene);
     }
 }

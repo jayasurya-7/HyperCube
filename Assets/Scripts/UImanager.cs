@@ -126,11 +126,15 @@ public class UImanager : MonoBehaviour
     {
         //JediDataFormat.ReadSetJediDataFormat(AppData.jdfFilename);
         //ConnectToHypercube.Connect("COM10");
-
+        AppData.rom = new ROM();
 
         //StartNewGameSession();
-        Debug.Log($"handle :{AppData.handleAngleMax}, handle  :{AppData.handleAngleMin}, grip :{AppData.handleGripForce},gross :{AppData.grossKnobMax},gross min:{AppData.grossKnobMin}, fine max:{AppData.fineKnobMax}, fine min :{AppData.fineKnobMin}," +
-            $",key max : {AppData.keyKnobMax},key Min :{AppData.keyKnobMin}, grasp max :{AppData.graspMax},grasp Min :{AppData.graspMin}");
+        //Debug.Log($"handle :{AppData.handleAngleMax}, handle  :{AppData.handleAngleMin}, grip :{AppData.handleGripForce},gross :{AppData.grossKnobMax},gross min:{AppData.grossKnobMin}, fine max:{AppData.fineKnobMax}, fine min :{AppData.fineKnobMin}," +
+        //    $",key max : {AppData.keyKnobMax},key Min :{AppData.keyKnobMin}, grasp max :{AppData.graspMax},grasp Min :{AppData.graspMin}");
+
+        Debug.Log($"handle :{AppData.rom.handleMax}, handle  :{AppData.rom.handleMin}, grip :{AppData.rom.gripForce},gross :{AppData.rom.grossKnobMax},gross min:{AppData.rom.grossKnobMin}, fine max:" +
+            $"{AppData.rom.fineKnobMax}, fine min :{AppData.rom.fineKnobMin}," +
+            $",key max : {AppData.rom.keyKnobMax},key Min :{AppData.rom.keyKnobMin}, grasp max :{AppData.rom.tripodMax},grasp Min :{AppData.rom.tripodMin}");
 
     }
 
@@ -636,7 +640,23 @@ public class UImanager : MonoBehaviour
 
     public void ReturnToHome()
     {
-
+        if (AppData.rom.datetime != null) {
+            AppData.handleAngleMin = (AppData.handleAngleMin == 0) ? AppData.rom.handleMin : AppData.handleAngleMin;
+            AppData.handleAngleMax = (AppData.handleAngleMax == 0) ? AppData.rom.handleMax : AppData.handleAngleMax;
+            AppData.handleGripForce = (AppData.handleGripForce < 0.5) ? AppData.rom.gripForce : AppData.handleGripForce;
+            AppData.grossKnobMin = (AppData.grossKnobMin == 0) ? AppData.rom.grossKnobMin : AppData.grossKnobMin;
+            AppData.grossKnobMax = (AppData.grossKnobMax == 0) ? AppData.rom.grossKnobMax : AppData.grossKnobMax;
+            AppData.fineKnobMax = (AppData.fineKnobMax == 0) ? AppData.rom.fineKnobMax : AppData.fineKnobMax;
+            AppData.fineKnobMin = (AppData.fineKnobMin == 0) ? AppData.rom.fineKnobMin : AppData.fineKnobMin;
+            AppData.keyKnobMin = (AppData.keyKnobMin == 0) ? AppData.rom.keyKnobMin : AppData.keyKnobMin;
+            AppData.keyKnobMax = (AppData.keyKnobMax == 0) ? AppData.rom.keyKnobMax : AppData.keyKnobMax;
+            AppData.graspMax = (AppData.graspMax == 0) ? AppData.rom.tripodMax : AppData.graspMax;
+            AppData.graspMin = (AppData.graspMin == 0) ? AppData.rom.tripodMin : AppData.graspMin;
+        }
+        else
+        {
+            Debug.Log("NEW ROM");
+        }
         string dir = Path.Combine(AppData.idPath, "rom.csv");
         if (!File.Exists(dir))
         {

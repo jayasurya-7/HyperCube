@@ -518,6 +518,7 @@ static class AppData
     public static string gameDataPath = null;
     public static string trialDataFileLocationTemp = null;
 
+    public static ROM rom;
 
     //ROM values
 
