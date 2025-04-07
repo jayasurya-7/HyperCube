@@ -108,6 +108,7 @@ public class hyper1 : MonoBehaviour
             force_2 = (float.Parse(JediSerialPayload.data[1].ToString()));
             force_total = (force_1 + force_2);
             ang1 = float.Parse(JediSerialPayload.data[2].ToString());
+            AppData.angle_1 = ang1 - AppData.offset;
             ang2 = float.Parse(JediSerialPayload.data[3].ToString());
             ang3 = float.Parse(JediSerialPayload.data[4].ToString());
             ang4 = float.Parse(JediSerialPayload.data[5].ToString());

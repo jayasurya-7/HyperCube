@@ -263,7 +263,7 @@ public class BirdControl : MonoBehaviour
         if (controlValue == 1)
         {
            // transform.position = new Vector2(this.transform.position.x, Angle2Screen(hyper1.instance.ang1));
-            transform.position = new Vector2(this.transform.position.x, Angle2Screen(JediSerialPayload.angle_1));
+            transform.position = new Vector2(this.transform.position.x, Angle2Screen(AppData.angle_1));
 
             if (this.transform.position.y > topbound)
             {

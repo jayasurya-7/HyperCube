@@ -147,6 +147,8 @@ public class UImanager : MonoBehaviour
             $"{AppData.rom.fineKnobMax}, fine min :{AppData.rom.fineKnobMin}," +
             $",key max : {AppData.rom.keyKnobMax},key Min :{AppData.rom.keyKnobMin}, grasp max :{AppData.rom.tripodMax},grasp Min :{AppData.rom.tripodMin}");
 
+        AppData.offset = float.Parse(JediSerialPayload.data[2].ToString());
+
     }
 
 
@@ -251,24 +253,24 @@ public class UImanager : MonoBehaviour
 
     public void HandleAngleROM()
     {
-        HandleAngle.text = (Mathf.Round((JediSerialPayload.angle_1) * 10.0f) * 0.1f) + "Deg".ToString();
+        HandleAngle.text = (Mathf.Round((JediSerialPayload.angle_1 - AppData.offset) * 10.0f) * 0.1f) + "Deg".ToString();
 
         if (!handleRom && HandGripCanvas.gameObject.activeSelf)
         {
             if (HandleAngSet == false)
             {
-                RadialBar1.fillAmount = 0.00403f * JediSerialPayload.angle_1;
+                RadialBar1.fillAmount = 0.00403f * (JediSerialPayload.angle_1 - AppData.offset);
             }
 
             if (HandleMax == false)
             {
-                RadialBar2.fillAmount = 0.5f - (0.00403f * JediSerialPayload.angle_1);
+                RadialBar2.fillAmount = 0.5f - (0.00403f * (JediSerialPayload.angle_1 - AppData.offset));
             }
 
             if (HandleMax == false && Input.GetKeyDown(KeyCode.Return))
             {
-                PlayerPrefs.SetFloat("Handle Ang Max", JediSerialPayload.angle_1);
-                AppData.handleAngleMax = JediSerialPayload.angle_1;
+                PlayerPrefs.SetFloat("Handle Ang Max", (JediSerialPayload.angle_1 - AppData.offset));
+                AppData.handleAngleMax = (JediSerialPayload.angle_1 - AppData.offset);
                 HandleMax = true;
                 Instruction3.SetActive(false);
                 Instruction4.SetActive(true);
@@ -278,7 +280,7 @@ public class UImanager : MonoBehaviour
             if (HandleMin == false && Input.GetKeyDown(KeyCode.Space))
             {
                 PlayerPrefs.SetFloat("Handle Ang Min", JediSerialPayload.angle_1);
-                AppData.handleAngleMin = JediSerialPayload.angle_1;
+                AppData.handleAngleMin = (JediSerialPayload.angle_1 - AppData.offset);
 
                 HandleMin = true;
                 HandleAngSet = true;

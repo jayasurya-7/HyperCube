@@ -68,7 +68,7 @@ public class PlayerControllerDefault : MonoBehaviour {
     public void PlayerControllerInput()
     {
         //rb.position = new Vector2(Angle2Screen(hyper1.instance.ang1), this.transform.position.y);
-        rb.position = new Vector3 (MovingAverage(Angle2Screen(JediSerialPayload.angle_1)), this.transform.position.y, Mathf.Clamp(rb.position.z, boundary.zMin, boundary.zMax));
+        rb.position = new Vector3 (MovingAverage(Angle2Screen(AppData.angle_1)), this.transform.position.y, Mathf.Clamp(rb.position.z, boundary.zMin, boundary.zMax));
         //rb.velocity = speed; //movement * speed;
         rb.rotation = Quaternion.Euler(0.0f, 0.0f, rb.velocity.x * -tilt);
        // Debug.Log(Angle2Screen(hyper1.instance.ang1));
