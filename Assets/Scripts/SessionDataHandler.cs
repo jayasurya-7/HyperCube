@@ -20,7 +20,7 @@ public class SessionDataHandler
     public string[] summaryDate;
     public string DATEFORMAT = "dd/MM";
     //Session file header format
-    public string DATEFORMAT_INFILE = "dd-MM-yyyy HH:mm";
+    public string DATEFORMAT_INFILE = "dd-MM-yyyy HH:mm:ss";
     public string DATETIME = "DateTime";
     public string MOVETIME = "MoveTime";
     public string STARTTIME = "StartTime";
@@ -102,6 +102,7 @@ public class SessionDataHandler
                .OrderBy(result => result.Date)
                .ToList();
             int len = filteredData.Count;
+            Debug.Log($"Length :{len}");
             summaryDate = new string[len];
             summaryElapsedTimeDay = new float[len];
 

@@ -41,11 +41,16 @@ public class mechSceneHandler : MonoBehaviour
         {
             Debug.Log("not created");
         }
+        Debug.Log($"mechh andle max:{AppData.handleAngleMax}, handle  :{AppData.handleAngleMin}, grip :{AppData.handleGripForce},gross max :{AppData.grossKnobMax},gross min:{AppData.grossKnobMin}, fine max:" +
+           $"{AppData.fineKnobMax}, fine min :{AppData.fineKnobMin}," +
+           $",key max : {AppData.keyKnobMax},key Min :{AppData.keyKnobMin}, grasp max :{AppData.graspMax},grasp Min :{AppData.graspMin}");
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Time.timeScale == 0) Time.timeScale = 1;
        // Debug.Log($" angle 1 :{JediSerialPayload.angle_1}");
 
         

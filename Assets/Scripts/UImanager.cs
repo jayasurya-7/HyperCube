@@ -120,6 +120,17 @@ public class UImanager : MonoBehaviour
     private bool tripodgrasp = false;
 
     private int enterCounter = 1;
+    float handleAngleMin = 0f;
+    float handleAngleMax = 0f;
+    float handleGripForce = 0f;
+    float grossKnobMin = 0f;
+    float grossKnobMax = 0f;
+    float fineKnobMax = 0f;
+    float fineKnobMin =     0f;
+    float keyKnobMin = 0f;
+    float keyKnobMax = 0f;
+    float graspMax = 0f;
+    float graspMin = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -477,7 +488,7 @@ public class UImanager : MonoBehaviour
                 if (GraspMaxSet == false)
                 {
                     PlayerPrefs.SetFloat("Dist Min", (Mathf.Round((JediSerialPayload.btwDistance) * 10.0f) * 0.1f));
-                    AppData.graspMax = (Mathf.Round((JediSerialPayload.btwDistance) * 10.0f) * 0.1f);
+                    AppData.graspMin = (Mathf.Round((JediSerialPayload.btwDistance) * 10.0f) * 0.1f);
 
                     MaxDistance.text = "Min distance: " + PlayerPrefs.GetFloat("Dist Min").ToString();
                     GraspInstruction_1.SetActive(false);
@@ -501,7 +512,7 @@ public class UImanager : MonoBehaviour
                 if (GraspMinSet == false)
                 {
                     PlayerPrefs.SetFloat("Dist Max", (Mathf.Round((JediSerialPayload.btwDistance) * 10.0f) * 0.1f));
-                    AppData.graspMin = (Mathf.Round((JediSerialPayload.btwDistance) * 10.0f) * 0.1f);
+                    AppData.graspMax = (Mathf.Round((JediSerialPayload.btwDistance) * 10.0f) * 0.1f);
 
                     MinDistance.text = "Max distance: " + PlayerPrefs.GetFloat("Dist Max").ToString();
                     GraspInstruction_2.SetActive(false);
@@ -641,17 +652,17 @@ public class UImanager : MonoBehaviour
     public void ReturnToHome()
     {
         if (AppData.rom.datetime != null) {
-            AppData.handleAngleMin = (AppData.handleAngleMin == 0) ? AppData.rom.handleMin : AppData.handleAngleMin;
-            AppData.handleAngleMax = (AppData.handleAngleMax == 0) ? AppData.rom.handleMax : AppData.handleAngleMax;
-            AppData.handleGripForce = (AppData.handleGripForce < 0.5) ? AppData.rom.gripForce : AppData.handleGripForce;
-            AppData.grossKnobMin = (AppData.grossKnobMin == 0) ? AppData.rom.grossKnobMin : AppData.grossKnobMin;
-            AppData.grossKnobMax = (AppData.grossKnobMax == 0) ? AppData.rom.grossKnobMax : AppData.grossKnobMax;
-            AppData.fineKnobMax = (AppData.fineKnobMax == 0) ? AppData.rom.fineKnobMax : AppData.fineKnobMax;
-            AppData.fineKnobMin = (AppData.fineKnobMin == 0) ? AppData.rom.fineKnobMin : AppData.fineKnobMin;
-            AppData.keyKnobMin = (AppData.keyKnobMin == 0) ? AppData.rom.keyKnobMin : AppData.keyKnobMin;
-            AppData.keyKnobMax = (AppData.keyKnobMax == 0) ? AppData.rom.keyKnobMax : AppData.keyKnobMax;
-            AppData.graspMax = (AppData.graspMax == 0) ? AppData.rom.tripodMax : AppData.graspMax;
-            AppData.graspMin = (AppData.graspMin == 0) ? AppData.rom.tripodMin : AppData.graspMin;
+            handleAngleMin = (AppData.handleAngleMin == 0) ? AppData.rom.handleMin : AppData.handleAngleMin;
+            handleAngleMax = (AppData.handleAngleMax == 0) ? AppData.rom.handleMax : AppData.handleAngleMax;
+            handleGripForce = (AppData.handleGripForce < 0.7) ? AppData.rom.gripForce : AppData.handleGripForce;
+            grossKnobMin = (AppData.grossKnobMin >=AppData.rom.grossKnobMin) ? AppData.rom.grossKnobMin : AppData.grossKnobMin;
+            grossKnobMax = (AppData.grossKnobMax <= AppData.rom.grossKnobMax) ? AppData.rom.grossKnobMax : AppData.grossKnobMax;
+            fineKnobMax = (AppData.fineKnobMax <= AppData.rom.fineKnobMax) ? AppData.rom.fineKnobMax : AppData.fineKnobMax;
+            fineKnobMin = (AppData.fineKnobMin >= AppData.rom.fineKnobMin) ? AppData.rom.fineKnobMin : AppData.fineKnobMin;
+            keyKnobMin = (AppData.keyKnobMin >= AppData.rom.keyKnobMin) ? AppData.rom.keyKnobMin : AppData.keyKnobMin;
+            keyKnobMax = (AppData.keyKnobMax <= AppData.rom.keyKnobMax) ? AppData.rom.keyKnobMax : AppData.keyKnobMax;
+            graspMax = (AppData.graspMax <= AppData.rom.tripodMax) ? AppData.rom.tripodMax : AppData.graspMax;
+            graspMin = (AppData.graspMin >= AppData.rom.tripodMax) ? AppData.rom.tripodMin : AppData.graspMin;
         }
         else
         {
@@ -665,11 +676,17 @@ public class UImanager : MonoBehaviour
                 writer.WriteLine("datetime,handleMin,handleMax,gripForce,grossKnobMin,grossKnobMax,fineKnobMin,fineKnobMax,keyKnobMin,KeyKnobMax,tripodMin,tripodMax");
             }
         }
-        ROM values = new ROM(AppData.handleAngleMin, AppData.handleAngleMax,AppData.handleGripForce,AppData.grossKnobMin,AppData.grossKnobMax,AppData.fineKnobMin,AppData.fineKnobMax,AppData.keyKnobMin,
-            AppData.keyKnobMax,AppData.graspMin,AppData.graspMax,true);
-
+        ROM values = new ROM(handleAngleMin, handleAngleMax, handleGripForce,grossKnobMin,grossKnobMax,fineKnobMin,fineKnobMax,keyKnobMin,
+            keyKnobMax,graspMin,graspMax,true);
+        Debug.Log($"before handle :{AppData.rom.handleMax}, handle  :{AppData.rom.handleMin}, grip :{AppData.rom.gripForce},gross :{AppData.rom.grossKnobMax},gross min:{AppData.rom.grossKnobMin}, fine max:" +
+           $"{AppData.rom.fineKnobMax}, fine min :{AppData.rom.fineKnobMin}," +
+           $",key max : {AppData.rom.keyKnobMax},key Min :{AppData.rom.keyKnobMin}, grasp max :{AppData.rom.tripodMax},grasp Min :{AppData.rom.tripodMin}");
         //End the sessionfile, not sure whether it will be working or not
         //EndCurrentGameSession();
+
+        Debug.Log($"after handle max:{handleAngleMax}, handle  :{handleAngleMin}, grip :{handleGripForce},gross max :{grossKnobMax},gross min:{grossKnobMin}, fine max:" +
+           $"{fineKnobMax}, fine min :{fineKnobMin}," +
+           $",key max : {keyKnobMax},key Min :{keyKnobMin}, grasp max :{graspMax},grasp Min :{graspMin}");
         SceneManager.LoadScene(homeScene);
     }
 
