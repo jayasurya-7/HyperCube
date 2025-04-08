@@ -292,7 +292,7 @@ public class UImanager : MonoBehaviour
 
             if (HandleMin == false && Input.GetKeyDown(KeyCode.Space))
             {
-                PlayerPrefs.SetFloat("Handle Ang Min", JediSerialPayload.angle_1);
+                PlayerPrefs.SetFloat("Handle Ang Min", (JediSerialPayload.angle_1 - AppData.offset));
                 AppData.handleAngleMin = (JediSerialPayload.angle_1 - AppData.offset);
 
                 HandleMin = true;
