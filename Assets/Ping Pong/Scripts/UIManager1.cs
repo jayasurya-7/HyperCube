@@ -12,32 +12,17 @@ public class UIManager1 : MonoBehaviour {
     public AudioClip[] audioClips; // winlevel loose
     public int winScore = 7;
     public int win;
-    // Use this for initialization
+
     void Start () {
 		pauseObjects = GameObject.FindGameObjectsWithTag("ShowOnPause");
 		finishObjects = GameObject.FindGameObjectsWithTag("ShowOnFinish");
 		hideFinished();
 	}
-	
-	// Update is called once per frame
-	void Update () {
 
-		//Debug.Log(AppData.inputPressed());
-
-
-
-		//if (AppData.inputPressed() || Input.GetKeyDown(KeyCode.Return))
-		//{
-
-
-
-		//    LoadLevel("pong_game");
-		//}
+	void Update () 
+	{
 		if (Input.GetKeyDown(KeyCode.Return))
 		{
-
-
-
 		    LoadLevel("pong_game");
 		}
 
@@ -45,9 +30,9 @@ public class UIManager1 : MonoBehaviour {
 
 
 	//Reloads the Level
-	public void Reload(){
+	public void Reload()
+	{
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-		//Application.LoadLevel(Application.loadedLevel);
 	}
     void playAudio(int clipNumber)
     {

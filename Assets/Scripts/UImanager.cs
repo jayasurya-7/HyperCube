@@ -24,7 +24,8 @@ public class UImanager : MonoBehaviour
     public GameObject Instruction4;
     public TMPro.TMP_Text HandleMaxAngle;
     public TMPro.TMP_Text HandleMinAngle;
-
+    public GameObject Grip;
+    public GameObject Force;
 
     //Gross knob ROM Canvas
     public Image GrossCircleClock;
@@ -41,6 +42,8 @@ public class UImanager : MonoBehaviour
     bool GrossAnticlockwise = false;
     bool GrossMaxAngSet = false;
     bool GrossMinAngSet = false;
+    public GameObject Gross;
+
 
     //Fine knob ROM Canvas
     public Image FineCircleClock;
@@ -57,6 +60,7 @@ public class UImanager : MonoBehaviour
     bool FineAnticlockwise = false;
     bool FineMaxAngSet = false;
     bool FineMinAngSet = false;
+    public GameObject Fine;
 
     //Key Knob ROM Canvas
     public Image KeyCircleClock;
@@ -73,6 +77,8 @@ public class UImanager : MonoBehaviour
     bool KeyAnticlockwise = false;
     bool KeyMaxAngSet = false;
     bool KeyMinAngSet = false;
+    public GameObject Key;
+
 
     //Tripod grasp ROM Canvas
     public Image HorizontalBar_1;
@@ -91,6 +97,8 @@ public class UImanager : MonoBehaviour
     bool GraspMinSet = false;
     bool GraspIn = false;
     bool GraspOut = false;
+    public GameObject Grasp;
+
 
     // Canvas
     public GameObject BaseCanvas;
@@ -149,6 +157,7 @@ public class UImanager : MonoBehaviour
 
         AppData.offset = float.Parse(JediSerialPayload.data[2].ToString());
 
+
     }
 
 
@@ -202,7 +211,11 @@ public class UImanager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     
+        if (AppData.rom.datetime == null)
+        {
+            Grip.SetActive(false);
+        }
+
         /*
                 if (Input.GetKeyDown(KeyCode.N))
                 {
@@ -222,20 +235,20 @@ public class UImanager : MonoBehaviour
                     Debug.Log($"enter : {enterCounter}+{enterCounter == 2}");
                 }*/
 
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            enterCounter++;
+        //if (Input.GetKeyDown(KeyCode.V))
+        //{
+        //    enterCounter++;
 
-            while (enterCounter < 7)
-            {
-                if (enterCounter == 2) Next1();
-                if (enterCounter == 3) Next2();
-                    if (enterCounter == 4) Next3();
-                    if (enterCounter == 5) Next4();
-                    if (enterCounter == 6) Next5();
-            }
-        }
-                HandleAngleROM();
+        //    while (enterCounter < 7)
+        //    {
+        //        if (enterCounter == 2) Next1();
+        //        if (enterCounter == 3) Next2();
+        //            if (enterCounter == 4) Next3();
+        //            if (enterCounter == 5) Next4();
+        //            if (enterCounter == 6) Next5();
+        //    }
+        //}
+        HandleAngleROM();
         HandleForce();
         GrossKnob();
         FineKnob();
@@ -619,6 +632,7 @@ public class UImanager : MonoBehaviour
     {
         HandGripCanvas.SetActive(true);
         BaseCanvas.SetActive(false);
+  
     }
 
     public void HandgripForceCanvasLoad()
@@ -649,27 +663,24 @@ public class UImanager : MonoBehaviour
     {
         TripodCanvas.SetActive(true);
         BaseCanvas.SetActive(false);
+
     }
 
     public void ReturnToHome()
     {
-        if (AppData.rom.datetime != null) {
-            handleAngleMin = (AppData.handleAngleMin == 0) ? AppData.rom.handleMin : AppData.handleAngleMin;
-            handleAngleMax = (AppData.handleAngleMax == 0) ? AppData.rom.handleMax : AppData.handleAngleMax;
-            handleGripForce = (AppData.handleGripForce < 0.7) ? AppData.rom.gripForce : AppData.handleGripForce;
-            grossKnobMin = (AppData.grossKnobMin >=AppData.rom.grossKnobMin) ? AppData.rom.grossKnobMin : AppData.grossKnobMin;
-            grossKnobMax = (AppData.grossKnobMax <= AppData.rom.grossKnobMax) ? AppData.rom.grossKnobMax : AppData.grossKnobMax;
-            fineKnobMax = (AppData.fineKnobMax <= AppData.rom.fineKnobMax) ? AppData.rom.fineKnobMax : AppData.fineKnobMax;
-            fineKnobMin = (AppData.fineKnobMin >= AppData.rom.fineKnobMin) ? AppData.rom.fineKnobMin : AppData.fineKnobMin;
-            keyKnobMin = (AppData.keyKnobMin >= AppData.rom.keyKnobMin) ? AppData.rom.keyKnobMin : AppData.keyKnobMin;
-            keyKnobMax = (AppData.keyKnobMax <= AppData.rom.keyKnobMax) ? AppData.rom.keyKnobMax : AppData.keyKnobMax;
-            graspMax = (AppData.graspMax <= AppData.rom.tripodMax) ? AppData.rom.tripodMax : AppData.graspMax;
-            graspMin = (AppData.graspMin >= AppData.rom.tripodMax) ? AppData.rom.tripodMin : AppData.graspMin;
-        }
-        else
-        {
-            Debug.Log("NEW ROM");
-        }
+      
+        handleAngleMin = (AppData.handleAngleMin == 0) ? AppData.rom.handleMin : AppData.handleAngleMin;
+        handleAngleMax = (AppData.handleAngleMax == 0) ? AppData.rom.handleMax : AppData.handleAngleMax;
+        handleGripForce = (AppData.handleGripForce < 0.7) ? AppData.rom.gripForce : AppData.handleGripForce;
+        grossKnobMin = (AppData.grossKnobMin >=AppData.rom.grossKnobMin) ? AppData.rom.grossKnobMin : AppData.grossKnobMin;
+        grossKnobMax = (AppData.grossKnobMax <= AppData.rom.grossKnobMax) ? AppData.rom.grossKnobMax : AppData.grossKnobMax;
+        fineKnobMax = (AppData.fineKnobMax <= AppData.rom.fineKnobMax) ? AppData.rom.fineKnobMax : AppData.fineKnobMax;
+        fineKnobMin = (AppData.fineKnobMin >= AppData.rom.fineKnobMin) ? AppData.rom.fineKnobMin : AppData.fineKnobMin;
+        keyKnobMin = (AppData.keyKnobMin >= AppData.rom.keyKnobMin) ? AppData.rom.keyKnobMin : AppData.keyKnobMin;
+        keyKnobMax = (AppData.keyKnobMax <= AppData.rom.keyKnobMax) ? AppData.rom.keyKnobMax : AppData.keyKnobMax;
+        graspMax =  AppData.graspMax;
+        graspMin =  AppData.graspMin;
+       
         string dir = Path.Combine(AppData.idPath, "rom.csv");
         if (!File.Exists(dir))
         {
@@ -706,24 +717,41 @@ public class UImanager : MonoBehaviour
     public void Next1()
     {
         HandGripCanvas.SetActive(false);
+        if (AppData.rom.datetime == null)
+        {
+            Force.SetActive(false);
+        }
         HandGripForceCanvas.SetActive(true);
     }
 
     public void Next2()
     {
       HandGripForceCanvas.SetActive(false);
-      GrossKnobCanvas.SetActive(true);
+        if (AppData.rom.datetime == null)
+        {
+            Gross.SetActive(false);
+        }
+        GrossKnobCanvas.SetActive(true);
+
     }
 
     public void Next3()
     {
         GrossKnobCanvas.SetActive(false);
+        if (AppData.rom.datetime == null)
+        {
+            Fine.SetActive(false);
+        }
         FineKnobCanvas.SetActive(true);
     }
 
     public void Next4()
     {
         FineKnobCanvas.SetActive(false);
+        if (AppData.rom.datetime == null)
+        {
+            Key.SetActive(false);
+        }
         KeyKnobCanvas.SetActive(true);
     }
 
