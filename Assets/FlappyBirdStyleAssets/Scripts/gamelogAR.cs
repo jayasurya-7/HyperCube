@@ -13,12 +13,11 @@ public class gamelogAR : MonoBehaviour
     string fileName;
     float time;
     int x = 0;
+    bool runOnce = false;
     void Start()
     {
         ResetGameData();
         InitializeSessionDetails();
-        CreateLogFile();
-        gameData.StartDataLog(fileName);
     }
 
     private void ResetGameData()
@@ -42,6 +41,8 @@ public class gamelogAR : MonoBehaviour
         //string dir = Path.Combine(AppData.rawDataPath, sessionNum);
         //Directory.CreateDirectory(dir);
 
+       
+
         string dir = AppData.gameDataPath;
 
         fileName = Path.Combine(dir, $"{AppData.selectedGame}_{dateTime}.csv");
@@ -54,6 +55,13 @@ public class gamelogAR : MonoBehaviour
         Debug.Log($" logging {gameData.isGameLogging}");
         if (gameData.isGameLogging)
         {
+            if (!runOnce)
+            {
+                CreateLogFile();
+                gameData.StartDataLog(fileName);
+                runOnce = true;
+            }
+
             Player = GameObject.FindGameObjectWithTag("Player");
             Target = GameObject.FindGameObjectWithTag("Target");
             //Enemy = GameObject.FindGameObjectWithTag("Enemy");

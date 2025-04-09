@@ -551,7 +551,7 @@ static class AppData
     public static float dist = 0f;
     public static float offset = 0f;
     public static float angle_1 = 0f;
-
+    public static bool offsetRunOnce = false;
     static public double nanosecPerTick = 1.0 / Stopwatch.Frequency;
     static public Stopwatch stp_watch = new Stopwatch();
 

@@ -22,11 +22,18 @@ public class UImanager : MonoBehaviour
     public TMPro.TMP_Text ForceAcknowledgement;
     public GameObject Instruction3;
     public GameObject Instruction4;
+    public GameObject Instruction5;
     public TMPro.TMP_Text HandleMaxAngle;
     public TMPro.TMP_Text HandleMinAngle;
     public GameObject Grip;
     public GameObject Force;
-
+    public GameObject menuButton1;
+    public GameObject menuButton2;
+    public Image Banner;
+    public Image ForceBanner;
+    public GameObject forceIns1;
+    public GameObject forceIns2;
+    public GameObject forceIns3;
     //Gross knob ROM Canvas
     public Image GrossCircleClock;
     public Image GrossCircleAnticlock;
@@ -38,12 +45,15 @@ public class UImanager : MonoBehaviour
     public GameObject GrossInstruction_3;
     public GameObject GrossInstruction_4;
     public GameObject GrossInstruction_5;
+    public GameObject GrossInstruction_6;
+    public GameObject GrossInstruction_7;
     bool GrossClockwise = false;
     bool GrossAnticlockwise = false;
     bool GrossMaxAngSet = false;
     bool GrossMinAngSet = false;
     public GameObject Gross;
-
+    public GameObject menuButton3;
+    public Image grossBanner;
 
     //Fine knob ROM Canvas
     public Image FineCircleClock;
@@ -61,6 +71,7 @@ public class UImanager : MonoBehaviour
     bool FineMaxAngSet = false;
     bool FineMinAngSet = false;
     public GameObject Fine;
+    public GameObject menuButton4;
 
     //Key Knob ROM Canvas
     public Image KeyCircleClock;
@@ -78,6 +89,7 @@ public class UImanager : MonoBehaviour
     bool KeyMaxAngSet = false;
     bool KeyMinAngSet = false;
     public GameObject Key;
+    public GameObject menuButton5;
 
 
     //Tripod grasp ROM Canvas
@@ -98,6 +110,7 @@ public class UImanager : MonoBehaviour
     bool GraspIn = false;
     bool GraspOut = false;
     public GameObject Grasp;
+    public GameObject menuButton6;
 
 
     // Canvas
@@ -214,6 +227,7 @@ public class UImanager : MonoBehaviour
         if (AppData.rom.datetime == null)
         {
             Grip.SetActive(false);
+            menuButton1.SetActive(false);
         }
 
         /*
@@ -287,6 +301,8 @@ public class UImanager : MonoBehaviour
                 HandleMax = true;
                 Instruction3.SetActive(false);
                 Instruction4.SetActive(true);
+                Instruction5.SetActive(true);
+                //Image Banner = Color.black;
                 HandleMaxAngle.text = "Max Angle: " + Mathf.Round(((PlayerPrefs.GetFloat("Handle Ang Max")) * 10.0f) * 0.1f).ToString();
             }
 
@@ -299,8 +315,10 @@ public class UImanager : MonoBehaviour
                 HandleAngSet = true;
 
                 Instruction4.SetActive(false);
+
                 HandleMinAngle.text = "Min Angle: " + Mathf.Round(((PlayerPrefs.GetFloat("Handle Ang Min")) * 10.0f) * 0.1f).ToString();
                 handleRom = true;
+                AppData.offsetRunOnce = false;
             }
         }
     }
@@ -310,12 +328,16 @@ public class UImanager : MonoBehaviour
         if (!handleGrip)
         {
             ForceBar.fillAmount = 0.05f * JediSerialPayload.totalForce;
+            forceIns1.SetActive(false);
+            forceIns2.SetActive(true);
             HandGripForce.text = (Mathf.Round((JediSerialPayload.totalForce) * 10.0f) * 0.1f) + "Kgs".ToString();
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 PlayerPrefs.SetFloat("Grip force", JediSerialPayload.totalForce);
                 AppData.handleGripForce = JediSerialPayload.totalForce;
                 ForceAcknowledgement.text = "Threshold force set as  " + PlayerPrefs.GetFloat("Grip force") + "  Kgs".ToString();
+                forceIns2.SetActive(false);
+                forceIns3.SetActive(true);
                 handleGrip = true;
             }
 
@@ -344,6 +366,7 @@ public class UImanager : MonoBehaviour
                     GrossMaxAngle.text = "Max angle: " + PlayerPrefs.GetFloat("Knob Ang Max").ToString();
                     GrossInstruction_1.SetActive(false);
                     GrossInstruction_3.SetActive(false);
+                    GrossInstruction_6.SetActive(true);
                     GrossClockwise = true;
                     GrossMaxAngSet = true;
                 }
@@ -369,12 +392,13 @@ public class UImanager : MonoBehaviour
                     GrossMinAngSet = true;
                     GrossInstruction_2.SetActive(false);
                     GrossInstruction_4.SetActive(false);
-                    GrossInstruction_5.SetActive(true);
+                    GrossInstruction_6.SetActive(true);
 
                     grossKnob = true;
                 }
             }
         }
+        if(GrossMaxAngSet && GrossMinAngSet) GrossInstruction_7.SetActive(true);
     }
 
     public void FineKnob()
@@ -552,6 +576,8 @@ public class UImanager : MonoBehaviour
         else if (HandGripForceCanvas.gameObject.activeSelf)
         {
             handleGrip = false;
+            forceIns1.SetActive(true);
+            forceIns3.SetActive(false);
             Debug.Log(" grip Canvas 2 is active");
         }
         else if (HandGripCanvas.gameObject.activeSelf)
@@ -561,6 +587,8 @@ public class UImanager : MonoBehaviour
             HandleMin = false;
             HandleAngSet = false;
             Instruction3.SetActive(true);
+            Instruction4.SetActive(false);
+            Instruction5.SetActive(false);
             handleRom = false;
             Debug.Log(" handle rom Canvas 2 is active");
         }
@@ -574,6 +602,7 @@ public class UImanager : MonoBehaviour
             GrossInstruction_1.SetActive(true);
             GrossInstruction_3.SetActive(true);
             GrossInstruction_5.SetActive(false);
+            GrossInstruction_7.SetActive(false);
 
             grossKnob=false;
             Debug.Log(" gross Canvas 2 is active");
@@ -720,6 +749,7 @@ public class UImanager : MonoBehaviour
         if (AppData.rom.datetime == null)
         {
             Force.SetActive(false);
+            menuButton2.SetActive(false);
         }
         HandGripForceCanvas.SetActive(true);
     }
@@ -730,6 +760,7 @@ public class UImanager : MonoBehaviour
         if (AppData.rom.datetime == null)
         {
             Gross.SetActive(false);
+            menuButton3.SetActive(false);
         }
         GrossKnobCanvas.SetActive(true);
 
@@ -741,6 +772,7 @@ public class UImanager : MonoBehaviour
         if (AppData.rom.datetime == null)
         {
             Fine.SetActive(false);
+            menuButton4.SetActive(false);
         }
         FineKnobCanvas.SetActive(true);
     }
@@ -751,6 +783,7 @@ public class UImanager : MonoBehaviour
         if (AppData.rom.datetime == null)
         {
             Key.SetActive(false);
+            menuButton5.SetActive(false);
         }
         KeyKnobCanvas.SetActive(true);
     }
@@ -758,6 +791,10 @@ public class UImanager : MonoBehaviour
     public void Next5()
     {
         KeyKnobCanvas.SetActive(false);
+        if (AppData.rom.datetime == null)
+        {
+            menuButton6.SetActive(false);
+        }
         TripodCanvas.SetActive(true);
     }
 

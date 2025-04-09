@@ -13,12 +13,11 @@ public class gamelogPP : MonoBehaviour
     string fileName;
     float time;
     int x = 0;
+    bool runOnce = false;
     void Start()
     {
         ResetGameData();
         InitializeSessionDetails();
-        CreateLogFile();
-        gameData.StartDataLog(fileName);
     }
 
     private void ResetGameData()
@@ -51,6 +50,13 @@ public class gamelogPP : MonoBehaviour
     {
         if (gameData.isGameLogging)
         {
+            if (!runOnce)
+            {
+
+                CreateLogFile();
+                gameData.StartDataLog(fileName);
+                runOnce = true;
+            }
             Player = GameObject.FindGameObjectWithTag("Player");
             Target = GameObject.FindGameObjectWithTag("Target");
             Enemy = GameObject.FindGameObjectWithTag("Enemy");

@@ -51,7 +51,11 @@ public class GameController : MonoBehaviour
 		restart = false;
 		restartText.text = "";
 		if (!PlayerPrefs.HasKey("highScore")) PlayerPrefs.SetInt("highScore", 100);
-        AppData.offset = float.Parse(JediSerialPayload.data[2].ToString());
+		if (!AppData.offsetRunOnce)
+		{
+			//AppData.offset = float.Parse(JediSerialPayload.data[2].ToString());
+			AppData.offsetRunOnce = true;
+		}
         highScoreText.text = "High Score:" + PlayerPrefs.GetInt("highScore").ToString();
 		StartCoroutine(SpawnWaves());
 		StartNewGameSession();
@@ -64,7 +68,7 @@ public class GameController : MonoBehaviour
     {
 		score = 0;
 		UpdateScore();
-        AppData.offset = float.Parse(JediSerialPayload.data[2].ToString());
+        //AppData.offset = float.Parse(JediSerialPayload.data[2].ToString());
         gameOver = false;
 		gameOverText.text = "";
 

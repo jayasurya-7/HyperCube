@@ -13,6 +13,7 @@ public class gamelogSS : MonoBehaviour
     string fileName;
     float time;
     int x = 0;
+    bool runOnce = false;
     void Start()
     {
         ResetGameData();
@@ -51,6 +52,13 @@ public class gamelogSS : MonoBehaviour
     {
         if (gameData.isGameLogging)
         {
+            if (!runOnce)
+            {
+
+                CreateLogFile();
+                gameData.StartDataLog(fileName);
+                runOnce = true;
+            }
             Player = GameObject.FindGameObjectWithTag("Player");
            
                 if (Player != null)
