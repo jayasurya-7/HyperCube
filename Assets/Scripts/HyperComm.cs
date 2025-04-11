@@ -53,14 +53,14 @@ public static class JediSerialPayload
     {
         get
         {
-            return (float.Parse(data[3].ToString()));
+            return -(float.Parse(data[3].ToString()));
         }
     }
     static public float angle_3
     {
         get
         {
-            return (float.Parse(data[4].ToString()));
+            return -(float.Parse(data[4].ToString()));
         }
     }
     static public float angle_4
