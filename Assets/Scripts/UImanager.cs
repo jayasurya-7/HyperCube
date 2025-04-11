@@ -377,7 +377,7 @@ public class UImanager : MonoBehaviour
                     AppData.grossKnobMax = JediSerialPayload.angle_2;
 
                     GrossMaxAngle.text = "Max angle: " + PlayerPrefs.GetFloat("Knob Ang Max").ToString();
-                    GrossInstruction_1.SetActive(false);
+                   // GrossInstruction_1.SetActive(false);
                     GrossInstruction_3.SetActive(false);
                     GrossInstruction_6.SetActive(true);
                     grossBanner.color = Color.yellow;
@@ -389,7 +389,7 @@ public class UImanager : MonoBehaviour
             if (GrossClockwise == true)
             {
                 GrossCircleAnticlock.fillAmount = -0.00277f * JediSerialPayload.angle_2;
-                GrossInstruction_2.SetActive(true);
+               // GrossInstruction_2.SetActive(true);
                 GrossInstruction_4.SetActive(true);
                 GrossAnticlockwise = true;
             }
@@ -404,7 +404,7 @@ public class UImanager : MonoBehaviour
                     GrossMinAngle.text = "Min angle: " + PlayerPrefs.GetFloat("Knob Ang Min").ToString();
                     GrossClockwise = false;
                     GrossMinAngSet = true;
-                    GrossInstruction_2.SetActive(false);
+                    //GrossInstruction_2.SetActive(false);
                     GrossInstruction_4.SetActive(false);
                     GrossInstruction_6.SetActive(true);
                    grossBanner.color = Color.green;
@@ -434,7 +434,7 @@ public class UImanager : MonoBehaviour
                     AppData.fineKnobMax = JediSerialPayload.angle_4;
 
                     FineMaxAngle.text = "Max angle: " + PlayerPrefs.GetFloat("Knob Fine Ang Max").ToString();
-                    FineInstruction_1.SetActive(false);
+                   // FineInstruction_1.SetActive(false);
                     FineInstruction_3.SetActive(false);
                     FineInstruction_6.SetActive(true);
                     fineBanner.color = Color.yellow;
@@ -446,7 +446,7 @@ public class UImanager : MonoBehaviour
             if (FineClockwise == true)
             {
                 FineCircleAnticlock.fillAmount = -0.00277f * JediSerialPayload.angle_4;
-                FineInstruction_2.SetActive(true);
+               // FineInstruction_2.SetActive(true);
                 FineInstruction_4.SetActive(true);
                 FineAnticlockwise = true;
             }
@@ -460,7 +460,7 @@ public class UImanager : MonoBehaviour
                     FineMinAngle.text = "Min angle: " + PlayerPrefs.GetFloat("Knob Fine Ang Min").ToString();
                     FineClockwise = false;
                     FineMinAngSet = true;
-                    FineInstruction_2.SetActive(false);
+                   // FineInstruction_2.SetActive(false);
                     FineInstruction_4.SetActive(false);
                     FineInstruction_6.SetActive(true);
                     fineBanner.color = Color.green;
@@ -490,7 +490,7 @@ public class UImanager : MonoBehaviour
                     AppData.keyKnobMax = JediSerialPayload.angle_3;
 
                     KeyMaxAngle.text = "Max angle: " + PlayerPrefs.GetFloat("Knob Key Ang Max").ToString();
-                    KeyInstruction_1.SetActive(false);
+                   // KeyInstruction_1.SetActive(false);
                     KeyInstruction_3.SetActive(false);
                     KeyInstruction_6.SetActive(true);
                     KeyClockwise = true;
@@ -502,7 +502,7 @@ public class UImanager : MonoBehaviour
             if (KeyClockwise == true)
             {
                 KeyCircleAnticlock.fillAmount = -0.00277f * JediSerialPayload.angle_3;
-                KeyInstruction_2.SetActive(true);
+              //  KeyInstruction_2.SetActive(true);
                 KeyInstruction_4.SetActive(true);
                 KeyAnticlockwise = true;
             }
@@ -517,7 +517,7 @@ public class UImanager : MonoBehaviour
                     KeyMinAngle.text = "Min angle: " + PlayerPrefs.GetFloat("Knob Key Ang Min").ToString();
                     KeyClockwise = false;
                     KeyMinAngSet = true;
-                    KeyInstruction_2.SetActive(false);
+                  //  KeyInstruction_2.SetActive(false);
                     KeyInstruction_4.SetActive(false);
                     KeyInstruction_6.SetActive(true);
                     keyBanner.color = Color.green;
@@ -548,7 +548,7 @@ public class UImanager : MonoBehaviour
                     AppData.graspMin = (Mathf.Round((JediSerialPayload.btwDistance) * 10.0f) * 0.1f);
 
                     MaxDistance.text = "Min distance: " + PlayerPrefs.GetFloat("Dist Min").ToString();
-                    GraspInstruction_1.SetActive(false);
+                    //GraspInstruction_1.SetActive(false);
                     GraspInstruction_3.SetActive(false);
                     GraspInstruction_6.SetActive(true);
                     GraspIn = true;
@@ -561,7 +561,7 @@ public class UImanager : MonoBehaviour
             {
                 HorizontalBar_3.fillAmount = 0.625f * ((JediSerialPayload.avgBtwDistance) / 2.0f) - 1.0f;
                 HorizontalBar_4.fillAmount = 0.625f * ((JediSerialPayload.avgBtwDistance) / 2.0f) - 1.0f;
-                GraspInstruction_2.SetActive(true);
+               // GraspInstruction_2.SetActive(true);
                 GraspInstruction_4.SetActive(true);
                 GraspOut = true;
             }
@@ -574,7 +574,7 @@ public class UImanager : MonoBehaviour
                     AppData.graspMax = (Mathf.Round((JediSerialPayload.btwDistance) * 10.0f) * 0.1f);
 
                     MinDistance.text = "Max distance: " + PlayerPrefs.GetFloat("Dist Max").ToString();
-                    GraspInstruction_2.SetActive(false);
+                   //GraspInstruction_2.SetActive(false);
                     GraspInstruction_4.SetActive(false);
                     GraspInstruction_6.SetActive(true);
                     GraspIn = false;
@@ -626,7 +626,7 @@ public class UImanager : MonoBehaviour
             GrossMinAngSet = false;
             GrossMaxAngSet = false;
             GrossAnticlockwise = false;
-            GrossInstruction_1.SetActive(true);
+            //GrossInstruction_1.SetActive(true);
             GrossInstruction_3.SetActive(true);
             GrossInstruction_5.SetActive(false);
             GrossInstruction_7.SetActive(false);
@@ -641,7 +641,7 @@ public class UImanager : MonoBehaviour
             KeyMinAngSet = false;
             KeyMaxAngSet = false;
             KeyAnticlockwise = false;
-            KeyInstruction_1.SetActive(true);
+           // KeyInstruction_1.SetActive(true);
             KeyInstruction_3.SetActive(true);
             KeyInstruction_5.SetActive(false);
             KeyInstruction_7.SetActive(false);
@@ -656,7 +656,7 @@ public class UImanager : MonoBehaviour
             FineMinAngSet = false;
             FineMaxAngSet = false;
             FineAnticlockwise = false;
-            FineInstruction_1.SetActive(true);
+           // FineInstruction_1.SetActive(true);
             FineInstruction_3.SetActive(true);
             FineInstruction_5.SetActive(false);
             FineInstruction_7.SetActive(false);
@@ -672,7 +672,7 @@ public class UImanager : MonoBehaviour
             GraspMaxSet = false;
             GraspMinSet = false;
             GraspOut = false;
-            GraspInstruction_1.SetActive(true);
+           // GraspInstruction_1.SetActive(true);
             GraspInstruction_3.SetActive(true);
             GraspInstruction_5.SetActive(false);
             GraspInstruction_6.SetActive(false);
@@ -681,11 +681,6 @@ public class UImanager : MonoBehaviour
             tripodgrasp = false;
             Debug.Log("tripod Canvas 2 is active");
         }
-
-        
-       
-
-
 
     }
 
