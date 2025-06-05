@@ -345,7 +345,7 @@ public class UImanager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 PlayerPrefs.SetFloat("Grip force", JediSerialPayload.totalForce);
-                AppData.handleGripForce = JediSerialPayload.totalForce;
+                AppData.handleGripForce = JediSerialPayload.totalForce * 0.1f;
                 ForceAcknowledgement.text = "Threshold force set as  " + PlayerPrefs.GetFloat("Grip force") + "  Kgs".ToString();
                 forceIns2.SetActive(false);
                 forceIns3.SetActive(true);
