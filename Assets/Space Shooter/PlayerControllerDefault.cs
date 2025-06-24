@@ -115,20 +115,41 @@ public class PlayerControllerDefault : MonoBehaviour {
         rb.rotation = Quaternion.Euler(0.0f, 0.0f, rb.velocity.x * -tilt);
        // Debug.Log(Angle2Screen(hyper1.instance.ang1));
     }
-    IEnumerator RefillBullets()
-{
-    isRefilling = true;
-    float refillRate = maxBullets / refillTimeWhenEmpty; // bullets per second
+    // IEnumerator RefillBullets()
+    // {
+    //     isRefilling = true;
+    //     float refillRate = maxBullets / refillTimeWhenEmpty; // bullets per second
 
-    while (currentBullets < maxBullets)
+    //     while (currentBullets < maxBullets)
+    //     {
+    //         currentBullets += Mathf.CeilToInt(refillRate * Time.deltaTime);
+    //         currentBullets = Mathf.Clamp(currentBullets, 0, maxBullets);
+    //         yield return null; // wait 1 frame
+    //     }
+
+    //     isRefilling = false;
+    // }
+
+    IEnumerator RefillBullets()
     {
-        currentBullets += Mathf.CeilToInt(refillRate * Time.deltaTime);
-        currentBullets = Mathf.Clamp(currentBullets, 0, maxBullets);
-        yield return null; // wait 1 frame
+        isRefilling = true;
+        float elapsed = 0f;
+        int startBullets = currentBullets;
+        int missingBullets = maxBullets - startBullets;
+
+        while (elapsed < refillTimeWhenEmpty)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / refillTimeWhenEmpty);
+            currentBullets = startBullets + Mathf.RoundToInt(missingBullets * t);
+            bulletBarImage.fillAmount = (float)currentBullets / maxBullets;
+            yield return null;
+        }
+
+        currentBullets = maxBullets;
+        isRefilling = false;
     }
 
-    isRefilling = false;
-}
 
 
     public static float Angle2Screen(float angle)
